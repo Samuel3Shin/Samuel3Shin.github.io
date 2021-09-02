@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+    <title>MyBiz</title>
+    <meta charset="utf-8">
+    <style>
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        #topMenu {
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 150px;
+            padding-right: 150px;
+            font-size: 24px;
+        }
+
+        #topMenu h5 {
+            font-family: monospace;
+            font-weight: 50;
+        }
+
+        #topButtons {
+            display: grid;
+            justify-content: end;
+            grid-template-columns: 70px 90px 70px;
+            padding-right: 30px;
+
+            font-family: sans-serif;
+            font-weight: 50;
+        }
+
+        #topButtons h6 {
+            color: gray;
+            opacity: 0.5;
+        }
+        #img {
+            width: 100%;
+            height: 100%; 
+            object-fit: contain;
+        }
+        #paragraphGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        #paragraph {
+            margin: 20px;
+        }
+
+        /* .shape{
+            text-align:center;
+            background-color:#0b3c5d;
+            width:200px;
+            height:250px;
+            line-height:60px;
+            color:white;
+            margin: 0;
+            padding: 30px;
+            position:relative;
+        } */
+
+        #whiteRectangle {
+            background-color:#e4eaed;
+            outline: none;
+            height: 60px;
+            width: 365px;
+        }
+        #yellowRectangle {
+            background-color: #fadd16;
+            width:200px;
+            height:50px;
+            justify-content:center;
+            align-items: center;
+            font-size: 15px;
+            display: flex;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .yellowRectangle2 {
+            background-color: #fadd16;
+            width:95px;
+            height:25px;
+            justify-content:center;
+            align-items: center;
+            font-size: 8px;
+            display: flex;
+            margin-top: 10px;
+            color: black;
+            margin: 0 auto;
+        }
+
+        .greenRectangle {
+            background-color: #0b3c5d;
+            width:95px;
+            height:25px;
+            justify-content:center;
+            align-items: center;
+            font-size: 8px;
+            display: flex;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .col-lg-3{
+            width: 100%;
+            min-width: 230px;
+            /* float: left; */
+            position: relative;
+            min-height: 1px;
+            /* padding-left: 15px; */
+            /* padding-right: 15px; */
+            /* background-color: #aaa; */
+            /* text-align: center; */
+        }
+        .col-lg-3 img {
+            max-width: 100%;
+        }
+        .img-container {
+            display: inline-block;
+            position: relative;
+        }
+        .positioning{
+            position: absolute;
+            left: 125px;
+            right: 1000px;
+            top: 180px;
+            bottom: 185px;
+            background-color: #0b3c5d;
+            color: white;
+            padding: 50px;
+            padding-top: 60px;
+            margin: 0;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            /* font-size: 17px;
+            line-height: 18px; */
+        }
+        .positioning h4{
+            margin-top: 0px;
+            margin-bottom: 0px;
+            /* font-size: 45px; */
+            font-weight:lighter;
+        }
+
+        .positioning h1{
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-size: 45px;
+            font-weight:lighter;
+        }
+
+        .positioning h3{
+            margin-top: 15px;
+            margin-bottom: 25px;
+            font-size: 15px;
+            font-weight:lighter;
+            font-style: italic;
+            color: yellow;
+        }
+
+        .rectangle {
+            height: 300px;
+            /* width: 75px; */
+            background-color: #f4f4f4;
+            /* border-radius:7px; */
+            display: flex;
+            justify-content:center;
+            align-items: center;
+        }
+
+        /* #textGid {
+            display: grid;
+            justify-content:center;
+            align-items: center;
+            text-align: center;
+        } */
+        #textGrid h6 {
+            justify-content:center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #glasses {
+            width: 100%;
+            min-width: 230px;
+            background-image: url('../HW3/images/glasses.png');
+        }
+
+        #pricesContainer {
+            position: relative; 
+            height: 720px;
+            width:100%;
+            /* width: 75px; */
+            /* background-color: gray; */
+            /* border-radius:7px; */
+            display: flex;
+            /* justify-content:center;
+            align-items: center; */
+                    
+        }
+        #pricesContainer:after {
+            content: "";
+            background-image: url('../HW3/images/glasses.png');
+            background-size: cover;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width:100%;
+            height:100%;
+            z-index:-1;
+            opacity: 0.2;
+            background-attachment: fixed; 
+        }
+
+        #pricesPlans {
+            height: 100%;
+            width: 100%;
+        }
+
+        #pricesPlans div {
+            text-align:center;
+        }
+        #pricesPlans div h5 {
+            position: relative;
+            color: #000000;
+        }
+        
+        /* #pricesGrid {
+            display: grid;
+            grid-template-rows: 100px 1fr;
+        } */
+        #plansGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        #gridImage {
+            height: 400px;
+            width: 300px; 
+            /* TODO: add grid image and make its opacity lighter */
+            /* background: url('../HW3/images/grid.png'); */
+            background-color: #ffffff;
+            color: black;
+            padding: 4px;
+            margin: 30px;
+            text-align:center;
+            /* background-image: url('../HW3/images/grid.png'); */
+        }
+
+        .image1 {
+            position: relative;
+            top: 0;
+            left: 0;
+            border: 1px red solid;
+        }
+        .image2 {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        border: 1px green solid;
+        }
+
+
+        #freeTrialContainer {
+            position: relative; 
+            height: 450px;
+            width:100%;
+            /* width: 75px; */
+            /* background-color: gray; */
+            /* border-radius:7px; */
+            display: flex;
+            justify-content:center;
+            align-items: center;
+                    
+        }
+        #freeTrialContainer:after {
+            content: "";
+            background-image: url('../HW3/images/notebook.jpeg');
+            background-size: cover;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width:100%;
+            height:100%;
+            z-index:-1;
+            opacity: 0.2;
+        }
+
+        #freeTrialContainer div{
+            text-align: center;
+        }
+
+        .snsRectangle {
+            /* display: grid; */
+            /* grid-template-rows: 1fr 1fr; */
+            height: 300px;
+            /* width: 75px; */
+            background-color: #1d2530;
+            /* border-radius:7px; */
+            /* display: flex; */
+            justify-content:center;
+            align-items: center;
+        }
+
+        .snsRectangle div {
+            color: white;
+            text-align: center;
+        }
+
+        #snsGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+
+        #snsGridImage {
+            height: 50px;
+            width: 50px; 
+            /* TODO: add grid image and make its opacity lighter */
+            /* background: url('../HW3/images/grid.png'); */
+            background-color: #ffffff;
+            color: black;
+            padding: 4px;
+            margin: 30px;
+            text-align:center;
+            /* background-image: url('../HW3/images/grid.png'); */
+        }
+
+        #fbImg {
+            height: 50px;
+            width: 50px;
+            content:url('../HW3/images/facebook.png');
+        }
+
+        #twImg {
+            height: 50px;
+            width: 50px;
+            content:url('../HW3/images/twitter.png');
+        }
+
+        #insImg {
+            height: 50px;
+            width: 50px;
+            content:url('../HW3/images/instagram.png');
+        }
+
+        #youImg {
+            height: 50px;
+            width: 50px;
+            content:url('../HW3/images/youtube.png');
+        }
+
+        #ggImg {
+            height: 50px;
+            width: 50px;
+            content:url('../HW3/images/googleplus.png');
+        }
+
+    </style>
+    <body>
+        <div id="topMenu">
+            <h5>MENU</h5>
+            <div>
+                <div id="topButtons">
+                    <a href="../Samuel3Shin.github.io/HW3_page2.html#home"><h6>About</h6></a>
+                    <a href="../Samuel3Shin.github.io/HW3_page2.html#projects"><h6>Projects</h6></a>
+                    <a href="../Samuel3Shin.github.io/HW3_page2.html#services"><h6>Services</h6></a>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div id="container" class="col-lg-3">
+                <div class="img-container">
+                    <div class="positioning">
+                        <h4>DON'T WAIT</h4>
+                        <h1>IMPROVE</h1>
+                        <h1>YOUR BUSINESS</h1>
+                        <h1>TODAY!</h1>
+                        <h3>- Get your hands on MyBiz -</h3>
+                        <input type=text id="whiteRectangle"></input>
+                        <button type="button" id="yellowRectangle">
+                            SIGN UP FOR FREE!
+                        </button>
+                    </div>
+                    <img src="../HW3/images/lawyer.jpeg" />
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div id="paragraphGrid">
+                <div id="paragraph">
+                    <h5>AMAZING FEATURE #1</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+                <div id="paragraph">
+                    <h5>AMAZING FEATURE #2</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+                <div id="paragraph">
+                    <h5>AMAZING FEATURE #3</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="rectangle">
+            <div id="textGrid">
+                <h5>"I COULDN'T HAVE ASKED FOR MORE THAN THIS. MYBIZ IS THE NEXT KILLER APP"</h5>
+                <h6>John Doe, CEO & Founder, MyBiz</h6>
+            </div>
+
+        </div>
+
+        <div id="pricesContainer">
+            <div id="pricesPlans">
+                <div>
+                    <h5>PRICES</h5>
+                    <h6>AFFORDABLE FOR EVERYONE</h6>
+                </div>
+                
+                <div>
+                    <div id="plansGrid">
+                       <div id="gridImage">
+                            <h5>BASIC PLAN</h5>
+                            <h6>Plan Amazing feature #1</h6>
+                            <h6>Plan Amazing feature #2</h6>
+                            <h6>Plan Amazing feature #3</h6>
+                            <h6>Plan Amazing feature #1</h6>
+                            <h3>$29.99</h3>
+                            <h3>Monthly</h3>
+                            <div class="greenRectangle">
+                                BUY NOW
+                            </div>
+                        </div>
+                        <div id="gridImage">
+                            <h5>STANDARD PLAN</h5>
+                            <h6>Plan Amazing feature #1</h6>
+                            <h6>Plan Amazing feature #2</h6>
+                            <h6>Plan Amazing feature #3</h6>
+                            <h6>Plan Amazing feature #1</h6>
+                            <h3>$39.99</h3>
+                            <h3>Monthly</h3>
+                            <div class="greenRectangle">
+                                BUY NOW
+                            </div>
+                        </div>
+                        <div id="gridImage">
+                            <h5>CORPORATE PLAN</h5>
+                            <h6>Plan Amazing feature #1</h6>
+                            <h6>Plan Amazing feature #2</h6>
+                            <h6>Plan Amazing feature #3</h6>
+                            <h6>Plan Amazing feature #1</h6>
+                            <h3>$49.99</h3>
+                            <h3>Monthly</h3>
+                            <div class="greenRectangle">
+                                BUY NOW
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="freeTrialContainer">
+            <div>
+                <h4>TRY THE BEST APP IN THE MARKET</h4>
+                <h6>tell more why your software is amazing and why users need to sign up</h6>
+                <div class="yellowRectangle2">
+                    TRY IT FOR FREE
+                </div>
+            </div>
+        </div>
+
+        <div class="snsRectangle">
+            <div>
+                <h5>MY BIZ</h5>
+                <h6>224 Grant Ave, Redondo Beach, CA, 90728 310.555.1212 Ext. 3 for Business Needs</h6>
+            </div>
+            <div>
+                <div id="snsGrid">
+                    <a href="http://www.facebook.com"><div id="fbImg"></div></a>
+                    <a href="http://www.twitter.com"><div id="twImg"></div></a>
+                    <a href="http://www.instagram.com"><div id="insImg"></div></a>
+                    <a href="http://www.youtube.com"><div id="youImg"></div></a>
+                    <a href="http://www.google.com"><div id="ggImg"></div></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
