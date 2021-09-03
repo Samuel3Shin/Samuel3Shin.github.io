@@ -19,7 +19,7 @@
         }
 
         #topMenu h5 {
-            font-family: monospace;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             font-weight: 50;
         }
 
@@ -45,9 +45,22 @@
         #paragraphGrid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
+            margin-top: 120px;
+            margin-bottom: 120px;
+            margin-left: 100px;
+            margin-right: 100px;
         }
         #paragraph {
             margin: 20px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #paragraph h5 {
+            font-size: 18px;
+        }
+
+        #paragraph p {
+            color: grey;
         }
 
         /* .shape{
@@ -95,11 +108,11 @@
 
         .greenRectangle {
             background-color: #0b3c5d;
-            width:95px;
-            height:25px;
+            width:180px;
+            height:70px;
             justify-content:center;
             align-items: center;
-            font-size: 8px;
+            font-size: 20px;
             display: flex;
             margin: 0 auto;
             color: white;
@@ -162,7 +175,7 @@
         }
 
         .rectangle {
-            height: 300px;
+            height: 465px;
             /* width: 75px; */
             background-color: #f4f4f4;
             /* border-radius:7px; */
@@ -171,16 +184,23 @@
             align-items: center;
         }
 
-        /* #textGid {
-            display: grid;
-            justify-content:center;
-            align-items: center;
-            text-align: center;
-        } */
+        #textGid {
+            margin: 100px;
+        }
         #textGrid h6 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             justify-content:center;
             align-items: center;
             text-align: center;
+            font-size: 15px;
+            margin: 15px;
+        }
+
+        #textGrid h5 {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 25px;
+            font-weight: lighter;
+            margin: 15px;
         }
 
         #glasses {
@@ -191,7 +211,7 @@
 
         #pricesContainer {
             position: relative; 
-            height: 720px;
+            height: 1000px;
             width:100%;
             /* width: 75px; */
             /* background-color: gray; */
@@ -209,24 +229,44 @@
             top: 0px;
             left: 0px;
             width:100%;
-            height:100%;
+            height:1000px;
             z-index:-1;
             opacity: 0.2;
             background-attachment: fixed; 
         }
 
         #pricesPlans {
-            height: 100%;
+            height: 1000px;
             width: 100%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
+        #pricesPlans div h5{
+            font-size: 25px;
+            font-weight: lighter;
+            margin: 0;
+            margin-top: 75px;
+            /* position: relative; */
+            text-align:center;
+        }
+
+        #pricesPlans div h6{
+            font-size: 15px;
+            margin: 0;
+            margin-top: 15px;
+            color: grey;
+            text-align:center;
+        }
+/* 
         #pricesPlans div {
             text-align:center;
         }
+
         #pricesPlans div h5 {
             position: relative;
-            color: #000000;
-        }
+        } */
+
+
         
         /* #pricesGrid {
             display: grid;
@@ -234,21 +274,53 @@
         } */
         #plansGrid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 465px 465px 465px;
+            padding-left: 130px;
+            margin-top: 120px;
         }
 
         #gridImage {
-            height: 400px;
-            width: 300px; 
+            height: 570px;
+            width: 405px; 
             /* TODO: add grid image and make its opacity lighter */
             /* background: url('../HW3/images/grid.png'); */
             background-color: #ffffff;
             color: black;
             padding: 4px;
-            margin: 30px;
+            padding-top: 85px;
+            margin: 0;
             text-align:center;
             /* background-image: url('../HW3/images/grid.png'); */
         }
+
+
+        #gridImage h7 {
+            /* color:red; */
+            font-size: 18px;
+            /* padding-bottom: 100px; */
+            /* padding-top: 50px; */
+        }
+
+        #innerGrid {
+            margin-top: 42px;
+        }
+
+        #innerGrid h4 {
+            font-size: 16px;
+            margin: 26px;
+            font-weight: lighter;
+        }
+
+        #priceBox {
+            margin-top: 70px;
+            margin-bottom: 35px;
+        }
+
+        #priceBox h3 {
+            font-size: 30px;
+            margin: 0;
+        }
+
 
         .image1 {
             position: relative;
@@ -395,19 +467,22 @@
                 <div id="paragraph">
                     <h5>AMAZING FEATURE #1</h5>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Lorem ipsum dolor sit met, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros ut erat facilities maximus. In congue et Leo in varius.
+                        Vestibulum sit met delis ornate, commode orchid ut, feugiat lore.
                     </p>
                 </div>
                 <div id="paragraph">
                     <h5>AMAZING FEATURE #2</h5>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Lorem ipsum dolor sit met, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros ut erat facilities maximus. In congue et Leo in varius.
+                        Vestibulum sit met delis ornate, commode orchid ut, feugiat lore.
                     </p>
                 </div>
                 <div id="paragraph">
                     <h5>AMAZING FEATURE #3</h5>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Lorem ipsum dolor sit met, consectetur adipiscing elit. Sed malesuada faucibus ex nec ultricies. Donec mattis egestas nisi non pretium. Suspendisse nec eros ut erat facilities maximus. In congue et Leo in varius.
+                        Vestibulum sit met delis ornate, commode orchid ut, feugiat lore.
                     </p>
                 </div>
             </div>
@@ -416,7 +491,7 @@
         <div class="rectangle">
             <div id="textGrid">
                 <h5>"I COULDN'T HAVE ASKED FOR MORE THAN THIS. MYBIZ IS THE NEXT KILLER APP"</h5>
-                <h6>John Doe, CEO & Founder, MyBiz</h6>
+                <h6>John Doe <span style="color:grey" >, CEO & Founder, MyBiz</span></h6>
             </div>
 
         </div>
@@ -431,39 +506,52 @@
                 <div>
                     <div id="plansGrid">
                        <div id="gridImage">
-                            <h5>BASIC PLAN</h5>
-                            <h6>Plan Amazing feature #1</h6>
-                            <h6>Plan Amazing feature #2</h6>
-                            <h6>Plan Amazing feature #3</h6>
-                            <h6>Plan Amazing feature #1</h6>
-                            <h3>$29.99</h3>
-                            <h3>Monthly</h3>
-                            <div class="greenRectangle">
-                                BUY NOW
+                            <h7>BASIC PLAN</h7>
+                            <div id="innerGrid">
+                                <h4>Plan Amazing feature #1</h4>
+                                <h4>Plan Amazing feature #2</h4>
+                                <h4>Plan Amazing feature #3</h4>
+                                <h4>Plan Amazing feature #4</h4>
+                                <div id="priceBox">
+                                    <h3>$29.99</h3>
+                                    <h3>Monthly</h3>
+                                </div>
+
+                                <button type="button" class="greenRectangle">
+                                    BUY NOW
+                                </button>
                             </div>
                         </div>
                         <div id="gridImage">
-                            <h5>STANDARD PLAN</h5>
-                            <h6>Plan Amazing feature #1</h6>
-                            <h6>Plan Amazing feature #2</h6>
-                            <h6>Plan Amazing feature #3</h6>
-                            <h6>Plan Amazing feature #1</h6>
-                            <h3>$39.99</h3>
-                            <h3>Monthly</h3>
-                            <div class="greenRectangle">
-                                BUY NOW
+                            <h7>STANDARD PLAN</h7>
+                            <div id="innerGrid">
+                                <h4>Plan Amazing feature #1</h4>
+                                <h4>Plan Amazing feature #2</h4>
+                                <h4>Plan Amazing feature #3</h4>
+                                <h4>Plan Amazing feature #4</h4>
+                                <div id="priceBox">
+                                    <h3>$39.99</h3>
+                                    <h3>Monthly</h3>
+                                </div>  
+                                <button type="button" class="greenRectangle">
+                                    BUY NOW
+                                </button>
                             </div>
                         </div>
                         <div id="gridImage">
-                            <h5>CORPORATE PLAN</h5>
-                            <h6>Plan Amazing feature #1</h6>
-                            <h6>Plan Amazing feature #2</h6>
-                            <h6>Plan Amazing feature #3</h6>
-                            <h6>Plan Amazing feature #1</h6>
-                            <h3>$49.99</h3>
-                            <h3>Monthly</h3>
-                            <div class="greenRectangle">
-                                BUY NOW
+                            <h7>CORPORATE PLAN</h7>
+                            <div id="innerGrid">
+                                <h4>Plan Amazing feature #1</h4>
+                                <h4>Plan Amazing feature #2</h4>
+                                <h4>Plan Amazing feature #3</h4>
+                                <h4>Plan Amazing feature #4</h4>
+                                <div id="priceBox">
+                                    <h3>$49.99</h3>
+                                    <h3>Monthly</h3>
+                                </div>
+                                <button type="button" class="greenRectangle">
+                                    BUY NOW
+                                </button>
                             </div>
                         </div>
                     </div>
