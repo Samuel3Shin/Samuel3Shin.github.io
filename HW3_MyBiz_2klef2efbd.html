@@ -13,8 +13,8 @@
             grid-template-columns: 1fr 1fr;
             padding-top: 25px;
             padding-bottom: 25px;
-            padding-left: 150px;
-            padding-right: 150px;
+            padding-left: 140px;
+            padding-right: 120px;
             font-size: 24px;
         }
 
@@ -35,7 +35,8 @@
 
         #topButtons h6 {
             color: gray;
-            opacity: 0.5;
+            opacity: 0.4;
+            font-weight: 500;
         }
 
         #img {
@@ -47,14 +48,16 @@
         #paragraphGrid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            margin-top: 120px;
-            margin-bottom: 120px;
+            margin-top: 133px;
+            margin-bottom: 133px;
             margin-left: 100px;
             margin-right: 100px;
         }
 
         #paragraph {
             margin: 20px;
+            margin-left: 25px;
+            margin-right: 25px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
 
@@ -97,7 +100,7 @@
             margin-top: 10px;
             color: black;
             margin: 0 auto;
-            margin-top: 30px;
+            margin-top: 45px;
             font-size: 15px;
         }
 
@@ -137,8 +140,8 @@
             bottom: 185px;
             background-color: #0b3c5d;
             color: white;
-            padding: 50px;
-            padding-top: 60px;
+            padding: 56px;
+            padding-top: 65px;
             margin: 0;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
@@ -152,6 +155,7 @@
         .positioning h1{
             margin-top: 0px;
             margin-bottom: 0px;
+            padding: 0;
             font-size: 45px;
             font-weight:lighter;
         }
@@ -235,7 +239,7 @@
         }
 
         #pricesPlans div h5{
-            font-size: 25px;
+            font-size: 26px;
             font-weight: lighter;
             margin: 0;
             margin-top: 75px;
@@ -243,11 +247,13 @@
         }
 
         #pricesPlans div h6{
-            font-size: 15px;
+            font-size: 17px;
             margin: 0;
             margin-top: 15px;
             color: grey;
             text-align:center;
+            opacity: 0.7;
+            font-weight: lighter;
         }
 
         #plansGrid {
@@ -275,9 +281,9 @@
             position: absolute;
             height: 659px;
             width: 413px; 
-            opacity: 0.2;
+            opacity: 0.1;
             margin: -207px;
-            margin-top: -543px;
+            margin-top: -550px;
 
         }
 
@@ -376,7 +382,7 @@
             font-size: 32px;
             font-weight: lighter;
             margin: 0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         #freeTrialContainer h6 {
@@ -421,6 +427,15 @@
         .snsRectangle div {
             color: white;
             text-align: center;
+            justify-content:center;
+            align-items: center;
+        }
+
+        #snsGridContainer {
+            width: 440px;
+            margin-left: 68px;
+            justify-content:center;
+            align-items: center;
         }
 
         #snsGrid {
@@ -449,42 +464,37 @@
         }
 
         #fbImg {
-            margin-left: 35px;
             height: 40px;
             width: 40px;
             content:url('../HW3/images/facebook.png');
         }
 
         #twImg {
-            margin-left: 35px;
             height: 40px;
             width: 40px;
             content:url('../HW3/images/twitter.png');
         }
 
         #insImg {
-            margin-left: 35px;
             height: 40px;
             width: 40px;
             content:url('../HW3/images/instagram.png');
         }
 
         #youImg {
-            margin-left: 35px;
             height: 40px;
             width: 40px;
             content:url('../HW3/images/youtube.png');
         }
 
         #ggImg {
-            margin-left: 35px;
             height: 40px;
             width: 40px;
             content:url('../HW3/images/googleplus.png');
         }
 
     </style>
-    
+
     <body>
         <div id="topMenu">
             <h5>MENU</h5>
@@ -624,12 +634,12 @@
         </div>
 
         <div class="snsRectangle">
-            <div>
+            <div >
                 <div>
                     <h5>MY BIZ</h5>
                     <h6>224 Grant Ave, Redondo Beach, CA, 90728 310.555.1212 Ext. 3 for Business Needs</h6>
                 </div>
-                <div>
+                <div id="snsGridContainer">
                     <div id="snsGrid">
                         <a href="http://www.facebook.com"><div id="fbImg"></div></a>
                         <a href="http://www.twitter.com"><div id="twImg"></div></a>
