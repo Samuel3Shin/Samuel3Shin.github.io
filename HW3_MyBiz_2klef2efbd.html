@@ -37,11 +37,13 @@
             color: gray;
             opacity: 0.5;
         }
+
         #img {
             width: 100%;
             height: 100%; 
             object-fit: contain;
         }
+
         #paragraphGrid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -50,6 +52,7 @@
             margin-left: 100px;
             margin-right: 100px;
         }
+
         #paragraph {
             margin: 20px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -64,24 +67,13 @@
             color: grey;
         }
 
-        /* .shape{
-            text-align:center;
-            background-color:#0b3c5d;
-            width:200px;
-            height:250px;
-            line-height:60px;
-            color:white;
-            margin: 0;
-            padding: 30px;
-            position:relative;
-        } */
-
         #whiteRectangle {
             background-color:#e4eaed;
             outline: none;
             height: 60px;
             width: 365px;
         }
+
         #yellowRectangle {
             background-color: #fadd16;
             width:200px;
@@ -121,24 +113,22 @@
             color: white;
         }
 
-        .col-lg-3{
+        #container {
             width: 100%;
             min-width: 230px;
-            /* float: left; */
             position: relative;
             min-height: 1px;
-            /* padding-left: 15px; */
-            /* padding-right: 15px; */
-            /* background-color: #aaa; */
-            /* text-align: center; */
         }
-        .col-lg-3 img {
+
+        #container img {
             max-width: 100%;
         }
-        .img-container {
+
+        .imgContainer {
             display: inline-block;
             position: relative;
         }
+
         .positioning{
             position: absolute;
             left: 125px;
@@ -151,13 +141,11 @@
             padding-top: 60px;
             margin: 0;
             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            /* font-size: 17px;
-            line-height: 18px; */
         }
+
         .positioning h4{
             margin-top: 0px;
             margin-bottom: 0px;
-            /* font-size: 45px; */
             font-weight:lighter;
         }
 
@@ -179,9 +167,7 @@
 
         .rectangle {
             height: 465px;
-            /* width: 75px; */
             background-color: #f4f4f4;
-            /* border-radius:7px; */
             display: flex;
             justify-content:center;
             align-items: center;
@@ -190,6 +176,7 @@
         #textGid {
             margin: 100px;
         }
+
         #textGrid h6 {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             justify-content:center;
@@ -216,14 +203,10 @@
             position: relative; 
             height: 1000px;
             width:100%;
-            /* width: 75px; */
-            /* background-color: gray; */
-            /* border-radius:7px; */
             display: flex;
-            /* justify-content:center;
-            align-items: center; */
                     
         }
+
         #pricesContainer:after {
             content: "";
             background-image: url('../HW3/images/glasses.png');
@@ -256,7 +239,6 @@
             font-weight: lighter;
             margin: 0;
             margin-top: 75px;
-            /* position: relative; */
             text-align:center;
         }
 
@@ -267,38 +249,13 @@
             color: grey;
             text-align:center;
         }
-/* 
-        #pricesPlans div {
-            text-align:center;
-        }
 
-        #pricesPlans div h5 {
-            position: relative;
-        } */
-
-
-        
-        /* #pricesGrid {
-            display: grid;
-            grid-template-rows: 100px 1fr;
-        } */
         #plansGrid {
             display: grid;
             grid-template-columns: 465px 465px 465px;
             padding-left: 130px;
             margin-top: 120px;
         }
-
-        /* #gridImage {
-            height: 570px;
-            width: 405px; 
-            color: black;
-            padding: 4px;
-            padding-top: 85px;
-            margin: 0;
-            text-align:center;
-            background: white;
-        } */
 
         #gridImage {
             height: 570px;
@@ -325,10 +282,7 @@
         }
 
         #gridImage h7 {
-            /* color:red; */
             font-size: 18px;
-            /* padding-bottom: 100px; */
-            /* padding-top: 50px; */
         }
 
         #innerGrid {
@@ -361,6 +315,7 @@
             left: 0;
             border: 1px red solid;
         }
+
         .image2 {
         position: absolute;
         top: 30px;
@@ -373,9 +328,6 @@
             position: relative; 
             height: 600px;
             width:100%;
-            /* width: 75px; */
-            /* background-color: gray; */
-            /* border-radius:7px; */
             display: flex;
             justify-content:center;
             align-items: center;
@@ -384,6 +336,7 @@
             margin: 0;
                     
         }
+
         #freeTrialContainer:after {
             content: "";
             background-color: #0b3c5d;
@@ -398,6 +351,7 @@
             z-index:-1;
             opacity: 0.8;
         }
+
         #freeTrialContainer:before {
             content: "";
             background-image: url('../HW3/images/notebook.jpeg');
@@ -412,7 +366,6 @@
             width:100%;
             height:100%;
             z-index:-1;
-            /* opacity: 0.2; */
         }
 
         #freeTrialContainer div{
@@ -488,12 +441,9 @@
         #snsGridImage {
             height: 40px;
             width: 40px; 
-            /* TODO: add grid image and make its opacity lighter */
-            /* background: url('../HW3/images/grid.png'); */
             background-color: #ffffff;
             color: black;
             text-align:center;
-            /* background-image: url('../HW3/images/grid.png'); */
             justify-content:center;
             align-items: center;
         }
@@ -534,6 +484,7 @@
         }
 
     </style>
+    
     <body>
         <div id="topMenu">
             <h5>MENU</h5>
@@ -547,8 +498,8 @@
         </div>
 
         <div>
-            <div id="container" class="col-lg-3">
-                <div class="img-container">
+            <div id="container">
+                <div class="imgContainer">
                     <div class="positioning">
                         <h4>DON'T WAIT</h4>
                         <h1>IMPROVE</h1>
