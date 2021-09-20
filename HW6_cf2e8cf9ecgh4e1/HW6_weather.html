@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="utils.js"></script>
     <style>
         header {
             background-image: url(Images/banner.jpg);
@@ -72,6 +73,21 @@
             height: 40px;
             width: 40px;
             content:url('./Images/uv_level.png');
+        }
+
+        .weekly_weather_card_top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            background-color: #587ab9;
+        }
+
+        #weekly_weather_card_container {
+            display: none;
+        }
+
+        .weekly_weather_card {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         }
         
     </style>
@@ -168,7 +184,6 @@
                                 if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
                                     aCallback(anHttpRequest.responseText);
                             }
-
                             anHttpRequest.open( "GET", aUrl, true );            
                             anHttpRequest.send( null );
                         }
@@ -176,9 +191,59 @@
 
                     function sendAddress() {
                         var client = new HttpClient();
-                        client.get('http://127.0.0.1:5000/weather', function(response) {
+                        
+                        client.get('http://127.0.0.1:5000/weekly_weather', function(response) {
+                            var json_data = JSON.parse(response);
+
+                            // weekly_weather_card.date.innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
+                            let elements = document.getElementsByClassName('weekly_weather_card');
+                            document.querySelector(".weekly_weather_card .date").innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
+                            document.querySelector(".weekly_weather_card .status").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"];
+                            document.querySelector(".weekly_weather_card .temp_high").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperatureMax"];
+                            document.querySelector(".weekly_weather_card .temp_low").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperatureMin"];
+                            document.querySelector(".weekly_weather_card .wind_speed").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["windSpeed"];
+                            
+                            for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
+                                var board = document.createElement('div');
+                                board.className = "weekly_weather_card";
+
+                                var newEntry1 = document.createElement('div');
+                                newEntry1.innerText = json_data["data"]["timelines"][0]["intervals"][i]["startTime"];
+                                board.appendChild(newEntry1);
+
+                                var newEntry2 = document.createElement('div');
+                                newEntry2.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["weatherCode"];
+                                board.appendChild(newEntry2);
+
+                                var newEntry3 = document.createElement('div');
+                                newEntry3.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"];
+                                board.appendChild(newEntry3);
+
+                                var newEntry4 = document.createElement('div');
+                                newEntry4.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"];
+                                board.appendChild(newEntry4);
+
+                                var newEntry5 = document.createElement('div');
+                                newEntry5.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["windSpeed"];
+                                board.appendChild(newEntry5);
+
+                                document.getElementById("weekly_weather_card_container").appendChild(board);
+
+                                console.log(i);
+                            }
+                            
+                            // ".cl1 .sl_price"
+                            // console.log(elements.);
+                            // elements.date.innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
+                            
+
+                            $("#weekly_weather_card_container").css('display', 'block');
+                        })
+
+                        client.get('http://127.0.0.1:5000/current_weather', function(response) {
                             
                             var json_data = JSON.parse(response);
+                            // var json_data = response;
                             // document.getElementById('address').value = response[0]['results'][0]['address_components'][3]['long_name'];
                             // $('#humiditiy_value').html("10");
                             console.log(json_data);
@@ -190,114 +255,13 @@
                             // TODO: Clear Sunny, Mostly Clear, Partly Cloudy <- differentiate day and night!!!
                             var is_sunset = false;
 
-                            switch (json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"]) {
-                                case 1000:
-                                    if(is_sunset) {
-                                        weather_icon_img_dir = "./Images/clear_night.svg"
-                                    } else {
-                                        weather_icon_img_dir = "./Images/clear_day.svg"
-                                    }
-                                    weather_icon_text = "Clear";
-                                    break;
-                                case 1101:
-                                    if(is_sunset) {
-                                        weather_icon_img_dir = "./Images/partly_cloudy_night.svg"
-                                    } else {
-                                        weather_icon_img_dir = "./Images/partly_cloudy_day.svg"
-                                    }
-                                    weather_icon_text = "Partly Cloudy";
-                                    break;
-                                case 1100:
-                                    if(is_sunset) {
-                                        weather_icon_img_dir = "./Images/mostly_clear_night.svg"
-                                    } else {
-                                        weather_icon_img_dir = "./Images/mostly_clear_day.svg"
-                                    }
-                                    weather_icon_text = "Mostly Clear";
-                                    break;
-                                case 1001:
-                                    weather_icon_img_dir = "./Images/cloudy.svg"
-                                    weather_icon_text = "Cloudy";
-                                    break;
-                                case 1102:
-                                    weather_icon_img_dir = "./Images/mostly_cloudy.svg"
-                                    weather_icon_text = "Mostly Cloudy";
-                                    break;
-                                case 4201:
-                                    weather_icon_img_dir = "./Images/rain_heavy.svg"
-                                    weather_icon_text = "Heavy Rain";
-                                    break;
-                                case 4001:
-                                    weather_icon_img_dir = "./Images/rain.svg"
-                                    weather_icon_text = "Rain";
-                                    break;
-                                case 4200:
-                                    weather_icon_img_dir = "./Images/rain_light.svg"
-                                    weather_icon_text = "Light Rain";
-                                    break;
-                                case 6201:
-                                    weather_icon_img_dir = "./Images/freezing_rain_heavy.svg"
-                                    weather_icon_text = "Heavy Freezing Rain";
-                                    break;
-                                case 6001:
-                                    weather_icon_img_dir = "./Images/freezing_rain.svg"
-                                    weather_icon_text = "Freezing Rain";
-                                    break;
-                                case 6200:
-                                    weather_icon_img_dir = "./Images/freezing_rain_light.svg"
-                                    weather_icon_text = "Light Freezing Rain";
-                                    break;
-                                case 6000:
-                                    weather_icon_img_dir = "./Images/freezing_drizzle.svg"
-                                    weather_icon_text = "Freezing Drizzle";
-                                    break;
-                                case 4000:
-                                    weather_icon_img_dir = "./Images/drizzle.svg"
-                                    weather_icon_text = "Drizzle";
-                                    break;
-                                case 7101:
-                                    weather_icon_img_dir = "./Images/ice_pellets_heavy.svg"
-                                    weather_icon_text = "Heavy Ice Pellets";
-                                    break;
-                                case 7000:
-                                    weather_icon_img_dir = "./Images/ice_pellets.svg"
-                                    weather_icon_text = "Ice Pellets";
-                                    break;
-                                case 7101:
-                                    weather_icon_img_dir = "./Images/ice_pellets_light.svg"
-                                    weather_icon_text = "Light Ice Pellets";
-                                    break;
-                                case 5101:
-                                    weather_icon_img_dir = "./Images/snow_heavy.svg"
-                                    weather_icon_text = "Heavy Snow";
-                                    break;
-                                case 5000:
-                                    weather_icon_img_dir = "./Images/snow.svg"
-                                    weather_icon_text = "Snow";
-                                    break;
-                                case 5100:
-                                    weather_icon_img_dir = "./Images/snow_light.svg"
-                                    weather_icon_text = "Light Snow";
-                                    break;
-                                case 5001:
-                                    weather_icon_img_dir = "./Images/flurries.svg"
-                                    weather_icon_text = "Flurries";
-                                    break;
-                                case 8000:
-                                    weather_icon_img_dir = "./Images/tstorm.svg"
-                                    weather_icon_text = "Thunderstorm";
-                                    break;
-                                case 2100:
-                                    weather_icon_img_dir = "./Images/fog_light.svg"
-                                    weather_icon_text = "Light Fog";
-                                    break;
-                                case 2000:
-                                    weather_icon_img_dir = "./Images/fog.svg"
-                                    weather_icon_text = "Fog";
-                                    break;
-                            }
+                            [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"], is_sunset);
+
                             $("#weather_code_img").attr("src",weather_icon_img_dir);
                             weather_code_text.innerText = weather_icon_text;
+
+                            // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
+                            current_temperture.innerText = Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + "º"
 
                             // weather specific infos
                             humidity_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["humidity"] + "%";
@@ -306,8 +270,9 @@
                             visibility_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["visibility"] + "mi";
                             cloud_cover_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"] + "%";
                             uv_level_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"];
-
-                            document.getElementById('card').style.display = 'block';
+                            
+                            $("#card").css('display', 'block');
+                            // document.getElementById('card').style.display = 'block';
                         });
                         // var street = document.getElementById("street_input").value;
                         // var city = document.getElementById("city_input").value;
@@ -339,7 +304,7 @@
                         <h3 id="weather_code_text">clear</h3>
                     </div>
                     <div>
-                        <h1>000</h1>
+                        <h1 id="current_temperture">000</h1>
                     </div>
                 </div>
                 <div id="specific_info_grid">
@@ -380,6 +345,24 @@
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
+
+        <div id="weekly_weather_card_container">
+            <div class="weekly_weather_card_top">
+                <div>Date</div>
+                <div>Status</div>
+                <div>Temp High</div>
+                <div>Temp Low</div>
+                <div>Wind Speed</div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+        </div>
     </body>
 </html>
