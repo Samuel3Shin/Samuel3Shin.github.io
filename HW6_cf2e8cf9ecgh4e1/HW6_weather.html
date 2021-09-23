@@ -272,9 +272,16 @@
                                     }
                                 };
 
+                            
+                            var weekly_weather_cards = document.getElementsByClassName("weekly_weather_card");
+                            
+                            // console.log("length: " + daily_weather_cards.length);
+                            console.log(weekly_weather_cards.length);
+                            
                             for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
-                                var board = document.createElement('div');
-                                board.className = "weekly_weather_card";
+                                // var board = document.createElement('div');
+                                var board = weekly_weather_cards[i];
+                                // board.className = "weekly_weather_card";
                                 // board.onclick 
                                 // board.addEventListener("click", saying, false); 
                                 // board.addEventListener("click", function (e) {
@@ -287,41 +294,17 @@
 
                                 // someObj.addEventListener('click', );
 
-                                var newEntry1 = document.createElement('div');
-                                newEntry1.innerText = json_data["data"]["timelines"][0]["intervals"][i]["startTime"];
-                                board.appendChild(newEntry1);
-
-                                var newEntry2 = document.createElement('div');
-                                newEntry2.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["weatherCode"];
-                                board.appendChild(newEntry2);
-
-                                var newEntry3 = document.createElement('div');
-                                newEntry3.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"];
-                                board.appendChild(newEntry3);
-
-                                var newEntry4 = document.createElement('div');
-                                newEntry4.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"];
-                                board.appendChild(newEntry4);
-
-                                var newEntry5 = document.createElement('div');
-                                newEntry5.innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["windSpeed"];
-                                board.appendChild(newEntry5);
-
-                                document.getElementById("weekly_weather_card_container").appendChild(board);
-
-                                console.log(i);
-                            }
-
-                            // function saying() {
+                                board.getElementsByClassName("date")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["startTime"];
                                 
-                            // }
-                            
-                            // ".cl1 .sl_price"
-                            // console.log(elements.);
-                            // elements.date.innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
-                            
+                                board.getElementsByClassName("status")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["weatherCode"];
+                                board.getElementsByClassName("temp_high")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"];
+                                board.getElementsByClassName("temp_low")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"];
+                                board.getElementsByClassName("wind_speed")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["windSpeed"];
+                                
+                            }                            
 
                             $("#weekly_weather_card_container").css('display', 'block');
+                            $("#weekly_specific_weather").css('display', 'none');
                         })
 
                         client.get('http://127.0.0.1:5000/current_weather', function(response) {
@@ -440,13 +423,126 @@
                 <div>Wind Speed</div>
             </div>
 
-            <!-- <div class="weekly_weather_card">
+            <div class="weekly_weather_card">
                 <div class="date"></div>
                 <div class="status"></div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
-            </div> -->
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
+            <div class="weekly_weather_card">
+                <div class="date"></div>
+                <div class="status"></div>
+                <div class="temp_high"></div>
+                <div class="temp_low"></div>
+                <div class="wind_speed"></div>
+            </div>
+
         </div>
 
         <div id="weekly_specific_weather">
