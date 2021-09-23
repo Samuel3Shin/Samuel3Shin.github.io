@@ -321,10 +321,10 @@ a {
 }
 
 .image2 {
-position: absolute;
-top: 30px;
-left: 30px;
-border: 1px green solid;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border: 1px green solid;
 }
 
 

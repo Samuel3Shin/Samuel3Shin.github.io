@@ -7,12 +7,15 @@
             background-image: url(Images/banner.jpg);
             border: gray solid 1px;
             font-weight: lighter;
+            background-color: #ffffff;
         }
 
         .container {
             display: grid;
             border: gray solid 1px;
             padding: 30px;
+            background-color: #ffffff;
+            
         }
 
         .address {
@@ -27,6 +30,7 @@
 
         #card {
             display: none;
+            background-color: #ffffff;
         }
 
         #icon_temperture {
@@ -88,9 +92,50 @@
         .weekly_weather_card {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+            height: 100px;
+            width: 100%;
+
+            justify-content:center;
+            align-items: center;
+
+            border: 1px black solid;
+            background-color: #ffffff;
+
+            cursor: pointer;
+
         }
+
+        #weekly_specific_weather {
+            display: none;
+        }
+
+        #weekly_specific_weather_box_upper_half {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        #weekly_specific_weather_box {
+            border: 1px black solid;
+            background-color: #ffffff;
+        }
+
+        .weekly_specific_text {
+            text-align: right; 
+        }
+
+        #weekly_specific_weather_box_lower_half {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .weekly_specific_val {
+            text-align: left; 
+        }
+
         
     </style>
+
     <header>
         <h1>Weather Search</h1>
         <h2>Fill out the form to get
@@ -98,7 +143,7 @@
     </header>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <body>
+    <body style="background-color:#eae9ea">
         <div class="container">
             <div>
                 Street
@@ -196,16 +241,51 @@
                             var json_data = JSON.parse(response);
 
                             // weekly_weather_card.date.innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
-                            let elements = document.getElementsByClassName('weekly_weather_card');
-                            document.querySelector(".weekly_weather_card .date").innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
-                            document.querySelector(".weekly_weather_card .status").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"];
-                            document.querySelector(".weekly_weather_card .temp_high").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperatureMax"];
-                            document.querySelector(".weekly_weather_card .temp_low").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperatureMin"];
-                            document.querySelector(".weekly_weather_card .wind_speed").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["windSpeed"];
-                            
+                            // let elements = document.getElementsByClassName('weekly_weather_card');
+                            // document.querySelector(".weekly_weather_card .date").innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
+                            // document.querySelector(".weekly_weather_card .status").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"];
+                            // document.querySelector(".weekly_weather_card .temp_high").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperatureMax"];
+                            // document.querySelector(".weekly_weather_card .temp_low").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperatureMin"];
+                            // document.querySelector(".weekly_weather_card .wind_speed").innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["windSpeed"];
+                            var showWeeklyWeather = function(json_data, idx) {
+                                    return function curried_func(e) {
+                                        console.log(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
+
+                                        weekly_specific_date.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["startTime"];
+
+                                        [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["weatherCode"]);
+                                        weekly_specific_overall.innerText = weather_icon_text;
+                                        $("#weekly_weather_code_img").attr("src",weather_icon_img_dir);
+                                        
+                                        weekly_specific_temperture.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMax"] + "/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"];
+                                        
+                                        weekly_specific_precipitation.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationType"]
+                                        weekly_specific_rain.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationProbability"]
+                                        weekly_specific_wind.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["windSpeed"]
+                                        weekly_specific_humidity.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["humidity"]
+                                        weekly_specific_visibility.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["visibility"]
+                                        weekly_specific_sunrise.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunriseTime"] + "/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunsetTime"]
+
+                                        $("#weekly_weather_card_container").css('display', 'none');
+                                        $("#card").css('display', 'none');
+                                        $("#weekly_specific_weather").css('display', 'block');
+                                    }
+                                };
+
                             for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
                                 var board = document.createElement('div');
                                 board.className = "weekly_weather_card";
+                                // board.onclick 
+                                // board.addEventListener("click", saying, false); 
+                                // board.addEventListener("click", function (e) {
+                                // console.log(this.className)           // logs the className of my_element
+                                // console.log(e.currentTarget === this) // logs `true`
+                                // console.log(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+                                // });
+
+                                board.addEventListener("click", showWeeklyWeather(json_data, i));
+
+                                // someObj.addEventListener('click', );
 
                                 var newEntry1 = document.createElement('div');
                                 newEntry1.innerText = json_data["data"]["timelines"][0]["intervals"][i]["startTime"];
@@ -231,6 +311,10 @@
 
                                 console.log(i);
                             }
+
+                            // function saying() {
+                                
+                            // }
                             
                             // ".cl1 .sl_price"
                             // console.log(elements.);
@@ -257,7 +341,7 @@
 
                             [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"], is_sunset);
 
-                            $("#weather_code_img").attr("src",weather_icon_img_dir);
+                            $("#weather_code_img").attr("src", weather_icon_img_dir);
                             weather_code_text.innerText = weather_icon_text;
 
                             // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
@@ -356,13 +440,52 @@
                 <div>Wind Speed</div>
             </div>
 
-            <div class="weekly_weather_card">
+            <!-- <div class="weekly_weather_card">
                 <div class="date"></div>
                 <div class="status"></div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
+            </div> -->
+        </div>
+
+        <div id="weekly_specific_weather">
+
+            <div>
+                <h1>Daily Weather Details</h1>
             </div>
+            <div id="weekly_specific_weather_box">
+                <div id="weekly_specific_weather_box_upper_half">
+                    <div>
+                        <div id="weekly_specific_date">Thursday, 09 Sep 2021</div>
+                        <div id="weekly_specific_overall">Light Fog</div>
+                        <div id="weekly_specific_temperture">90.88F/64.87F</div>
+                    </div>
+                    <div>
+                        <img id="weekly_weather_code_img" src="./Images/clear_day.svg" width="150" height="150">
+                    </div>
+                </div>
+                <div id="weekly_specific_weather_box_lower_half">
+                    <div class="weekly_specific_text">
+                        <div>Precipitation:</div>
+                        <div>Chance of Rain:</div>
+                        <div>Wind Speed:</div>
+                        <div>Humidity:</div>
+                        <div>Visibility:</div>
+                        <div>Sunrise/Sunset:</div>
+                    </div>
+                    <div class="weekly_specific_val">
+                        <div id="weekly_specific_precipitation">N/A</div>
+                        <div id="weekly_specific_rain">0%</div>
+                        <div id="weekly_specific_wind">13.24 mph</div>
+                        <div id="weekly_specific_humidity">94.96%</div>
+                        <div id="weekly_specific_visibility">9.94 mi</div>
+                        <div id="weekly_specific_sunrise">6AM/7PM</div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </body>
 </html>
