@@ -2,6 +2,13 @@
 <html>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="utils.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
     <style>
         header {
             background-image: url(Images/banner.jpg);
@@ -133,6 +140,21 @@
             text-align: left; 
         }
 
+        #downArrow {
+            height: 40px;
+            width: 40px;
+            content:url('./Images/point-down-512.png');
+        }
+
+        #upArrow {
+            height: 40px;
+            width: 40px;
+            content:url('./Images/point-up-512.png');
+        }
+
+        #weather_charts {
+            display: none;
+        }
         
     </style>
 
@@ -305,7 +327,85 @@
 
                             $("#weekly_weather_card_container").css('display', 'block');
                             $("#weekly_specific_weather").css('display', 'none');
-                        })
+
+
+                            // // weather chart1 populating
+                            // var weather_chart_data = []
+                            // for(i=0; i<15; ++i) {
+                            //     // json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"]
+                            //     let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+                            //     // console.log(date);
+                            //     weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
+                            // }
+
+                            // Highcharts.chart('#chart1_container', {
+
+                            //     chart: {
+                            //         type: 'arearange',
+                            //         zoomType: 'x',
+                            //         scrollablePlotArea: {
+                            //             minWidth: 600,
+                            //             scrollPositionX: 1
+                            //         }
+                            //     },
+
+                            //     title: {
+                            //         text: 'Temperature Ranges (Min, MAX)'
+                            //     },
+
+                            //     xAxis: {
+                            //         type: 'datetime',
+                            //         accessibility: {
+                            //             // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
+                            //         }
+                            //     },
+
+                            //     yAxis: {
+                            //         title: {
+                            //             text: null
+                            //         }
+                            //     },
+
+                            //     tooltip: {
+                            //         crosshairs: true,
+                            //         shared: true,
+                            //         valueSuffix: '°F',
+                            //         xDateFormat: '%A, %b %e'
+                            //     },
+
+                            //     legend: {
+                            //         enabled: false
+                            //     },
+
+                            //     series: [{
+                            //         name: 'Temperatures',
+                            //         data: weather_chart_data,
+
+                            //         // fillColor: '#eebd59',
+                            //         lineColor: '#ffb10b',
+
+                            //         fillColor: {
+                            //             linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                            //             stops: [
+                            //                 [0, '#feb315'], // start
+                            //                 [0.5, '#dfcb98'], // middle
+                            //                 [1, '#dce9f5'] // end
+                            //             ]
+                            //         }
+                            //     }],
+
+                            //     colors: {
+                            //     linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                            //     stops: [
+                            //         [0, '#eebd59'], // start
+                            //         [0.5, '#dad4bf'], // middle
+                            //         [1, '#dce9f1'] // end
+                            //     ]
+                            //     }
+
+                            // });
+
+                        });
 
                         client.get('http://127.0.0.1:5000/current_weather', function(response) {
                             
@@ -579,9 +679,107 @@
                         <div id="weekly_specific_sunrise">6AM/7PM</div>
                     </div>
                 </div>
-
             </div>
 
+            <div>Weather Charts</div>
+            <div id="downArrow"></div></a>
+            <script>
+                $("#downArrow").click(function(){
+                    $("#weather_charts").css('display', 'block');
+                });
+            </script>
         </div>
+
+        <div id="weather_charts">
+            <div id="upArrow"></div></a>
+            <figure class="highcharts-figure">
+                <div id="chart1_container"></div>
+                <script>
+                    var client = new HttpClient();
+                    
+                    client.get('http://127.0.0.1:5000/weekly_weather', function(response) {
+                    var json_data = JSON.parse(response);
+
+                    console.log('It started');
+                    // weather chart1 populating
+                    var weather_chart_data = []
+                        for(i=0; i<15; ++i) {
+                            // json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"]
+                            let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+                            // console.log(date);
+                            weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
+                        }
+
+                        Highcharts.chart('chart1_container', {
+
+                            chart: {
+                                type: 'arearange',
+                                zoomType: 'x',
+                                scrollablePlotArea: {
+                                    minWidth: 600,
+                                    scrollPositionX: 1
+                                }
+                            },
+
+                            title: {
+                                text: 'Temperature Ranges (Min, MAX)'
+                            },
+
+                            xAxis: {
+                                type: 'datetime',
+                                accessibility: {
+                                    // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
+                                }
+                            },
+
+                            yAxis: {
+                                title: {
+                                    text: null
+                                }
+                            },
+
+                            tooltip: {
+                                crosshairs: true,
+                                shared: true,
+                                valueSuffix: '°F',
+                                xDateFormat: '%A, %b %e'
+                            },
+
+                            legend: {
+                                enabled: false
+                            },
+
+                            series: [{
+                                name: 'Temperatures',
+                                data: weather_chart_data,
+
+                                // fillColor: '#eebd59',
+                                lineColor: '#ffb10b',
+
+                                fillColor: {
+                                    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                                    stops: [
+                                        [0, '#feb315'], // start
+                                        [0.5, '#dfcb98'], // middle
+                                        [1, '#dce9f5'] // end
+                                    ]
+                                }
+                            }],
+
+                            colors: {
+                            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                            stops: [
+                                [0, '#eebd59'], // start
+                                [0.5, '#dad4bf'], // middle
+                                [1, '#dce9f1'] // end
+                            ]
+                            }
+
+                        });
+                    });
+                </script>
+            </figure>
+        </div>
+
     </body>
 </html>
