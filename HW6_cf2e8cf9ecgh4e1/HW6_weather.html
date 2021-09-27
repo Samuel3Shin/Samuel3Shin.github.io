@@ -145,12 +145,18 @@
             height: 40px;
             width: 40px;
             content:url('./Images/point-down-512.png');
+
+            margin: auto;
+            cursor: pointer;
         }
 
         #upArrow {
             height: 40px;
             width: 40px;
             content:url('./Images/point-up-512.png');
+
+            margin: auto;
+            cursor: pointer;
         }
 
         #weather_charts {
@@ -302,20 +308,9 @@
                             console.log(weekly_weather_cards.length);
                             
                             for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
-                                // var board = document.createElement('div');
                                 var board = weekly_weather_cards[i];
-                                // board.className = "weekly_weather_card";
-                                // board.onclick 
-                                // board.addEventListener("click", saying, false); 
-                                // board.addEventListener("click", function (e) {
-                                // console.log(this.className)           // logs the className of my_element
-                                // console.log(e.currentTarget === this) // logs `true`
-                                // console.log(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
-                                // });
 
                                 board.addEventListener("click", showWeeklyWeather(json_data, i));
-
-                                // someObj.addEventListener('click', );
 
                                 board.getElementsByClassName("date")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["startTime"];
                                 
@@ -329,92 +324,11 @@
                             $("#weekly_weather_card_container").css('display', 'block');
                             $("#weekly_specific_weather").css('display', 'none');
 
-
-                            // // weather chart1 populating
-                            // var weather_chart_data = []
-                            // for(i=0; i<15; ++i) {
-                            //     // json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"]
-                            //     let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
-                            //     // console.log(date);
-                            //     weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
-                            // }
-
-                            // Highcharts.chart('#chart1_container', {
-
-                            //     chart: {
-                            //         type: 'arearange',
-                            //         zoomType: 'x',
-                            //         scrollablePlotArea: {
-                            //             minWidth: 600,
-                            //             scrollPositionX: 1
-                            //         }
-                            //     },
-
-                            //     title: {
-                            //         text: 'Temperature Ranges (Min, MAX)'
-                            //     },
-
-                            //     xAxis: {
-                            //         type: 'datetime',
-                            //         accessibility: {
-                            //             // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
-                            //         }
-                            //     },
-
-                            //     yAxis: {
-                            //         title: {
-                            //             text: null
-                            //         }
-                            //     },
-
-                            //     tooltip: {
-                            //         crosshairs: true,
-                            //         shared: true,
-                            //         valueSuffix: '°F',
-                            //         xDateFormat: '%A, %b %e'
-                            //     },
-
-                            //     legend: {
-                            //         enabled: false
-                            //     },
-
-                            //     series: [{
-                            //         name: 'Temperatures',
-                            //         data: weather_chart_data,
-
-                            //         // fillColor: '#eebd59',
-                            //         lineColor: '#ffb10b',
-
-                            //         fillColor: {
-                            //             linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                            //             stops: [
-                            //                 [0, '#feb315'], // start
-                            //                 [0.5, '#dfcb98'], // middle
-                            //                 [1, '#dce9f5'] // end
-                            //             ]
-                            //         }
-                            //     }],
-
-                            //     colors: {
-                            //     linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                            //     stops: [
-                            //         [0, '#eebd59'], // start
-                            //         [0.5, '#dad4bf'], // middle
-                            //         [1, '#dce9f1'] // end
-                            //     ]
-                            //     }
-
-                            // });
-
                         });
 
                         client.get('http://127.0.0.1:5000/current_weather', function(response) {
                             
                             var json_data = JSON.parse(response);
-                            // var json_data = response;
-                            // document.getElementById('address').value = response[0]['results'][0]['address_components'][3]['long_name'];
-                            // $('#humiditiy_value').html("10");
-                            console.log(json_data);
                             
                             // weather icon
                             var weather_icon_img_dir = "./Images/clear_night.svg";
@@ -440,24 +354,19 @@
                             uv_level_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"];
                             
                             $("#card").css('display', 'block');
-                            // document.getElementById('card').style.display = 'block';
                         });
-                        // var street = document.getElementById("street_input").value;
-                        // var city = document.getElementById("city_input").value;
-                        // var state = document.getElementById("state_input").value;
 
-                        // console.log(street);
-                        // console.log(city);
-                        // console.log(state);
-
-                        // axios.get('http://127.0.0.1:5000')
-                        //     .then(response => {
-                        //         console.log(response.data);
-                        //     })
-                        //     .catch(error => console.error(error));
                     }
                 </script>
-                <button type="clear">Clear</button>
+                <button type="clear" onclick="clearEverything()">Clear</button>
+                <script>
+                    function clearEverything() {
+                        $("#card").css('display', 'none');
+                        $("#weekly_weather_card_container").css('display', 'none');
+                        $("#weekly_specific_weather").css('display', 'none');
+                        $("#weather_charts").css('display', 'none');
+                    }
+                </script>
             </div>
         </div>
 
@@ -681,18 +590,26 @@
                     </div>
                 </div>
             </div>
-
             <div>Weather Charts</div>
             <div id="downArrow"></div></a>
             <script>
                 $("#downArrow").click(function(){
                     $("#weather_charts").css('display', 'block');
+                    $("#downArrow").css('display', 'none');
+                    $("#upArrow").css('display', 'block');
                 });
             </script>
         </div>
 
         <div id="weather_charts">
             <div id="upArrow"></div></a>
+            <script>
+                $("#upArrow").click(function(){
+                    $("#weather_charts").css('display', 'none');
+                    $("#downArrow").css('display', 'block');
+                    $("#upArrow").css('display', 'none');
+                });
+            </script>
             <figure class="highcharts-figure">
                 <div id="chart1_container"></div>
                 <div id="chart2_container"></div>
@@ -706,9 +623,7 @@
                     // weather chart1 populating
                     var weather_chart_data = []
                         for(i=0; i<15; ++i) {
-                            // json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"]
                             let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
-                            // console.log(date);
                             weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
                         }
 
@@ -776,7 +691,6 @@
                                 [1, '#dce9f1'] // end
                             ]
                             }
-
                         });
                     });
 
