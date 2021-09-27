@@ -8,6 +8,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/windbarb.js"></script>
 
     <style>
         header {
@@ -694,6 +695,7 @@
             <div id="upArrow"></div></a>
             <figure class="highcharts-figure">
                 <div id="chart1_container"></div>
+                <div id="chart2_container"></div>
                 <script>
                     var client = new HttpClient();
                     
@@ -777,6 +779,12 @@
 
                         });
                     });
+
+                    client.get('http://127.0.0.1:5000/hourly_weather', function(response) {
+                        var json_data = JSON.parse(response);
+                        window.meteogram = new Meteogram(json_data, 'chart2_container');
+                    });
+                    
                 </script>
             </figure>
         </div>
