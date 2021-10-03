@@ -18,35 +18,104 @@
             background-color: #ffffff;
             width: 500px;
             margin: auto;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            
         }
 
         header h1 {
             margin: 20px;
             font-size: 25px;
+            font-weight: lighter;
+            margin-left: 31px;
         }
 
         header h2 {
             margin: 20px;
             font-size: 20px;
+            font-weight: lighter;
+            margin-left: 31px;
         }
 
         .container {
             display: grid;
             border: gray solid 1px;
-            /* padding: 30px; */
+            padding: 30px;
             background-color: #ffffff;
-            width: 500px;
+            width: 440px;
             margin: auto;
         }
 
         .address {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            margin-top: 15px;
+        }
+
+        #street_input {
+            width: 430px;
+            height: 22px;
+            border-radius: 0;
+            /* background: transparent; */
+            border: 1px solid #e4e4e4;
+   
+        }
+
+        #city_input {
+            width: 180px;
+            height: 22px;
+            border-radius: 0;
+            border: 1px solid #e4e4e4;
+        }
+
+        #state_input {
+            width: 217px;
+            height: 26px;
+            margin: 0;
+            border-radius: 0;
+            border: 1px solid #e4e4e4;
         }
 
         .buttons {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 100px 100px;
+            margin-top: 30px;
+        }
+
+        #submit_button {
+            background-color: #587ab9;
+            width:100px;
+            height:40px;
+            justify-content:center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: lighter;
+            display: flex;
+            /* margin: 0 auto; */
+            color: white;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom-width: 3px;
+            border-bottom-color:#466195;  
+        }
+
+        #clear_button {
+            background-color: #ffbc00;
+            width:100px;
+            height:40px;
+            justify-content:center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: lighter;
+            display: flex;
+            margin-left: 3px;
+            /* margin: 0 auto; */
+            color: white;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom-width: 3px;
+            border-bottom-color:#ffbb30;      
         }
 
         #card {
@@ -188,16 +257,16 @@
     <body style="background-color:#eae9ea">
         <div class="container">
             <div>
-                <div>Street</div>
+                <div style="color:#5c79ac">Street</div>
                 <input type="text" name="street" id="street_input" required>
             </div>
                 <div class="address">
-                    <div>
-                        <div>City</div>
+                    <div class="city_input_container">
+                        <div style="color:#5c79ac">City</div>
                         <input type="text" name="city" id="city_input" required>
                     </div>
-                    <div>
-                        <div>State</div>
+                    <div class="state_input_container">
+                        <div style="color:#5c79ac">State</div>
                         <!-- <input type="text" name="state" required> -->
                         <select id="state_input" required>
                             <option value="starter" selected>Select Your State</option>
@@ -255,15 +324,32 @@
                         </select>			
                     </div>
             </div>
-            <hr style="width:300px;margin:30px">
+            <hr style="border:none;height:1px;width:437px;margin-top:25px;margin-bottom:18px;margin-left:1px;margin-right:1px;color:#5c79ac;background-color:#5c79ac">
             
             <label>
-                <span class="psw"> Want us to auto-detect your location? Check here</span>
-                <input type="checkbox"  checked="checked" name="remember">
+                <span class="psw" style="color:#5c79ac; font-weight:lighter;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Want us to auto-detect your location? Check here</span>
+                <input type="checkbox" id="checkbox" onclick='handleCheckboxClick(this);' name="remember">
+                <script>
+                    function handleCheckboxClick(cb) {
+                        if(cb.checked) {
+                            $("#street_input").val("");
+                            $("#city_input").val("");
+                            $("#state_input").val('starter').prop("selected", true);
+
+                            $("#street_input").attr("disabled",true);
+                            $("#city_input").attr("disabled",true);
+                            $("#state_input").attr("disabled",true);
+                        } else {
+                            $("#street_input").removeAttr("disabled"); 
+                            $("#city_input").removeAttr("disabled"); 
+                            $("#state_input").removeAttr("disabled"); 
+                        }
+                    }
+                </script>
             </label>
             
             <div class="buttons">
-                <button type="submit" onclick="sendAddress()">Submit</button>
+                <button type="submit" id="submit_button" onclick="sendAddress()">Submit</button>
                 <script>
 
                     var HttpClient = function() {
@@ -299,10 +385,9 @@
                             return;
                         }
 
-
                         var client = new HttpClient();
                         
-                        client.get('http://127.0.0.1:5000/weekly_weather', function(response) {
+                        client.get('http://127.0.0.1:5000/weekly_weather?street=royal', function(response) {
                             var json_data = JSON.parse(response);
 
                             // weekly_weather_card.date.innerText = json_data["data"]["timelines"][0]["intervals"][0]["startTime"];
@@ -362,7 +447,7 @@
 
                         });
 
-                        client.get('http://127.0.0.1:5000/current_weather', function(response) {
+                        client.get('http://127.0.0.1:5000/current_weather?street=royal', function(response) {
                             
                             var json_data = JSON.parse(response);
                             
@@ -394,7 +479,7 @@
 
                     }
                 </script>
-                <button type="clear" onclick="clearEverything()">Clear</button>
+                <button type="clear" id="clear_button" onclick="clearEverything()">Clear</button>
                 <script>
                     function clearEverything() {
                         $("#card").css('display', 'none');
