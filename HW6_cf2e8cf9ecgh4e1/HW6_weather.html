@@ -157,19 +157,19 @@
             margin-left: 15px;
         }
 
-        #icon_temperture {
+        #icon_temperature {
             display: grid;
             grid-template-columns: 1fr 1fr;
             margin: 0;
         }
 
-        #current_temperture {
+        #current_temperature {
             font-size: 150px;
             font-weight: 100;
             margin: 0;
         }
 
-        #card_temperture {
+        #card_temperature {
             margin: 0;
         }
 
@@ -286,6 +286,17 @@
 
         }
 
+        #status_grid {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            margin: auto;
+        }
+
+        #status_img {
+            margin-left: auto; 
+            margin-right: 0;
+        }
+
         .date {
             margin: auto;
         }
@@ -308,16 +319,55 @@
 
         #weekly_specific_weather {
             display: none;
+            margin: auto;
+            width: 500px;
+        }
+
+        #daily_word {
+            margin: auto;
+            margin-top: 35px;
+            margin-bottom: 35px;
+            /* justify-content:center;
+            align-items: center; */
+            font-size: 30px;
+            font-weight: lighter;
+            text-align:center;
         }
 
         #weekly_specific_weather_box_upper_half {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 300px 200px;
+            font-weight: lighter;
+            margin-bottom: 30px;
+        }
+
+        #weekly_specific_weather_box_upper_half_left {
+            padding: 15px;
+            color: #4e5f7d;
+        }
+
+        #weekly_specific_date {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        #weekly_specific_overall {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        #weekly_specific_temperature {
+            font-size: 30px;
+        }
+
+        #weekly_specific_weather_box_upper_half_right {
+            margin: auto;
         }
 
         #weekly_specific_weather_box {
             border: 1px black solid;
-            background-color: #ffffff;
+            background-image: linear-gradient(to bottom, #ffffff,#374262);
+            height: 400px;
         }
 
         .weekly_specific_text {
@@ -326,11 +376,18 @@
 
         #weekly_specific_weather_box_lower_half {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 300px 200px;
         }
 
         .weekly_specific_val {
+            margin-left: 5px;
             text-align: left; 
+        }
+
+        .weekly_specific_text_format {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: white;
         }
 
         #downArrow {
@@ -339,6 +396,7 @@
             content:url('./Images/point-down-512.png');
 
             margin: auto;
+            margin-top: 0;
             cursor: pointer;
         }
 
@@ -353,6 +411,16 @@
 
         #weather_charts {
             display: none;
+        }
+        #chart1_container {
+            margin: auto;
+            width: 1200px;
+        }
+        #chart2_container {
+            margin: auto;
+            margin-top: 30px;
+            height: 400px;
+            width: 1200px;
         }
         
     </style>
@@ -527,7 +595,7 @@
 
                              var showWeeklyWeather = function(json_data, idx) {
                                     return function curried_func(e) {
-                                        console.log(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
+                                        // console.log(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
                                         
 
                                         var date = new Date(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
@@ -539,14 +607,20 @@
                                         weekly_specific_overall.innerText = weather_icon_text;
                                         $("#weekly_weather_code_img").attr("src",weather_icon_img_dir);
                                         
-                                        weekly_specific_temperture.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMax"] + "/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"];
+                                        weekly_specific_temperature.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMax"] +  "°F/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"] +"°F";
                                         
                                         weekly_specific_precipitation.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationType"]
-                                        weekly_specific_rain.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationProbability"]
-                                        weekly_specific_wind.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["windSpeed"]
-                                        weekly_specific_humidity.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["humidity"]
-                                        weekly_specific_visibility.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["visibility"]
-                                        weekly_specific_sunrise.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunriseTime"] + "/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunsetTime"]
+                                        weekly_specific_rain.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationProbability"] + "%";
+                                        weekly_specific_wind.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["windSpeed"] + " mph";
+                                        weekly_specific_humidity.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["humidity"] + "%";
+                                        weekly_specific_visibility.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["visibility"] + " mi";
+
+                                        console.log(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunriseTime"].slice(0, -6));
+
+                                        var sunriseTime = new Date(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunriseTime"].slice(0, -6)).getHours();
+                                        var sunsetTime = new Date(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunsetTime"].slice(0, -6)).getHours();
+                                        
+                                        weekly_specific_sunrise.innerText = (sunriseTime > 12 ? (sunriseTime - 12) : sunriseTime) + "AM/" + (sunsetTime > 12 ? (sunsetTime - 12) : sunsetTime) + "PM";
 
                                         $("#weekly_weather_card_container").css('display', 'none');
                                         $("#card").css('display', 'none');
@@ -558,7 +632,7 @@
                             var weekly_weather_cards = document.getElementsByClassName("weekly_weather_card");
                             
                             // console.log("length: " + daily_weather_cards.length);
-                            console.log(weekly_weather_cards.length);
+                            // console.log(weekly_weather_cards.length);
                             
                             for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
                                 var board = weekly_weather_cards[i];
@@ -569,7 +643,13 @@
 
                                 board.getElementsByClassName("date")[0].innerText = weekday[date.getDay()] + ", " + date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear();
                                 
-                                board.getElementsByClassName("status")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["weatherCode"];
+                                
+                                [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][i]["values"]["weatherCode"], false);
+                                
+                                // $("#status_img").attr("src", weather_icon_img_dir);
+                                board.getElementsByClassName("status_img")[0].src = weather_icon_img_dir;
+                                board.getElementsByClassName("status")[0].innerText = weather_icon_text;
+
                                 board.getElementsByClassName("temp_high")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"];
                                 board.getElementsByClassName("temp_low")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"];
                                 board.getElementsByClassName("wind_speed")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["windSpeed"];
@@ -599,7 +679,7 @@
                             weather_code_text.innerText = weather_icon_text;
 
                             // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
-                            current_temperture.innerText = Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + "º"
+                            current_temperature.innerText = Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + "º"
 
                             // weather specific infos
                             humidity_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["humidity"] + "%";
@@ -631,13 +711,13 @@
                 <div>
                     <h1 id="card_address_text">Los Angeles, California</h1>
                 </div>
-                <div id="icon_temperture">
+                <div id="icon_temperature">
                     <div id="card_weather_icon">
                         <img id="weather_code_img" src="./Images/clear_day.svg" width="150" height="150">
                         <h3 id="weather_code_text">clear</h3>
                     </div>
-                    <div id="card_temperture">
-                        <h1 id="current_temperture">000</h1>
+                    <div id="card_temperature">
+                        <h1 id="current_temperature">000</h1>
                     </div>
                 </div>
                 <div id="specific_info_grid">
@@ -691,7 +771,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -699,7 +782,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -707,7 +793,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -715,7 +804,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -723,7 +815,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -731,7 +826,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -739,7 +837,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -747,7 +848,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img"src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -755,7 +859,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -763,7 +870,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -771,7 +881,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -779,7 +892,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -787,7 +903,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -795,7 +914,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -803,7 +925,10 @@
 
             <div class="weekly_weather_card">
                 <div class="date"></div>
-                <div class="status"></div>
+                <div id="status_grid">
+                    <img class="status_img" src="./Images/clear_day.svg" style="margin:auto; width:40px; height:40px; display:block" />
+                    <div class="status"></div>
+                </div>
                 <div class="temp_high"></div>
                 <div class="temp_low"></div>
                 <div class="wind_speed"></div>
@@ -812,41 +937,41 @@
         </div>
 
         <div id="weekly_specific_weather">
-
-            <div>
-                <h1>Daily Weather Details</h1>
+            <div id="daily_word">
+                Daily Weather Details
+                <!-- <h1 style="margin:auto"></h1> -->
             </div>
             <div id="weekly_specific_weather_box">
                 <div id="weekly_specific_weather_box_upper_half">
-                    <div>
+                    <div id="weekly_specific_weather_box_upper_half_left">
                         <div id="weekly_specific_date">Thursday, 09 Sep 2021</div>
                         <div id="weekly_specific_overall">Light Fog</div>
-                        <div id="weekly_specific_temperture">90.88F/64.87F</div>
+                        <div id="weekly_specific_temperature">90.88F/64.87F</div>
                     </div>
-                    <div>
-                        <img id="weekly_weather_code_img" src="./Images/clear_day.svg" width="150" height="150">
+                    <div id="weekly_specific_weather_box_upper_half_right">
+                        <img id="weekly_weather_code_img" src="./Images/clear_day.svg" width="140" height="140">
                     </div>
                 </div>
                 <div id="weekly_specific_weather_box_lower_half">
                     <div class="weekly_specific_text">
-                        <div>Precipitation:</div>
-                        <div>Chance of Rain:</div>
-                        <div>Wind Speed:</div>
-                        <div>Humidity:</div>
-                        <div>Visibility:</div>
-                        <div>Sunrise/Sunset:</div>
+                        <div class="weekly_specific_text_format">Precipitation:</div>
+                        <div class="weekly_specific_text_format">Chance of Rain:</div>
+                        <div class="weekly_specific_text_format">Wind Speed:</div>
+                        <div class="weekly_specific_text_format">Humidity:</div>
+                        <div class="weekly_specific_text_format">Visibility:</div>
+                        <div class="weekly_specific_text_format">Sunrise/Sunset:</div>
                     </div>
                     <div class="weekly_specific_val">
-                        <div id="weekly_specific_precipitation">N/A</div>
-                        <div id="weekly_specific_rain">0%</div>
-                        <div id="weekly_specific_wind">13.24 mph</div>
-                        <div id="weekly_specific_humidity">94.96%</div>
-                        <div id="weekly_specific_visibility">9.94 mi</div>
-                        <div id="weekly_specific_sunrise">6AM/7PM</div>
+                        <div class="weekly_specific_text_format" id="weekly_specific_precipitation">N/A</div>
+                        <div class="weekly_specific_text_format" id="weekly_specific_rain">0%</div>
+                        <div class="weekly_specific_text_format" id="weekly_specific_wind">13.24 mph</div>
+                        <div class="weekly_specific_text_format" id="weekly_specific_humidity">94.96%</div>
+                        <div class="weekly_specific_text_format" id="weekly_specific_visibility">9.94 mi</div>
+                        <div class="weekly_specific_text_format" id="weekly_specific_sunrise">6AM/7PM</div>
                     </div>
                 </div>
             </div>
-            <div>Weather Charts</div>
+            <div id="daily_word">Weather Charts</div>
             <div id="downArrow"></div></a>
             <script>
                 $("#downArrow").click(function(){
