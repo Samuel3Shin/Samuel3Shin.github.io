@@ -4,27 +4,15 @@ function weatherCodeMapper(weather_code, is_sunset=false) {
 
     switch (weather_code) {
         case 1000:
-            if(is_sunset) {
-                weather_icon_img_dir = "./Images/clear_night.svg"
-            } else {
-                weather_icon_img_dir = "./Images/clear_day.svg"
-            }
+            weather_icon_img_dir = "./Images/clear_day.svg"
             weather_icon_text = "Clear";
             break;
         case 1101:
-            if(is_sunset) {
-                weather_icon_img_dir = "./Images/partly_cloudy_night.svg"
-            } else {
-                weather_icon_img_dir = "./Images/partly_cloudy_day.svg"
-            }
+            weather_icon_img_dir = "./Images/partly_cloudy_day.svg"
             weather_icon_text = "Partly Cloudy";
             break;
         case 1100:
-            if(is_sunset) {
-                weather_icon_img_dir = "./Images/mostly_clear_night.svg"
-            } else {
-                weather_icon_img_dir = "./Images/mostly_clear_day.svg"
-            }
+            weather_icon_img_dir = "./Images/mostly_clear_day.svg"
             weather_icon_text = "Mostly Clear";
             break;
         case 1001:
@@ -35,9 +23,29 @@ function weatherCodeMapper(weather_code, is_sunset=false) {
             weather_icon_img_dir = "./Images/mostly_cloudy.svg"
             weather_icon_text = "Mostly Cloudy";
             break;
-        case 4201:
-            weather_icon_img_dir = "./Images/rain_heavy.svg"
-            weather_icon_text = "Heavy Rain";
+        case 2000:
+            weather_icon_img_dir = "./Images/fog.svg"
+            weather_icon_text = "Fog";
+            break;
+        case 2100:
+            weather_icon_img_dir = "./Images/fog_light.svg"
+            weather_icon_text = "Light Fog";
+            break;
+        case 3000:
+            weather_icon_img_dir = "./Images/light_wind.svg"
+            weather_icon_text = "Light Wind";
+            break;
+        case 3001:
+            weather_icon_img_dir = "./Images/wind.svg"
+            weather_icon_text = "Wind";
+            break;
+        case 3002:
+            weather_icon_img_dir = "./Images/strong_wind.svg"
+            weather_icon_text = "Strong Wind";
+            break;
+        case 4000:
+            weather_icon_img_dir = "./Images/drizzle.svg"
+            weather_icon_text = "Drizzle";
             break;
         case 4001:
             weather_icon_img_dir = "./Images/rain.svg"
@@ -47,9 +55,29 @@ function weatherCodeMapper(weather_code, is_sunset=false) {
             weather_icon_img_dir = "./Images/rain_light.svg"
             weather_icon_text = "Light Rain";
             break;
-        case 6201:
-            weather_icon_img_dir = "./Images/freezing_rain_heavy.svg"
-            weather_icon_text = "Heavy Freezing Rain";
+        case 4201:
+            weather_icon_img_dir = "./Images/rain_heavy.svg"
+            weather_icon_text = "Heavy Rain";
+            break;
+        case 5000:
+            weather_icon_img_dir = "./Images/snow.svg"
+            weather_icon_text = "Snow";
+            break;
+        case 5001:
+            weather_icon_img_dir = "./Images/flurries.svg"
+            weather_icon_text = "Flurries";
+            break;
+        case 5100:
+            weather_icon_img_dir = "./Images/snow_light.svg"
+            weather_icon_text = "Light Snow";
+            break;
+        case 5101:
+            weather_icon_img_dir = "./Images/snow_heavy.svg"
+            weather_icon_text = "Heavy Snow";
+            break;
+        case 6000:
+            weather_icon_img_dir = "./Images/freezing_drizzle.svg"
+            weather_icon_text = "Freezing Drizzle";
             break;
         case 6001:
             weather_icon_img_dir = "./Images/freezing_rain.svg"
@@ -59,53 +87,25 @@ function weatherCodeMapper(weather_code, is_sunset=false) {
             weather_icon_img_dir = "./Images/freezing_rain_light.svg"
             weather_icon_text = "Light Freezing Rain";
             break;
-        case 6000:
-            weather_icon_img_dir = "./Images/freezing_drizzle.svg"
-            weather_icon_text = "Freezing Drizzle";
-            break;
-        case 4000:
-            weather_icon_img_dir = "./Images/drizzle.svg"
-            weather_icon_text = "Drizzle";
-            break;
-        case 7101:
-            weather_icon_img_dir = "./Images/ice_pellets_heavy.svg"
-            weather_icon_text = "Heavy Ice Pellets";
+        case 6201:
+            weather_icon_img_dir = "./Images/freezing_rain_heavy.svg"
+            weather_icon_text = "Heavy Freezing Rain";
             break;
         case 7000:
             weather_icon_img_dir = "./Images/ice_pellets.svg"
             weather_icon_text = "Ice Pellets";
             break;
         case 7101:
+            weather_icon_img_dir = "./Images/ice_pellets_heavy.svg"
+            weather_icon_text = "Heavy Ice Pellets";
+            break;
+        case 7102:
             weather_icon_img_dir = "./Images/ice_pellets_light.svg"
             weather_icon_text = "Light Ice Pellets";
-            break;
-        case 5101:
-            weather_icon_img_dir = "./Images/snow_heavy.svg"
-            weather_icon_text = "Heavy Snow";
-            break;
-        case 5000:
-            weather_icon_img_dir = "./Images/snow.svg"
-            weather_icon_text = "Snow";
-            break;
-        case 5100:
-            weather_icon_img_dir = "./Images/snow_light.svg"
-            weather_icon_text = "Light Snow";
-            break;
-        case 5001:
-            weather_icon_img_dir = "./Images/flurries.svg"
-            weather_icon_text = "Flurries";
             break;
         case 8000:
             weather_icon_img_dir = "./Images/tstorm.svg"
             weather_icon_text = "Thunderstorm";
-            break;
-        case 2100:
-            weather_icon_img_dir = "./Images/fog_light.svg"
-            weather_icon_text = "Light Fog";
-            break;
-        case 2000:
-            weather_icon_img_dir = "./Images/fog.svg"
-            weather_icon_text = "Fog";
             break;
     }
 
@@ -252,6 +252,97 @@ var populatingCurrentWeather = function(url) {
     uv_level_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"];
     
     $("#card").css('display', 'block');
+    });
+}
+
+
+var populatingChart1 = function (url) {
+    var client = new HttpClient();
+    
+    client.get(url, function(response) {
+    var json_data = JSON.parse(response);
+
+    console.log('It started');
+    // weather chart1 populating
+    var weather_chart_data = []
+        for(i=0; i<15; ++i) {
+            let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+            weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
+        }
+
+        Highcharts.chart('chart1_container', {
+
+            chart: {
+                type: 'arearange',
+                zoomType: 'x',
+                scrollablePlotArea: {
+                    minWidth: 600,
+                    scrollPositionX: 1
+                }
+            },
+
+            title: {
+                text: 'Temperature Ranges (Min, MAX)'
+            },
+
+            xAxis: {
+                type: 'datetime',
+                accessibility: {
+                    // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
+                }
+            },
+
+            yAxis: {
+                title: {
+                    text: null
+                }
+            },
+
+            tooltip: {
+                crosshairs: true,
+                shared: true,
+                valueSuffix: '°F',
+                xDateFormat: '%A, %b %e'
+            },
+
+            legend: {
+                enabled: false
+            },
+
+            series: [{
+                name: 'Temperatures',
+                data: weather_chart_data,
+
+                // fillColor: '#eebd59',
+                lineColor: '#ffb10b',
+
+                fillColor: {
+                    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                    stops: [
+                        [0, '#feb315'], // start
+                        [0.5, '#dfcb98'], // middle
+                        [1, '#dce9f5'] // end
+                    ]
+                }
+            }],
+
+            colors: {
+            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+            stops: [
+                [0, '#eebd59'], // start
+                [0.5, '#dad4bf'], // middle
+                [1, '#dce9f1'] // end
+            ]
+            }
+        });
+    });
+}
+
+var populatingChart2 = function(url) {
+    var client = new HttpClient();
+    client.get(url, function(response) {
+        var json_data = JSON.parse(response);
+        window.meteogram = new Meteogram(json_data, 'chart2_container');
     });
 }
 

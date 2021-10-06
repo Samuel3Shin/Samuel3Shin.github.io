@@ -9,6 +9,7 @@
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/modules/windbarb.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
         header {
@@ -430,7 +431,6 @@
         <h2>Fill out the form to get
             weather info!</h2>
     </header>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <body style="background-color:#eae9ea; font-family:Helvetica, sans-serif;">
         <div class="container">
@@ -528,7 +528,6 @@
                 </label>
             </form>
 
-            
             <div class="buttons">
                 <button type="submit" id="submit_button" onclick="sendAddress()">Submit</button>
                 <script>
@@ -553,6 +552,14 @@
                                     console.log(lat + " " + lng);
                                     populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
                                     populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
+                                    populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
+                                    populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
+
+                                    // populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather`);
+                                    // populatingCurrentWeather(`http://127.0.0.1:5000/current_weather`);
+                                    // populatingChart1('http://127.0.0.1:5000/weekly_weather');
+                                    // populatingChart2('http://127.0.0.1:5000/hourly_weather');
+
                                 }
                             )                        
                         } else {
@@ -585,13 +592,20 @@
                                     lat = jsonResponse['results'][0]['geometry']['location']['lat'];
                                     lng = jsonResponse['results'][0]['geometry']['location']['lng'];
                                     console.log(lat + " " + lng);
+
                                     populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
                                     populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
+                                    populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
+                                    populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
+
+                                    // populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather`);
+                                    // populatingCurrentWeather(`http://127.0.0.1:5000/current_weather`);
+                                    // populatingChart1('http://127.0.0.1:5000/weekly_weather');
+                                    // populatingChart2('http://127.0.0.1:5000/hourly_weather');
+
                                 }
                             )   
                         }
-
-
 
                     }
                 </script>
@@ -896,93 +910,6 @@
             <figure class="highcharts-figure">
                 <div id="chart1_container"></div>
                 <div id="chart2_container"></div>
-                <script>
-                    var client = new HttpClient();
-                    
-                    client.get('http://127.0.0.1:5000/weekly_weather', function(response) {
-                    var json_data = JSON.parse(response);
-
-                    console.log('It started');
-                    // weather chart1 populating
-                    var weather_chart_data = []
-                        for(i=0; i<15; ++i) {
-                            let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
-                            weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
-                        }
-
-                        Highcharts.chart('chart1_container', {
-
-                            chart: {
-                                type: 'arearange',
-                                zoomType: 'x',
-                                scrollablePlotArea: {
-                                    minWidth: 600,
-                                    scrollPositionX: 1
-                                }
-                            },
-
-                            title: {
-                                text: 'Temperature Ranges (Min, MAX)'
-                            },
-
-                            xAxis: {
-                                type: 'datetime',
-                                accessibility: {
-                                    // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
-                                }
-                            },
-
-                            yAxis: {
-                                title: {
-                                    text: null
-                                }
-                            },
-
-                            tooltip: {
-                                crosshairs: true,
-                                shared: true,
-                                valueSuffix: '°F',
-                                xDateFormat: '%A, %b %e'
-                            },
-
-                            legend: {
-                                enabled: false
-                            },
-
-                            series: [{
-                                name: 'Temperatures',
-                                data: weather_chart_data,
-
-                                // fillColor: '#eebd59',
-                                lineColor: '#ffb10b',
-
-                                fillColor: {
-                                    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                                    stops: [
-                                        [0, '#feb315'], // start
-                                        [0.5, '#dfcb98'], // middle
-                                        [1, '#dce9f5'] // end
-                                    ]
-                                }
-                            }],
-
-                            colors: {
-                            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                            stops: [
-                                [0, '#eebd59'], // start
-                                [0.5, '#dad4bf'], // middle
-                                [1, '#dce9f1'] // end
-                            ]
-                            }
-                        });
-                    });
-
-                    client.get('http://127.0.0.1:5000/hourly_weather', function(response) {
-                        var json_data = JSON.parse(response);
-                        window.meteogram = new Meteogram(json_data, 'chart2_container');
-                    });
-                    
-                </script>
             </figure>
         </div>
 
