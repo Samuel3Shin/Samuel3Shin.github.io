@@ -112,6 +112,149 @@ function weatherCodeMapper(weather_code, is_sunset=false) {
     return [weather_icon_img_dir, weather_icon_text];
 }
 
+// HttpClient 
+var HttpClient = function() {
+    this.get = function(aUrl, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+        anHttpRequest.open( "GET", aUrl, true );            
+        anHttpRequest.send( null );
+    }
+}
+
+// weekday, month mapping
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+var month = new Array();
+month[0] = "Jan";
+month[1] = "Feb";
+month[2] = "Mar";
+month[3] = "Apr";
+month[4] = "May";
+month[5] = "June";
+month[6] = "July";
+month[7] = "Aug";
+month[8] = "Sep";
+month[9] = "Oct";
+month[10] = "Nov";
+month[11] = "Dec";
+
+var showWeeklyWeather = function(json_data, idx) {
+    return function curried_func(e) {
+        // console.log(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
+        
+        var date = new Date(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
+
+        weekly_specific_date.innerText = weekday[date.getDay()] + ", " + date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear();
+        // weekly_specific_date.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["startTime"];
+
+        [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["weatherCode"]);
+        weekly_specific_overall.innerText = weather_icon_text;
+        $("#weekly_weather_code_img").attr("src",weather_icon_img_dir);
+        
+        weekly_specific_temperature.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMax"] +  "°F/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"] +"°F";
+        
+        weekly_specific_precipitation.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationType"]
+        weekly_specific_rain.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationProbability"] + "%";
+        weekly_specific_wind.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["windSpeed"] + " mph";
+        weekly_specific_humidity.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["humidity"] + "%";
+        weekly_specific_visibility.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["visibility"] + " mi";
+
+        console.log(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunriseTime"].slice(0, -6));
+
+        var sunriseTime = new Date(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunriseTime"].slice(0, -6)).getHours();
+        var sunsetTime = new Date(json_data["data"]["timelines"][0]["intervals"][idx]["values"]["sunsetTime"].slice(0, -6)).getHours();
+        
+        weekly_specific_sunrise.innerText = (sunriseTime > 12 ? (sunriseTime - 12) : sunriseTime) + "AM/" + (sunsetTime > 12 ? (sunsetTime - 12) : sunsetTime) + "PM";
+
+        $("#weekly_weather_card_container").css('display', 'none');
+        $("#card").css('display', 'none');
+        $("#weekly_specific_weather").css('display', 'block');
+    }
+};
+
+var populatingWeeklyWeather = function(url) {
+    var client = new HttpClient();
+    client.get(url, function(response) {
+    var json_data = JSON.parse(response);
+    
+    var weekly_weather_cards = document.getElementsByClassName("weekly_weather_card");
+    
+    // console.log("length: " + daily_weather_cards.length);
+    // console.log(weekly_weather_cards.length);
+    
+    for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
+        var board = weekly_weather_cards[i];
+
+        board.addEventListener("click", showWeeklyWeather(json_data, i));
+
+        var date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+
+        board.getElementsByClassName("date")[0].innerText = weekday[date.getDay()] + ", " + date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear();
+        
+        
+        [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][i]["values"]["weatherCode"], false);
+        
+        // $("#status_img").attr("src", weather_icon_img_dir);
+        board.getElementsByClassName("status_img")[0].src = weather_icon_img_dir;
+        board.getElementsByClassName("status")[0].innerText = weather_icon_text;
+
+        board.getElementsByClassName("temp_high")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"];
+        board.getElementsByClassName("temp_low")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"];
+        board.getElementsByClassName("wind_speed")[0].innerText = json_data["data"]["timelines"][0]["intervals"][i]["values"]["windSpeed"];
+        
+    }                            
+
+    $("#weekly_weather_card_container").css('display', 'block');
+    $("#weekly_specific_weather").css('display', 'none');
+
+});
+}
+
+var populatingCurrentWeather = function(url) {
+    var client = new HttpClient();
+    client.get(url, function(response) {
+    
+    var json_data = JSON.parse(response);
+    
+    // weather icon
+    var weather_icon_img_dir = "./Images/clear_night.svg";
+    var weather_icon_text = "clear";
+    
+    // TODO: Clear Sunny, Mostly Clear, Partly Cloudy <- differentiate day and night!!!
+    var is_sunset = false;
+
+    card_address_text.innerText = $("#city_input").val() + ", " + $("#state_input").val();
+    [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"], is_sunset);
+
+    $("#weather_code_img").attr("src", weather_icon_img_dir);
+    weather_code_text.innerText = weather_icon_text;
+
+    // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
+    current_temperature.innerText = Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + "º"
+
+    // weather specific infos
+    humidity_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["humidity"] + "%";
+    pressure_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["pressureSeaLevel"] + "inHg";
+    wind_speed_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["windSpeed"] + "mph";
+    visibility_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["visibility"] + "mi";
+    cloud_cover_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"] + "%";
+    uv_level_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"];
+    
+    $("#card").css('display', 'block');
+    });
+}
+
 
 // Start of the Meteogram protype
 
