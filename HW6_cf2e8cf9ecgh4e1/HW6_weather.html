@@ -14,7 +14,7 @@
     <style>
         header {
             background-image: url(Images/banner.jpg);
-            border: gray solid 1px;
+            border: #dbdbdb solid 1px;
             font-weight: lighter;
             background-color: #ffffff;
             width: 500px;
@@ -37,13 +37,27 @@
             margin-left: 31px;
         }
 
-        .container {
+        .search_texts {
+            margin-bottom: 5px;
+            color:#5c79ac;
+            font-weight: lighter;
+
+        }
+        .search_texts:after {
+            content:" *";
+            color: #e4c2c9;
+        }
+
+        #search_container {
             display: grid;
-            border: gray solid 1px;
+            /* border: gray solid 1px; */
             padding: 30px;
             background-color: #ffffff;
             width: 440px;
             margin: auto;
+
+            border: 1px solid #dbdbdb;
+            box-shadow: 1px 1px #dbdbdb;
         }
 
         .address {
@@ -433,19 +447,19 @@
     </header>
 
     <body style="background-color:#eae9ea; font-family:Helvetica, sans-serif;">
-        <div class="container">
-            <form>
+        <div id="search_container">
+            <form action="" onsubmit="sendAddress(event)">
                 <div>
-                    <div style="color:#5c79ac">Street</div>
+                    <div class="search_texts">Street</div>
                     <input type="text" name="street" id="street_input" required>
                 </div>
                 <div class="address">
                     <div class="city_input_container">
-                        <div style="color:#5c79ac">City</div>
+                        <div class="search_texts">City</div>
                         <input type="text" name="city" id="city_input" required>
                     </div>
                     <div class="state_input_container">
-                        <div style="color:#5c79ac">State</div>
+                        <div class="search_texts">State</div>
                         <!-- <input type="text" name="state" required> -->
                         <select id="state_input" required>
                             <option value="starter" selected>Select Your State</option>
@@ -526,100 +540,104 @@
                         }
                     </script>
                 </label>
+                <div class="buttons">
+                    <button type="submit" id="submit_button">Submit</button>
+                    <script >
+                        // function alarm() {
+                        //     event.preventDefault()
+                        //     alert("clicked!");
+                        // }
+                        function sendAddress(event) {
+                            // prevent reloading
+                            event.preventDefault()
+
+                            var street;
+                            var city;
+                            var state;
+                            var lat;
+                            var lng;
+    
+                            // location auto-detection
+                            if($('#checkbox').is(':checked')) {
+                                fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
+                                    (response) => response.json()
+                                ).then(
+                                    (jsonResponse) => {
+                                        city = jsonResponse['city'];
+                                        state = jsonResponse['region'];
+                                        lat = jsonResponse['loc'].split(",")[0];
+                                        lng = jsonResponse['loc'].split(",")[1];
+                                        console.log(lat + " " + lng);
+                                        populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
+                                        populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
+                                        
+                                        populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
+                                        populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
+    
+                                        // populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather`);
+                                        // populatingCurrentWeather(`http://127.0.0.1:5000/current_weather`);
+                                        // populatingChart1('http://127.0.0.1:5000/weekly_weather');
+                                        // populatingChart2('http://127.0.0.1:5000/hourly_weather');
+    
+                                    }
+                                )                        
+                            } else {
+    
+                                // user input addresses
+                                street = document.getElementById("street_input").value;
+                                city = document.getElementById("city_input").value;
+                                state = document.getElementById("state_input").value;
+    
+                                // Input should be in the input.
+                                if(street.length == 0) {
+                                    console.log("Street input empty");
+                                    return;
+                                }
+                                
+                                if(city.length == 0) {
+                                    console.log("City input empty");
+                                    return;
+                                }
+    
+                                if(state == "starter") {
+                                    console.log("State input empty");
+                                    return;
+                                }
+    
+                                fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street} ${city} ${state}&key=AIzaSyBdntW0ccDzEwtizOG019WmtcYnj34D410`).then(
+                                    (response) => response.json()
+                                ).then(
+                                    (jsonResponse) => {
+                                        lat = jsonResponse['results'][0]['geometry']['location']['lat'];
+                                        lng = jsonResponse['results'][0]['geometry']['location']['lng'];
+                                        console.log(lat + " " + lng);
+    
+                                        populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
+                                        populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
+                                        
+                                        populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
+                                        populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
+    
+                                    }
+                                )   
+                            }
+    
+                        }
+                    </script>
+                    
+                    <button type="button" id="clear_button" onclick="clearEverything()">Clear</button>
+                    <script>
+                        function clearEverything() {
+                            $("#card").css('display', 'none');
+                            $("#weekly_weather_card_container").css('display', 'none');
+                            $("#weekly_specific_weather").css('display', 'none');
+                            $("#weather_charts").css('display', 'none');
+                        }
+                    </script>
+                </div>
             </form>
 
-            <div class="buttons">
-                <button type="submit" id="submit_button" onclick="sendAddress()">Submit</button>
-                <script>
 
-                    function sendAddress() {
-                        var street;
-                        var city;
-                        var state;
-                        var lat;
-                        var lng;
-
-                        // location auto-detection
-                        if($('#checkbox').is(':checked')) {
-                            fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
-                                (response) => response.json()
-                            ).then(
-                                (jsonResponse) => {
-                                    city = jsonResponse['city'];
-                                    state = jsonResponse['region'];
-                                    lat = jsonResponse['loc'].split(",")[0];
-                                    lng = jsonResponse['loc'].split(",")[1];
-                                    console.log(lat + " " + lng);
-                                    populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
-                                    populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
-                                    populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
-                                    populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
-
-                                    // populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather`);
-                                    // populatingCurrentWeather(`http://127.0.0.1:5000/current_weather`);
-                                    // populatingChart1('http://127.0.0.1:5000/weekly_weather');
-                                    // populatingChart2('http://127.0.0.1:5000/hourly_weather');
-
-                                }
-                            )                        
-                        } else {
-
-                            // user input addresses
-                            street = document.getElementById("street_input").value;
-                            city = document.getElementById("city_input").value;
-                            state = document.getElementById("state_input").value;
-
-                            // Input should be in the input.
-                            if(street.length == 0) {
-                                console.log("Street input empty");
-                                return;
-                            }
-                            
-                            if(city.length == 0) {
-                                console.log("City input empty");
-                                return;
-                            }
-
-                            if(state == "starter") {
-                                console.log("State input empty");
-                                return;
-                            }
-
-                            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street} ${city} ${state}&key=AIzaSyBdntW0ccDzEwtizOG019WmtcYnj34D410`).then(
-                                (response) => response.json()
-                            ).then(
-                                (jsonResponse) => {
-                                    lat = jsonResponse['results'][0]['geometry']['location']['lat'];
-                                    lng = jsonResponse['results'][0]['geometry']['location']['lng'];
-                                    console.log(lat + " " + lng);
-
-                                    populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
-                                    populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
-                                    populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
-                                    populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
-
-                                    // populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather`);
-                                    // populatingCurrentWeather(`http://127.0.0.1:5000/current_weather`);
-                                    // populatingChart1('http://127.0.0.1:5000/weekly_weather');
-                                    // populatingChart2('http://127.0.0.1:5000/hourly_weather');
-
-                                }
-                            )   
-                        }
-
-                    }
-                </script>
-                
-                <button type="clear" id="clear_button" onclick="clearEverything()">Clear</button>
-                <script>
-                    function clearEverything() {
-                        $("#card").css('display', 'none');
-                        $("#weekly_weather_card_container").css('display', 'none');
-                        $("#weekly_specific_weather").css('display', 'none');
-                        $("#weather_charts").css('display', 'none');
-                    }
-                </script>
-            </div>
         </div>
 
         <div id="card">
