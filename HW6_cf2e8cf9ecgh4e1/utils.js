@@ -203,6 +203,8 @@ var populatingWeeklyWeather = function(url) {
     for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
         var board = weekly_weather_cards[i];
 
+        board.style.visibility = "visible";
+
         board.addEventListener("click", showWeeklyWeather(json_data, i));
 
         var date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
