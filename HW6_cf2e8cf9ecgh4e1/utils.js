@@ -187,6 +187,7 @@ var showWeeklyWeather = function(json_data, idx) {
         $("#weekly_weather_card_container").css('display', 'none');
         $("#card").css('display', 'none');
         $("#weekly_specific_weather").css('display', 'block');
+
     }
 };
 
@@ -227,6 +228,9 @@ var populatingWeeklyWeather = function(url) {
     $("#weekly_weather_card_container").css('display', 'block');
     $("#weekly_specific_weather").css('display', 'none');
 
+    // populate chart1 with the weekly data
+    populateChart1FromJson(json_data);
+
 });
 }
 
@@ -234,6 +238,10 @@ var populatingCurrentWeather = function(url) {
     var client = new HttpClient();
     client.get(url, function(response) {
         var json_data = JSON.parse(response);
+
+        if(json_data["data"] == undefined) {
+            alert('No API calls left at this time. Please try again in an hour.');
+        }
         
         // weather icon
         var weather_icon_img_dir = "./Images/clear_night.svg";
@@ -263,89 +271,160 @@ var populatingCurrentWeather = function(url) {
 }
 
 
-var populatingChart1 = function (url) {
-    var client = new HttpClient();
+// var populatingChart1 = function (url) {
+//     var client = new HttpClient();
     
-    client.get(url, function(response) {
-        var json_data = JSON.parse(response);
+//     client.get(url, function(response) {
+//         var json_data = JSON.parse(response);
+//         // console.log(json_data);
 
-        if(json_data["data"] == undefined) {
-            alert('No API calls left at this time. Please try again in an hour.');
-        }
-        // console.log(json_data);
+//         // weather chart1 populating
+//         var weather_chart_data = []
+//         for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
+//             let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+//             weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
+//         }
 
-        // weather chart1 populating
-        var weather_chart_data = []
-        for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
-            let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
-            weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
-        }
+//         Highcharts.chart('chart1_container', {
 
-        Highcharts.chart('chart1_container', {
+//             chart: {
+//                 type: 'arearange',
+//                 zoomType: 'x',
+//                 scrollablePlotArea: {
+//                     minWidth: 600,
+//                     scrollPositionX: 1
+//                 }
+//             },
 
-            chart: {
-                type: 'arearange',
-                zoomType: 'x',
-                scrollablePlotArea: {
-                    minWidth: 600,
-                    scrollPositionX: 1
-                }
-            },
+//             title: {
+//                 text: 'Temperature Ranges (Min, Max)'
+//             },
 
-            title: {
-                text: 'Temperature Ranges (Min, Max)'
-            },
+//             xAxis: {
+//                 type: 'datetime',
+//                 accessibility: {
+//                     // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
+//                 }
+//             },
 
-            xAxis: {
-                type: 'datetime',
-                accessibility: {
-                    // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
-                }
-            },
+//             yAxis: {
+//                 title: {
+//                     text: null
+//                 }
+//             },
 
-            yAxis: {
-                title: {
-                    text: null
-                }
-            },
+//             tooltip: {
+//                 crosshairs: true,
+//                 shared: true,
+//                 valueSuffix: '°F',
+//                 xDateFormat: '%A, %b %e'
+//             },
 
-            tooltip: {
-                crosshairs: true,
-                shared: true,
-                valueSuffix: '°F',
-                xDateFormat: '%A, %b %e'
-            },
+//             legend: {
+//                 enabled: false
+//             },
 
-            legend: {
-                enabled: false
-            },
+//             series: [{
+//                 name: 'Temperatures',
+//                 data: weather_chart_data,
 
-            series: [{
-                name: 'Temperatures',
-                data: weather_chart_data,
+//                 // fillColor: '#eebd59',
+//                 lineColor: '#ffb10b',
 
-                // fillColor: '#eebd59',
-                lineColor: '#ffb10b',
+//                 fillColor: {
+//                     linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+//                     stops: [
+//                         [0, '#feb315'], // start
+//                         [0.5, '#dfcb98'], // middle
+//                         [1, '#dce9f5'] // end
+//                     ]
+//                 }
+//             }],
 
-                fillColor: {
-                    linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-                    stops: [
-                        [0, '#feb315'], // start
-                        [0.5, '#dfcb98'], // middle
-                        [1, '#dce9f5'] // end
-                    ]
-                }
-            }],
+//             colors: {
+//             linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+//             stops: [
+//                 [0, '#eebd59'], // start
+//                 [0.5, '#dad4bf'], // middle
+//                 [1, '#dce9f1'] // end
+//             ]
+//             }
+//         });
+//     });
+// }
 
-            colors: {
-            linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
-            stops: [
-                [0, '#eebd59'], // start
-                [0.5, '#dad4bf'], // middle
-                [1, '#dce9f1'] // end
-            ]
+var populateChart1FromJson = function(json_data) {
+    // weather chart1 populating
+    var weather_chart_data = []
+    for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
+        let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
+        weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
+    }
+
+    Highcharts.chart('chart1_container', {
+
+        chart: {
+            type: 'arearange',
+            zoomType: 'x',
+            scrollablePlotArea: {
+                minWidth: 600,
+                scrollPositionX: 1
             }
-        });
+        },
+
+        title: {
+            text: 'Temperature Ranges (Min, Max)'
+        },
+
+        xAxis: {
+            type: 'datetime',
+            accessibility: {
+                // rangeDescription: 'Range: Jan 1st 2017 to Dec 31 2017.'
+            }
+        },
+
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            valueSuffix: '°F',
+            xDateFormat: '%A, %b %e'
+        },
+
+        legend: {
+            enabled: false
+        },
+
+        series: [{
+            name: 'Temperatures',
+            data: weather_chart_data,
+
+            // fillColor: '#eebd59',
+            lineColor: '#ffb10b',
+
+            fillColor: {
+                linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+                stops: [
+                    [0, '#feb315'], // start
+                    [0.5, '#dfcb98'], // middle
+                    [1, '#dce9f5'] // end
+                ]
+            }
+        }],
+
+        colors: {
+        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+        stops: [
+            [0, '#eebd59'], // start
+            [0.5, '#dad4bf'], // middle
+            [1, '#dce9f1'] // end
+        ]
+        }
     });
 }
 
