@@ -233,33 +233,32 @@ var populatingWeeklyWeather = function(url) {
 var populatingCurrentWeather = function(url) {
     var client = new HttpClient();
     client.get(url, function(response) {
-    
-    var json_data = JSON.parse(response);
-    
-    // weather icon
-    var weather_icon_img_dir = "./Images/clear_night.svg";
-    var weather_icon_text = "clear";
-    
-    // TODO: Clear Sunny, Mostly Clear, Partly Cloudy <- differentiate day and night!!!
-    var is_sunset = false;
+        var json_data = JSON.parse(response);
+        
+        // weather icon
+        var weather_icon_img_dir = "./Images/clear_night.svg";
+        var weather_icon_text = "clear";
+        
+        // TODO: Clear Sunny, Mostly Clear, Partly Cloudy <- differentiate day and night!!!
+        var is_sunset = false;
 
-    [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"], is_sunset);
+        [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"], is_sunset);
 
-    $("#weather_code_img").attr("src", weather_icon_img_dir);
-    weather_code_text.innerText = weather_icon_text;
+        $("#weather_code_img").attr("src", weather_icon_img_dir);
+        weather_code_text.innerText = weather_icon_text;
 
-    // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
-    current_temperature.innerText = (Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"] * 10)/10) + "º"
+        // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
+        current_temperature.innerText = (Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"] * 10)/10) + "º"
 
-    // weather specific infos
-    humidity_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["humidity"] + "%";
-    pressure_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["pressureSeaLevel"] + "inHg";
-    wind_speed_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["windSpeed"] + "mph";
-    visibility_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["visibility"] + "mi";
-    cloud_cover_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"] + "%";
-    uv_level_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"];
-    
-    $("#card").css('display', 'block');
+        // weather specific infos
+        humidity_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["humidity"] + "%";
+        pressure_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["pressureSeaLevel"] + "inHg";
+        wind_speed_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["windSpeed"] + "mph";
+        visibility_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["visibility"] + "mi";
+        cloud_cover_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"] + "%";
+        uv_level_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"];
+        
+        $("#card").css('display', 'block');
     });
 }
 
@@ -268,12 +267,16 @@ var populatingChart1 = function (url) {
     var client = new HttpClient();
     
     client.get(url, function(response) {
-    var json_data = JSON.parse(response);
+        var json_data = JSON.parse(response);
 
-    console.log('It started');
-    // weather chart1 populating
-    var weather_chart_data = []
-        for(i=0; i<15; ++i) {
+        if(json_data["data"] == undefined) {
+            alert('No API calls left at this time. Please try again in an hour.');
+        }
+        // console.log(json_data);
+
+        // weather chart1 populating
+        var weather_chart_data = []
+        for(i=0; i<json_data["data"]["timelines"][0]["intervals"].length; ++i) {
             let date = new Date(json_data["data"]["timelines"][0]["intervals"][i]["startTime"]);
             weather_chart_data.push([Math.round(date.getTime()), json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMin"], json_data["data"]["timelines"][0]["intervals"][i]["values"]["temperatureMax"]]);
         }

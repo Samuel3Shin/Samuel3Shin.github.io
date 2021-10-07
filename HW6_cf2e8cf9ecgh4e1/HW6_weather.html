@@ -514,7 +514,6 @@
                     </div>
                     <div class="state_input_container">
                         <div class="search_texts">State</div>
-                        <!-- <input type="text" name="state" required> -->
                         <select id="state_input" required oninvalid="this.setCustomValidity('Please select an item in the list.')">
                             <option value="" selected disabled>Select Your State</option>
                             <option value="AL">Alabama</option>
@@ -601,6 +600,9 @@
                             // prevent reloading
                             event.preventDefault()
 
+                            // first clear
+                            clearEverything()
+
                             var street;
                             var city;
                             var state;
@@ -625,13 +627,7 @@
                                         populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
                                         
                                         populatingChart1(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
-                                        populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);
-    
-                                        // populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather`);
-                                        // populatingCurrentWeather(`http://127.0.0.1:5000/current_weather`);
-                                        // populatingChart1('http://127.0.0.1:5000/weekly_weather');
-                                        // populatingChart2('http://127.0.0.1:5000/hourly_weather');
-    
+                                        populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=${lat}&lng=${lng}`);    
                                     }
                                 )                        
                             } else {
@@ -673,9 +669,10 @@
 
                                         lat = jsonResponse['results'][0]['geometry']['location']['lat'];
                                         lng = jsonResponse['results'][0]['geometry']['location']['lng'];
-                                        // console.log(lat + " " + lng);
 
                                         card_address_text.innerText = city + ", " + state;
+
+                                        console.log(lat + ", " + lng);
     
                                         populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
                                         populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
@@ -693,6 +690,11 @@
                     <button type="button" id="clear_button" onclick="clearEverything()">Clear</button>
                     <script>
                         function clearEverything() {
+                            // up arrow button 
+                            $("#weather_charts").css('display', 'none');
+                            $("#downArrow").css('display', 'block');
+                            $("#upArrow").css('display', 'none');
+
                             $("#card").css('display', 'none');
                             $("#weekly_weather_card_container").css('display', 'none');
                             $("#weekly_specific_weather").css('display', 'none');
