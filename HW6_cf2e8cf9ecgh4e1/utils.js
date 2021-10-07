@@ -234,7 +234,6 @@ var populatingCurrentWeather = function(url) {
     // TODO: Clear Sunny, Mostly Clear, Partly Cloudy <- differentiate day and night!!!
     var is_sunset = false;
 
-    card_address_text.innerText = $("#city_input").val() + ", " + $("#state_input").val();
     [weather_icon_img_dir, weather_icon_text] = weatherCodeMapper(json_data["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"], is_sunset);
 
     $("#weather_code_img").attr("src", weather_icon_img_dir);

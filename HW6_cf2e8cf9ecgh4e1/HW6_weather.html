@@ -14,13 +14,18 @@
     <style>
         header {
             background-image: url(Images/banner.jpg);
+            /* background-size: 300px; */
+            background-position-x: -100px;
+            background-position-y: -80px;
+
             border: #dbdbdb solid 1px;
             font-weight: lighter;
             background-color: #ffffff;
             width: 500px;
             margin: auto;
             font-family:Helvetica, sans-serif;
-            
+            color: #53646f;
+
         }
 
         header h1 {
@@ -70,9 +75,14 @@
             width: 430px;
             height: 22px;
             border-radius: 0;
-            /* background: transparent; */
             border: 1px solid #e4e4e4;
-   
+            padding-left: 8px;
+            color: #53646f;
+        }
+
+        #street_input:focus {
+            outline: none;
+            border: 1px solid #515a63;
         }
 
         #city_input {
@@ -80,6 +90,13 @@
             height: 22px;
             border-radius: 0;
             border: 1px solid #e4e4e4;
+            padding-left: 8px;
+            color: #53646f;
+        }
+
+        #city_input:focus {
+            outline: none;
+            border: 1px solid #515a63;
         }
 
         #state_input {
@@ -88,6 +105,12 @@
             margin: 0;
             border-radius: 0;
             border: 1px solid #e4e4e4;
+            color: #53646f;
+        }
+
+        #state_input:focus {
+            outline: none;
+            border: 1px solid #515a63;
         }
 
         .buttons {
@@ -114,6 +137,16 @@
             border-bottom-color:#466195;  
         }
 
+        #submit_button:hover {
+            background-color: #6788bf;
+        }
+
+        #submit_button:active, 
+        #submit_button:focus 
+        {
+            outline: 1px solid black;
+        }
+
         #clear_button {
             background-color: #ffbc00;
             width:100px;
@@ -126,12 +159,25 @@
             margin-left: 3px;
             /* margin: 0 auto; */
             color: white;
+
+            /* border: 10px solid black; */
             border-top: none;
             border-left: none;
             border-right: none;
             border-bottom-width: 3px;
             border-bottom-color:#ffbb30;      
         }
+
+        #clear_button:hover {
+            background-color: #efad00;
+        }
+
+        #clear_button:active, 
+        #clear_button:focus 
+        {
+            outline: 1px solid black;
+        }
+
 
         #card {
             display: none;
@@ -160,10 +206,6 @@
             border: 1px solid #dbdbdb;
             box-shadow: 1px 2px #dbdbdb,
                         -1px 2px #dbdbdb;
-            
-            /* box-shadow: 2px 7px 10px #9e9e9e,
-                        -2px 7px 10px #9e9e9e; */
-            
         }
 
         .specific_infos {
@@ -197,7 +239,7 @@
         #weather_code_text {
             margin: 0;
             font-weight: 100;
-            margin-left: 20px;
+            margin-left: 10px;
         }
 
         #card_weather_icon {
@@ -365,7 +407,7 @@
 
         #weekly_specific_weather_box_upper_half_left {
             padding: 15px;
-            color: #4e5f7d;
+            color: #53646f;
         }
 
         #weekly_specific_date {
@@ -389,7 +431,7 @@
         #weekly_specific_weather_box {
             border: 1px black solid;
             background-image: linear-gradient(to bottom, #ffffff,#374262);
-            height: 400px;
+            height: 370px;
             border: 1px solid #dbdbdb;
             box-shadow: 1px 3px #dbdbdb;
         }
@@ -470,8 +512,8 @@
                     <div class="state_input_container">
                         <div class="search_texts">State</div>
                         <!-- <input type="text" name="state" required> -->
-                        <select id="state_input" required>
-                            <option value="starter" selected>Select Your State</option>
+                        <select id="state_input" required oninvalid="this.setCustomValidity('Please select an item in the list.')">
+                            <option value="" selected disabled>Select Your State</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
@@ -536,7 +578,7 @@
                             if(cb.checked) {
                                 $("#street_input").val("");
                                 $("#city_input").val("");
-                                $("#state_input").val('starter').prop("selected", true);
+                                $("#state_input").val("").prop("selected", true);
     
                                 $("#street_input").attr("disabled",true);
                                 $("#city_input").attr("disabled",true);
@@ -552,10 +594,6 @@
                 <div class="buttons">
                     <button type="submit" id="submit_button">Submit</button>
                     <script >
-                        // function alarm() {
-                        //     event.preventDefault()
-                        //     alert("clicked!");
-                        // }
                         function sendAddress(event) {
                             // prevent reloading
                             event.preventDefault()
@@ -576,7 +614,10 @@
                                         state = jsonResponse['region'];
                                         lat = jsonResponse['loc'].split(",")[0];
                                         lng = jsonResponse['loc'].split(",")[1];
-                                        console.log(lat + " " + lng);
+
+                                        card_address_text.innerText = city + ", " + state;
+
+                                        // console.log(lat + " " + lng);
                                         populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
                                         populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
                                         
@@ -617,9 +658,21 @@
                                     (response) => response.json()
                                 ).then(
                                     (jsonResponse) => {
+
+                                        var addressComponents = jsonResponse['results'][0]['address_components'];
+                                        for(i=0; i<addressComponents.length; ++i) {
+                                            if(addressComponents[i]['types'][0] == 'locality') {
+                                                city = addressComponents[i]['long_name'];
+                                            } else if(addressComponents[i]['types'][0] == 'administrative_area_level_1') {
+                                                state = addressComponents[i]['long_name'];
+                                            }
+                                        }
+
                                         lat = jsonResponse['results'][0]['geometry']['location']['lat'];
                                         lng = jsonResponse['results'][0]['geometry']['location']['lng'];
-                                        console.log(lat + " " + lng);
+                                        // console.log(lat + " " + lng);
+
+                                        card_address_text.innerText = city + ", " + state;
     
                                         populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
                                         populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
