@@ -149,6 +149,13 @@ month[9] = "Oct";
 month[10] = "Nov";
 month[11] = "Dec";
 
+var precipitationMapper = new Array();
+precipitationMapper[0] = "N/A";
+precipitationMapper[1] = "Rain";
+precipitationMapper[2] = "Snow";
+precipitationMapper[3] = "Freezing Rain";
+precipitationMapper[4] = "Ice Pellets";
+
 var showWeeklyWeather = function(json_data, idx) {
     return function curried_func(e) {
         // console.log(json_data["data"]["timelines"][0]["intervals"][idx]["startTime"]);
@@ -164,7 +171,7 @@ var showWeeklyWeather = function(json_data, idx) {
         
         weekly_specific_temperature.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMax"] +  "°F/" + json_data["data"]["timelines"][0]["intervals"][idx]["values"]["temperatureMin"] +"°F";
         
-        weekly_specific_precipitation.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationType"]
+        weekly_specific_precipitation.innerText = precipitationMapper[json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationType"]];
         weekly_specific_rain.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["precipitationProbability"] + "%";
         weekly_specific_wind.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["windSpeed"] + " mph";
         weekly_specific_humidity.innerText = json_data["data"]["timelines"][0]["intervals"][idx]["values"]["humidity"] + "%";
@@ -240,7 +247,7 @@ var populatingCurrentWeather = function(url) {
     weather_code_text.innerText = weather_icon_text;
 
     // console.log(typeof json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]);
-    current_temperature.innerText = Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + "º"
+    current_temperature.innerText = (Math.round(json_data["data"]["timelines"][0]["intervals"][0]["values"]["temperature"] * 10)/10) + "º"
 
     // weather specific infos
     humidity_value.innerText = json_data["data"]["timelines"][0]["intervals"][0]["values"]["humidity"] + "%";
@@ -281,7 +288,7 @@ var populatingChart1 = function (url) {
             },
 
             title: {
-                text: 'Temperature Ranges (Min, MAX)'
+                text: 'Temperature Ranges (Min, Max)'
             },
 
             xAxis: {
@@ -495,7 +502,7 @@ Meteogram.prototype.getChartOptions = function () {
 
         xAxis: [{ // Bottom X axis
             type: 'datetime',
-            tickInterval: 2 * 36e5, // two hours
+            tickInterval: 4 * 36e5, // four hours
             minorTickInterval: 36e5, // one hour
             tickLength: 0,
             gridLineWidth: 1,
