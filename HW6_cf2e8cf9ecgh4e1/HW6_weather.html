@@ -32,8 +32,8 @@
                     </div>
                     <div class="state_input_container">
                         <div class="search_texts">State</div>
-                        <select id="state_input" required oninvalid="this.setCustomValidity('Please select an item in the list.')">
-                            <option value="" selected disabled>Select Your State</option>
+                        <select id="state_input" required>
+                            <option value="">Select Your State</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>
                             <option value="AZ">Arizona</option>
@@ -90,40 +90,52 @@
                 </div>
                 <hr style="border:none;height:1px;width:437px;margin-top:25px;margin-bottom:18px;margin-left:1px;margin-right:1px;color:#5c79ac;background-color:#5c79ac">
                 
-                <label>
-                    <span class="psw" style="color:#5c79ac; font-weight:lighter;font-family:Helvetica, sans-serif;"> Want us to auto-detect your location? Check here</span>
-                    <input type="checkbox" id="checkbox" onclick='handleCheckboxClick(this);' name="remember">
-                    <script>
-                        function handleCheckboxClick(cb) {
-                            if(cb.checked) {
-                                $("#street_input").val("");
-                                $("#city_input").val("");
-                                $("#state_input").val("").prop("selected", true);
-    
-                                $("#street_input").attr("disabled",true);
-                                $("#city_input").attr("disabled",true);
-                                $("#state_input").attr("disabled",true);
-                            } else {
-                                $("#street_input").removeAttr("disabled"); 
-                                $("#city_input").removeAttr("disabled"); 
-                                $("#state_input").removeAttr("disabled"); 
-                            }
+                
+                <span id="noclick" class="psw" style="color:#5c79ac; font-weight:lighter;font-family:Helvetica, sans-serif;"> Want us to auto-detect your location? Check here</span>
+                <input type="checkbox" id="checkbox" onclick='handleCheckboxClick(this);' name="remember">
+                <script>
+                    // $("#noclick").css("pointer-events", "none");
+                    function handleCheckboxClick(cb) {
+                        console.log(cb.checked);
+                        console.log($("#state_input").val());
+
+                        if(cb.checked) {
+                            $("#street_input").val("");
+                            $("#city_input").val("");
+                            $("#state_input").val("").prop("selected", true);
+                            // $("#state_input").val("".is(':checked'));
+
+                            $("#street_input").attr("disabled",true);
+                            $("#city_input").attr("disabled",true);
+                            $("#state_input").attr("disabled",true);
+                        } else {
+                            // $("#street_input").attr("disabled",false);
+                            // $("#city_input").attr("disabled",false);
+                            // $("#state_input").attr("disabled",false);
+
+                            $("#street_input").removeAttr("disabled"); 
+                            $("#city_input").removeAttr("disabled"); 
+                            $("#state_input").removeAttr("disabled"); 
                         }
-                    </script>
-                </label>
+                    }
+                </script>
+            
                 <div class="buttons">
                     <button type="submit" id="submit_button">Submit</button>
                     <script >
                         function sendAddress(event) {
                             // prevent reloading
                             event.preventDefault()
-
+                            console.log("submitted");
                             // first clear
-                            clearEverything()
+                            clearEverythingWoCheckbox()
 
-                            var street;
-                            var city;
-                            var state;
+                            console.log($("#state_input").val());
+
+                            var street = document.getElementById("street_input").value;
+                            var city = document.getElementById("city_input").value;
+                            var state = document.getElementById("state_input").value;
+                            var country = "USA";
                             var lat;
                             var lng;
     
@@ -138,9 +150,9 @@
                                         lat = jsonResponse['loc'].split(",")[0];
                                         lng = jsonResponse['loc'].split(",")[1];
 
-                                        card_address_text.innerText = city + ", " + state;
+                                        card_address_text.innerText = city + ", " + state + ", " + country;
 
-                                        // console.log(lat + " " + lng);
+                                        console.log(lat + " " + lng);
                                         populatingCurrentWeather(`http://127.0.0.1:5000/current_weather?lat=${lat}&lng=${lng}`);
                                         populatingWeeklyWeather(`http://127.0.0.1:5000/weekly_weather?lat=${lat}&lng=${lng}`);
                                         
@@ -150,31 +162,19 @@
                                 )                        
                             } else {
     
-                                // user input addresses
-                                street = document.getElementById("street_input").value;
-                                city = document.getElementById("city_input").value;
-                                state = document.getElementById("state_input").value;
-    
-                                // Input should be in the input.
-                                if(street.length == 0) {
-                                    console.log("Street input empty");
-                                    return;
-                                }
-                                
-                                if(city.length == 0) {
-                                    console.log("City input empty");
-                                    return;
-                                }
-    
-                                if(state == "starter") {
-                                    console.log("State input empty");
-                                    return;
-                                }
-    
                                 fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street} ${city} ${state}&key=AIzaSyBdntW0ccDzEwtizOG019WmtcYnj34D410`).then(
                                     (response) => response.json()
                                 ).then(
                                     (jsonResponse) => {
+
+                                        if(jsonResponse['results'].length == 0) {
+                                            alert('There is no Geocoding API result. Please fill out addresses correctly.')
+                                        }
+
+                                        var formattedAddress = "";
+                                        if(jsonResponse['results'][0]['formatted_address'] != undefined) {
+                                            formattedAddress = jsonResponse['results'][0]['formatted_address'];
+                                        }
 
                                         var addressComponents = jsonResponse['results'][0]['address_components'];
                                         for(i=0; i<addressComponents.length; ++i) {
@@ -182,13 +182,19 @@
                                                 city = addressComponents[i]['long_name'];
                                             } else if(addressComponents[i]['types'][0] == 'administrative_area_level_1') {
                                                 state = addressComponents[i]['long_name'];
+                                            } else if(addressComponents[i]['types'][0] == 'route') {
+                                                route = state = addressComponents[i]['short_name'];
                                             }
                                         }
 
                                         lat = jsonResponse['results'][0]['geometry']['location']['lat'];
                                         lng = jsonResponse['results'][0]['geometry']['location']['lng'];
 
-                                        card_address_text.innerText = city + ", " + state;
+                                        if(formattedAddress == "") {
+                                            card_address_text.innerText = (route=="" ? "" : (route + ", ")) + city + ", " + state + ", " + country;
+                                        } else {
+                                            card_address_text.innerText = formattedAddress;
+                                        }
 
                                         console.log(lat + ", " + lng);
     
@@ -208,6 +214,27 @@
                     <button type="button" id="clear_button" onclick="clearEverything()">Clear</button>
                     <script>
                         function clearEverything() {
+
+                            if(document.getElementById('checkbox').checked) {
+                                handleCheckboxClick(this);
+                                $("#checkbox").prop("checked", false);
+                            }
+
+                            $("#street_input").val("");
+                            $("#city_input").val("");
+                            $("#state_input").val("").prop("selected", true);
+
+                            // up arrow button 
+                            $("#weather_charts").css('display', 'none');
+                            $("#downArrow").css('display', 'block');
+                            $("#upArrow").css('display', 'none');
+
+                            $("#card").css('display', 'none');
+                            $("#weekly_weather_card_container").css('display', 'none');
+                            $("#weekly_specific_weather").css('display', 'none');
+                            $("#weather_charts").css('display', 'none');
+                        }
+                        function clearEverythingWoCheckbox() {
                             // up arrow button 
                             $("#weather_charts").css('display', 'none');
                             $("#downArrow").css('display', 'block');

@@ -94,6 +94,10 @@ header h2 {
     color: #53646f;
 }
 
+#state_input:invalid {
+    border: 2px solid red;
+  }
+
 #state_input:focus {
     outline: none;
     border: 1px solid #515a63;
@@ -423,6 +427,11 @@ header h2 {
     height: 370px;
     border: 1px solid #dbdbdb;
     box-shadow: 1px 3px #dbdbdb;
+
+}
+
+#weekly_specific_weather_box:hover {
+    box-shadow:2px 7px 10px #9e9e9e, -2px 7px 10px #9e9e9e;
 }
 
 .weekly_specific_text {
@@ -476,4 +485,15 @@ header h2 {
     margin-top: 30px;
     height: 400px;
     width: 1200px;
+}
+
+/* span not clickable */
+#noclick {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
 }
