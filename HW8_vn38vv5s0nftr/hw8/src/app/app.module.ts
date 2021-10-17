@@ -4,12 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { WeeklyWeatherComponent } from './weekly-weather/weekly-weather.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    WeeklyWeatherComponent
   ],
   imports: [
     BrowserModule, FormsModule
