@@ -7,6 +7,8 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { WeeklyWeatherComponent } from './weekly-weather/weekly-weather.component'; 
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +16,9 @@ import { WeeklyWeatherComponent } from './weekly-weather/weekly-weather.componen
     WeeklyWeatherComponent
   ],
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule, 
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

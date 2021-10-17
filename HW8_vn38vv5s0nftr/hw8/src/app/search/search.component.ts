@@ -9,6 +9,8 @@ import * as $ from 'jquery';
 export class SearchComponent implements OnInit {
   
   @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
+  @Output() sendLatLng : EventEmitter<any> = new EventEmitter();
+  
   isChecked: boolean | undefined;
 
   constructor() {
@@ -40,7 +42,7 @@ export class SearchComponent implements OnInit {
               state = jsonResponse['region'];
               lat = jsonResponse['loc'].split(",")[0];
               lng = jsonResponse['loc'].split(",")[1];
-              this.sendMyEvent.emit(lat + " " + lng);
+              this.sendLatLng.emit(lat + " " + lng);
           }
       )    
     } else {
@@ -78,7 +80,7 @@ export class SearchComponent implements OnInit {
           if(formattedAddress == "") {
             formattedAddress = (route=="" ? "" : (route + ", ")) + city + ", " + state + ", " + country;
           } 
-          this.sendMyEvent.emit(lat + " " + lng);
+          this.sendLatLng.emit(lat + " " + lng);
         }
       );      
     }
