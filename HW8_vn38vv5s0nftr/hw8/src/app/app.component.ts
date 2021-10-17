@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hw8';
+
+  getEventThanks(event: any){
+    console.log(event)
+  }
 }
+
+
