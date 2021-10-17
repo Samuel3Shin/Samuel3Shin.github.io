@@ -94,10 +94,10 @@
             </div>
             <div class="buttons">
               <div class="col-sm-10">
-                <button type="submit" id="submit_button" class="btn btn-primary">Search</button>
+                <button type="submit" (click)='handleCheckboxClick($event);' id="submit_button" class="btn btn-primary">Search</button>
               </div>
               <div class="col-sm-10">
-                <button type="submit" id="clear_button" class="btn btn-primary">Clear</button>
+                <button type="submit" (click)='clearEverything();' id="clear_button" class="btn btn-primary">Clear</button>
               </div>
             </div>
         </form>

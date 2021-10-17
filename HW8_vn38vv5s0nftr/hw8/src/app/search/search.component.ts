@@ -38,4 +38,18 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  clearEverything() {
+    this.sendMyEvent.emit("clear clicked!");
+    if($("#checkbox").is(':checked')) {
+      $("#street_input").removeAttr("disabled"); 
+      $("#city_input").removeAttr("disabled"); 
+      $("#state_input").removeAttr("disabled"); 
+      $("#checkbox").prop("checked", false);
+    }
+    
+    $("#street_input").val("");
+    $("#city_input").val("");
+    $("#state_input").val("").prop("selected", true);
+  }
+
 }
