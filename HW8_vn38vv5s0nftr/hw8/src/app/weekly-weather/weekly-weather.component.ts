@@ -17,7 +17,8 @@ export class WeeklyWeatherComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+    this.json_data = JSON.parse(this.json_data);
+    this.sendMyEvent.emit(this.json_data['data']);
   }
 
   ngOnChanges() {

@@ -17,6 +17,7 @@ export class AppComponent {
     console.log(event);
   }
 
+
   async getLatLng(event: any) {
     
     const lat = event.split(" ")[0];
