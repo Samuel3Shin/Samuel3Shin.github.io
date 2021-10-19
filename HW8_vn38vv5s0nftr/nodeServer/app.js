@@ -11,6 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+var cors = require('cors');
 
 'use strict';
 
@@ -90,7 +91,7 @@ const getTimelineParameters =  queryString.stringify({
 // [START gae_node_request_example]
 const express = require('express');
 
-const app = express();
+const app = express().use(cors());
 
 app.get('/', (req, res) => {
   res.status(200).send('Hello, world!').end();

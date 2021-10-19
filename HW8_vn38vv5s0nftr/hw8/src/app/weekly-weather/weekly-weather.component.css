@@ -22,13 +22,15 @@
 
 .weekly_weather_card {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
     height: 80px;
     width: 100%;
 
     justify-content:center;
     align-items: center;
+
+    text-align:center;
 
     border: 1px black solid;
     background-color: #ffffff;
@@ -41,4 +43,10 @@
 
     /* visibility: hidden; */
 
+}
+
+#status_grid {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    margin: auto;
 }
