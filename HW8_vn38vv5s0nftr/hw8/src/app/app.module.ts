@@ -8,12 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { WeeklyWeatherComponent } from './weekly-weather/weekly-weather.component'; 
 
 import { HttpClientModule } from '@angular/common/http';
+import { TempChartComponent } from './temp-chart/temp-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    WeeklyWeatherComponent
+    WeeklyWeatherComponent,
+    TempChartComponent
   ],
   imports: [
     BrowserModule, 
