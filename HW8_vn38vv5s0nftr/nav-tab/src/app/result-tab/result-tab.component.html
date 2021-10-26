@@ -1,0 +1,32 @@
+<div *ngIf="!isDetail" [@slideWeekly]>
+  <div class="address">Forecast at {{ address }}</div>
+
+  <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-end">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Day View</a>
+      <ng-template ngbNavContent>
+        <app-weekly-weather [json_data]='weather_data' (sendDetailTrigger)="getDetailTrigger($event)"></app-weekly-weather>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Daily Temp. Chart</a>
+      <ng-template ngbNavContent>
+        <app-temp-chart [json_data]='weather_data' ></app-temp-chart>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>Meteogram</a>
+      <ng-template ngbNavContent>
+        Meteogram!
+      </ng-template>
+    </li>
+  </ul>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+
+
+<div *ngIf="isDetail" [@slideDetail]>
+  <button mat-stroked-button (click)="listClick()">List</button>
+  <h1>Detail Field!!!!!</h1>
+</div>

@@ -1,0 +1,5 @@
+<app-search (sendMyEvent)="getEventThanks($event)" (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)"></app-search>
+<app-result-tab *ngIf="resultExist" [json_data]='weather_data' [address_data]='address'></app-result-tab>
+
+<!-- <app-weekly-weather (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-weekly-weather> -->
+<!-- <app-temp-chart (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-temp-chart> -->
