@@ -60,6 +60,7 @@ export class ResultTabComponent implements OnInit {
   weather_data: any;
   address: string | undefined;
   isDetail = false;
+  date: any;
   
   constructor() { }
 
@@ -78,6 +79,7 @@ export class ResultTabComponent implements OnInit {
   async getDetailTrigger(event: any) {
     if(!this.isDetail) {
       this.isDetail = true;
+      this.date = event;
       // alert(event);
     }
     
@@ -90,6 +92,12 @@ export class ResultTabComponent implements OnInit {
   listClick() {
     this.isDetail = false;
     // alert(this.isDetail);
+  }
+
+  twit() {
+    var strWindowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
+    window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.address} on (Day of week, Date) is (Temperature). The weather conditions are (Summary) #CSCI571WeatherSearch`, "", strWindowFeatures);
+    // alert("twit!");
   }
 
   

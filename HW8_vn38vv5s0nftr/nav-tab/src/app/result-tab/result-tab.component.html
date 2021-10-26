@@ -26,7 +26,22 @@
 </div>
 
 
+
+
 <div *ngIf="isDetail" [@slideDetail]>
-  <button mat-stroked-button (click)="listClick()">List</button>
-  <h1>Detail Field!!!!!</h1>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <button mat-stroked-button (click)="listClick()">List</button>
+      </div>
+      <div class="col-sm">
+        <h3>{{date}}</h3>
+      </div>
+      <div class="col-sm">
+        <button type="button" id="twiter_button" mdbBtn mdbWavesEffect (click)="twit()"></button>
+      </div>
+    </div>
+  </div>
+
 </div>
