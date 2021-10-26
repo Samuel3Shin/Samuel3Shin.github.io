@@ -75,7 +75,7 @@ const startTime = moment.utc(now).add(0, "minutes").toISOString();
 const endTime = moment.utc(now).add(1, "days").toISOString();
 
 // specify the timezone, using standard IANA timezone format
-const timezone = "America/New_York";
+const timezone = "America/Los_Angeles";
 
 // request the timelines with all the query string parameters as options
 const getTimelineParameters =  queryString.stringify({
