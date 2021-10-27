@@ -1,7 +1,10 @@
+<div class="center">
+    <h1>Angular Highcharts demo</h1>
 
-<h1 class="center">Angular Highcharts demo</h1>
+    <highcharts-chart *ngIf="chartExist"
+    [Highcharts] = "highcharts" 
+    [options] = "chartOptions">
+    </highcharts-chart>    
+</div>
 
-<highcharts-chart class="center" *ngIf="chartExist"
-[Highcharts] = "highcharts" 
-[options] = "chartOptions">
-</highcharts-chart>
+

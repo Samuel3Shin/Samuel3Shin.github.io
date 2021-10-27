@@ -1,4 +1,7 @@
-<app-search (sendMyEvent)="getEventThanks($event)" (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)"></app-search>
+<app-search (sendMyEvent)="getEventThanks($event)" (sendProgress)="getProgress($event)" (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)"></app-search>
+<div class="progress" *ngIf="isProgressBar" style="width: 65%; margin:auto">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%"></div>
+</div>
 <app-result-tab *ngIf="resultExist" [json_data]='weather_data' [address_data]='address'></app-result-tab>
 
 <!-- <app-weekly-weather (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-weekly-weather> -->

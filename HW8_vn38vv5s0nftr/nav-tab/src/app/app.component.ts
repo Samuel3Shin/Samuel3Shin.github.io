@@ -12,13 +12,18 @@ export class AppComponent {
   errorMessage: any;
   weather_data: any;
   address: string | undefined;
-
+  
   resultExist = false;
+  isProgressBar = false;
 
   constructor(private http: HttpClient) { }
 
   getEventThanks(event: any){
     console.log(event);
+  }
+
+  getProgress(event: any){
+    this.isProgressBar = event;
   }
 
   async getAddress(event: any) {
@@ -29,7 +34,6 @@ export class AppComponent {
   }
 
   async getLatLng(event: any) {
-    
     const lat = event.split(" ")[0];
     const lng = event.split(" ")[1];
     console.log(lat);
@@ -46,6 +50,7 @@ export class AppComponent {
           console.log(json_data["data"]["timelines"][2]["intervals"][0]["values"]["precipitationType"]);
           // console.log(typeof(JSON.stringify(json_data)));
           this.weather_data = JSON.stringify(json_data);
+          this.isProgressBar = false;
           this.resultExist = true;
           // console.log(json_data["data"]);
       },

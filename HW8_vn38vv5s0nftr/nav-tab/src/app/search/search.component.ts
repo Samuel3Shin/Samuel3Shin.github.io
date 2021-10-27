@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
   @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
   @Output() sendLatLng : EventEmitter<any> = new EventEmitter();
   @Output() sendAddress : EventEmitter<any> = new EventEmitter();
+  @Output() sendProgress : EventEmitter<any> = new EventEmitter();
   
   isChecked: boolean | undefined;
 
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit {
   }
 
   handleSubmit() {
+    this.sendProgress.emit(true);
     this.sendMyEvent.emit("submit button clicked!");
 
     var street = $("street_input").val();
