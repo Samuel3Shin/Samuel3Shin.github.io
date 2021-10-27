@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
               lat = jsonResponse['loc'].split(",")[0];
               lng = jsonResponse['loc'].split(",")[1];
               this.sendLatLng.emit(lat + " " + lng);
-              this.sendAddress.emit(state + "/" + city);
+              this.sendAddress.emit(city + " " + state);
           }
       )    
     } else {
@@ -85,7 +85,7 @@ export class SearchComponent implements OnInit {
             formattedAddress = (route=="" ? "" : (route + ", ")) + city + ", " + state + ", " + country;
           } 
           this.sendLatLng.emit(lat + " " + lng);
-          this.sendAddress.emit(state + "/" + city);
+          this.sendAddress.emit(route + " " + city + " " + state);
         }
       );      
     }

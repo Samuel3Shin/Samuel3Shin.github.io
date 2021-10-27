@@ -27,10 +27,10 @@ export class AppComponent {
   }
 
   async getAddress(event: any) {
-    const state = event.split("/")[0];
-    const city = event.split("/")[1];
+    // const state = event.split("/")[0];
+    // const city = event.split("/")[1];
 
-    this.address = state + " " + city;
+    this.address = event;
   }
 
   async getLatLng(event: any) {
