@@ -33,7 +33,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <button mat-stroked-button (click)="listClick()">List</button>
+        <button mat-stroked-button (click)="listClick()"> &lt; List</button>
       </div>
       <div class="col-sm">
         <h3>{{date}}</h3>
@@ -43,5 +43,14 @@
       </div>
     </div>
   </div>
+
+  <table class="table table-striped">
+    <tbody>
+    <tr *ngFor="let info of weatherDetails; index as i">
+      <td>{{ info.name}}</td>
+      <td>{{ info.value}}</td>
+    </tr>
+    </tbody>
+  </table>
 
 </div>

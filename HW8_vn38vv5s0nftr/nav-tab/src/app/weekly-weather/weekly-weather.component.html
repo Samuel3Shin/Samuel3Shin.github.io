@@ -1,25 +1,25 @@
-<table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Date</th>
-      <th scope="col">Status</th>
-      <th scope="col">Temp. High (º F)</th>
-      <th scope="col">Temp. Low (º F)</th>
-      <th scope="col">Wind Speed (mph)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let detail of weatherDetails; index as i">
-      <th scope="row">{{ i + 1 }}</th>
-      <td (click)=onItemClick(i)>{{ detail.date }}</td>
-      <td>
-        <img [src]=detail.status_img class="mr-2" style="width: 20px">
-        {{ detail.status_txt }}
-      </td>
-      <td>{{ detail.high_temp}}</td>
-      <td>{{ detail.low_temp}}</td>
-      <td>{{ detail.wind_speed}}</td>
-    </tr>
-    </tbody>
-  </table>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Date</th>
+    <th scope="col">Status</th>
+    <th scope="col">Temp. High (º F)</th>
+    <th scope="col">Temp. Low (º F)</th>
+    <th scope="col">Wind Speed (mph)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let info of weatherInfo; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td (click)=onItemClick(i)>{{ info.date }}</td>
+    <td>
+      <img [src]=info.status_img class="mr-2" style="width: 20px">
+      {{ info.status_txt }}
+    </td>
+    <td>{{ info.high_temp}}</td>
+    <td>{{ info.low_temp}}</td>
+    <td>{{ info.wind_speed}}</td>
+  </tr>
+  </tbody>
+</table>

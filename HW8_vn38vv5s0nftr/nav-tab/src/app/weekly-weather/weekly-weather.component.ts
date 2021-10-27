@@ -5,7 +5,7 @@ import { Utils } from './../utils';
 
 var util = new Utils();
 
-interface WeatherDetail {
+interface WeatherInfo {
   date: string;
   status_img: string;
   status_txt: string;
@@ -24,7 +24,7 @@ export class WeeklyWeatherComponent implements OnInit {
   @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
   @Output() sendDetailTrigger : EventEmitter<any> = new EventEmitter();
 
-  weatherDetails: WeatherDetail[] = [];
+  weatherInfo: WeatherInfo[] = [];
 
   constructor() { }
 
@@ -53,7 +53,7 @@ export class WeeklyWeatherComponent implements OnInit {
 
             const [weather_icon_img_dir, weather_icon_text] = util.weatherCodeMapper(this.json_data["data"]["timelines"][2]["intervals"][i]["values"]["weatherCode"], false);
             
-            this.weatherDetails?.push({
+            this.weatherInfo?.push({
               date: util.weekday[date.getDay()] + ", " + date.getDate() + " " + util.month[date.getMonth()] + " " + date.getFullYear(),
               status_img: weather_icon_img_dir,
               status_txt: weather_icon_text,

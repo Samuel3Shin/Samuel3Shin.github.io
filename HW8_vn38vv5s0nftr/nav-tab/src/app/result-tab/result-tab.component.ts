@@ -1,5 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { trigger, transition, animate, style, query, group } from '@angular/animations'
+
+import { Utils } from './../utils';
+
+var util = new Utils();
+
+interface WeatherDetail {
+  name: string;
+  value: string;
+}
 
 @Component({
   selector: 'app-result-tab',
@@ -56,10 +65,14 @@ import { trigger, transition, animate, style, query, group } from '@angular/anim
 export class ResultTabComponent implements OnInit {
   @Input() json_data: any;
   @Input() address_data: any;
+  @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
+
+  weatherDetails: WeatherDetail[] = [];
   
   weather_data: any;
   address: string | undefined;
   isDetail = false;
+  idx: any;
   date: any;
   
   constructor() { }
@@ -73,13 +86,71 @@ export class ResultTabComponent implements OnInit {
       this.weather_data = this.json_data;
       this.address = this.address_data;
     }
-  
   }
 
-  async getDetailTrigger(event: any) {
+  getDetailTrigger(event: any) {
     if(!this.isDetail) {
       this.isDetail = true;
-      this.date = event;
+      this.idx = event;
+      this.sendMyEvent.emit(this.weather_data);
+
+      var data = JSON.parse(this.weather_data);
+      var date_obj = new Date(data["data"]["timelines"][2]["intervals"][this.idx]["startTime"]);
+
+      this.date = util.weekday[date_obj.getDay()] + ", " + date_obj.getDate() + " " + util.month[date_obj.getMonth()] + " " + date_obj.getFullYear();
+      
+      const [weather_icon_img_dir, weather_icon_text] = util.weatherCodeMapper(data["data"]["timelines"][2]["intervals"][this.idx]["values"]["weatherCode"], false);
+            
+      this.weatherDetails.push({
+        name: "Status",
+        value: weather_icon_text
+      })
+
+      this.weatherDetails.push({
+        name: "Max Temperature",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["temperatureMax"] + " °F"
+      })
+
+      this.weatherDetails.push({
+        name: "Min Temperature",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["temperatureMin"] + " °F"
+      })
+
+      this.weatherDetails.push({
+        name: "Apparent Temperature",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["temperatureApparent"] + " °F"
+      })
+
+      this.weatherDetails.push({
+        name: "Sun Rise Time",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["sunriseTime"].slice(11, -6)
+      })
+
+      this.weatherDetails.push({
+        name: "Sun Set Time",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["sunsetTime"].slice(11, -6)
+      })
+
+      this.weatherDetails.push({
+        name: "Humidity",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["humidity"] + " %"
+      })
+
+      this.weatherDetails.push({
+        name: "Wind Speed",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["windSpeed"] + " mph"
+      })
+
+      this.weatherDetails.push({
+        name: "Visibility",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["visibility"] + " mi"
+      })
+
+      this.weatherDetails.push({
+        name: "Cloud Cover",
+        value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["cloudCover"] + " %"
+      })
+
       // alert(event);
     }
     
