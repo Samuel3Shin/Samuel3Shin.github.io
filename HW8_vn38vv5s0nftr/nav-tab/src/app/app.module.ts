@@ -6,12 +6,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { HighchartsChartModule } from 'highcharts-angular';
-
 
 import { ResultTabComponent } from './result-tab/result-tab.component';
 import { SearchComponent } from './search/search.component';
@@ -21,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {DemoMaterialModule} from './material-module';
 
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -39,7 +36,10 @@ import {DemoMaterialModule} from './material-module';
     HighchartsChartModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB6wzX7VVJILzNoa2cbSUebst5BmBOLzEA'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

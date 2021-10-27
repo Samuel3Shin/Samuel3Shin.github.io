@@ -8,10 +8,13 @@
     
 }
 
-
 #twiter_button {
     background-image: url(../../../src/assets/Twitter_logo_white_32.png);
     background-size:auto;
     width: 40px;
     height: 40px;
 }
+
+agm-map {
+    height: 600px;
+  }

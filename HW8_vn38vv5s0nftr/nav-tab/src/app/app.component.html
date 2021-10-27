@@ -2,7 +2,7 @@
 <div class="progress" *ngIf="isProgressBar" style="width: 65%; margin:auto">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%"></div>
 </div>
-<app-result-tab *ngIf="resultExist" (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' [address_data]='address'></app-result-tab>
+<app-result-tab *ngIf="resultExist" (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' [address_data]='address' [lng]='longitude' [lat]='latitude'></app-result-tab>
 
 <!-- <app-weekly-weather (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-weekly-weather> -->
 <!-- <app-temp-chart (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-temp-chart> -->

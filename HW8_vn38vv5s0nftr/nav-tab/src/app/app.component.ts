@@ -12,6 +12,8 @@ export class AppComponent {
   errorMessage: any;
   weather_data: any;
   address: string | undefined;
+  latitude: any;
+  longitude: any;
   
   resultExist = false;
   isProgressBar = false;
@@ -36,14 +38,16 @@ export class AppComponent {
   async getLatLng(event: any) {
     const lat = event.split(" ")[0];
     const lng = event.split(" ")[1];
+
+    this.latitude = lat;
+    this.longitude = lng;
+    
     console.log(lat);
     console.log(lng);
     // const response = await fetch(`http://localhost:8080/weather?lat=${lat}&lng=${lng}`);
     // const json_data = await response.json();
 
     // console.log(json_data);
-
-    //TODO: I need to pass json data to child component
 
     this.http.get<any>(`http://localhost:8080/weather?lat=${lat}&lng=${lng}`).subscribe({
       next: json_data => {

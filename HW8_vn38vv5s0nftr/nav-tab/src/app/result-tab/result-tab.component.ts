@@ -65,6 +65,9 @@ interface WeatherDetail {
 export class ResultTabComponent implements OnInit {
   @Input() json_data: any;
   @Input() address_data: any;
+  @Input() lat: any;
+  @Input() lng: any;
+
   @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
 
   weatherDetails: WeatherDetail[] = [];
@@ -74,6 +77,9 @@ export class ResultTabComponent implements OnInit {
   isDetail = false;
   idx: any;
   date: any;
+
+  latitude: any;
+  longitude: any;
   
   constructor() { }
 
@@ -82,17 +88,23 @@ export class ResultTabComponent implements OnInit {
   }
 
   ngOnChanges() { 
-    if(this.json_data != null) {
+    // if(this.json_data != null) {
       this.weather_data = this.json_data;
       this.address = this.address_data;
-    }
+
+      this.latitude = parseFloat(this.lat);
+      this.longitude = parseFloat(this.lng);
+
+      this.sendMyEvent.emit("lat: " + this.latitude + " lng: " + this.longitude);
+      // this.sendMyEvent.emit(this.weather_data);
+    // }
   }
 
   getDetailTrigger(event: any) {
     if(!this.isDetail) {
       this.isDetail = true;
       this.idx = event;
-      this.sendMyEvent.emit(this.weather_data);
+      // this.sendMyEvent.emit(this.weather_data);
 
       var data = JSON.parse(this.weather_data);
       var date_obj = new Date(data["data"]["timelines"][2]["intervals"][this.idx]["startTime"]);
@@ -162,6 +174,7 @@ export class ResultTabComponent implements OnInit {
 
   listClick() {
     this.isDetail = false;
+    this.weatherDetails = [];
     // alert(this.isDetail);
   }
 
