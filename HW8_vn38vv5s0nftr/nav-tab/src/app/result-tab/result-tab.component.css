@@ -15,6 +15,13 @@
     height: 40px;
 }
 
+/* #star_button {
+    background-image: url(../../../src/assets/star_border_black_24dp.svg);
+    background-size:auto;
+    width: 40px;
+    height: 40px;
+} */
+
 agm-map {
     height: 600px;
   }

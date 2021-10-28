@@ -17,6 +17,8 @@ export class AppComponent {
   
   resultExist = false;
   isProgressBar = false;
+  isFavorite = false;
+  isError = true;
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +28,20 @@ export class AppComponent {
 
   getProgress(event: any){
     this.isProgressBar = event;
+  }
+
+  clickResult() {
+    this.resultExist = true;
+    this.isFavorite = false;
+    // this.sendIsFavorite.emit(true);
+    // this.sendMyEvent.emit("Favorite clicked!");
+  }
+
+  clickFavorite() {
+    this.resultExist = false;
+    this.isFavorite = true;
+    // this.sendIsFavorite.emit(true);
+    // this.sendMyEvent.emit("Favorite clicked!");
   }
 
   async getAddress(event: any) {
@@ -56,6 +72,7 @@ export class AppComponent {
           this.weather_data = JSON.stringify(json_data);
           this.isProgressBar = false;
           this.resultExist = true;
+          this.isError = false;
           // console.log(json_data["data"]);
       },
       error: error => {

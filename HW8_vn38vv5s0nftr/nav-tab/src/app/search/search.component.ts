@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit {
   @Output() sendAddress : EventEmitter<any> = new EventEmitter();
   @Output() sendProgress : EventEmitter<any> = new EventEmitter();
   
+  
   isChecked: boolean | undefined;
 
   constructor() {

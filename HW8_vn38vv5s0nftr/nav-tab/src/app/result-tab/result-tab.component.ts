@@ -67,10 +67,12 @@ export class ResultTabComponent implements OnInit {
   @Input() address_data: any;
   @Input() lat: any;
   @Input() lng: any;
+  @Input() isError_data: any;
 
   @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
 
   weatherDetails: WeatherDetail[] = [];
+  isError = false;
   
   weather_data: any;
   address: string | undefined;
@@ -89,6 +91,7 @@ export class ResultTabComponent implements OnInit {
 
   ngOnChanges() { 
     // if(this.json_data != null) {
+      this.isError = this.isError_data;
       this.weather_data = this.json_data;
       this.address = this.address_data;
 
@@ -182,6 +185,10 @@ export class ResultTabComponent implements OnInit {
     var strWindowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
     window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.address} on ${this.date} is ${this.weatherDetails[3]["value"]}. The weather conditions are ${this.weatherDetails[0]["value"]} %23CSCI571WeatherSearch`, "", strWindowFeatures);
     // alert("twit!");
+  }
+
+  addFavorite() {
+
   }
 
   

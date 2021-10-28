@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './material-module';
 
 import { AgmCoreModule } from '@agm/core';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AgmCoreModule } from '@agm/core';
     ResultTabComponent,
     SearchComponent,
     WeeklyWeatherComponent,
-    TempChartComponent
+    TempChartComponent,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,
