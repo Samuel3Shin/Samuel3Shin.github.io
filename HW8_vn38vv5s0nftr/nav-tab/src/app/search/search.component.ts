@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit {
   @Output() sendLatLng : EventEmitter<any> = new EventEmitter();
   @Output() sendAddress : EventEmitter<any> = new EventEmitter();
   @Output() sendProgress : EventEmitter<any> = new EventEmitter();
+  @Output() sendClear : EventEmitter<any> = new EventEmitter();
   
   
   isChecked: boolean | undefined;
@@ -114,6 +115,7 @@ export class SearchComponent implements OnInit {
 
   clearEverything() {
     this.sendMyEvent.emit("clear clicked!");
+    this.sendClear.emit(true);
     if($("#checkbox").is(':checked')) {
       $("#street_input").removeAttr("disabled"); 
       $("#city_input").removeAttr("disabled"); 

@@ -30,6 +30,12 @@ export class AppComponent {
     this.isProgressBar = event;
   }
 
+  getClear(event: any){
+    if(event == true) {
+      this.resultExist = false;
+    }
+  }
+
   clickResult() {
     this.resultExist = true;
     this.isFavorite = false;
