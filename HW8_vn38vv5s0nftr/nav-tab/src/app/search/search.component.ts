@@ -115,8 +115,8 @@ export class SearchComponent implements OnInit {
       $("#city_input").val("");
       $("#state_input").val("").prop("selected", true);
 
-      // this.street = '';
-      // this.city = '';
+      this.street = "    ";
+      this.city = "    ";
 
 
       $("#street_input").attr("disabled", "true");
