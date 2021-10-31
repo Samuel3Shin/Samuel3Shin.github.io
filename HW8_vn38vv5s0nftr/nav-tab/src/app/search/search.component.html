@@ -100,7 +100,7 @@
   
   
     <div class="form-row">
-        <button [disabled]="cityInput.errors?.required || streetInput.errors?.required" class="btn btn-primary" type="submit" id="submit_button">Submit</button>
+        <button [disabled]="cityInput.errors?.required || streetInput.errors?.required || (checkBoxChecked && !userLocationDetermined)" class="btn btn-primary" type="submit" id="submit_button">Submit</button>
         <button class="btn btn-primary" type="button" (click)='clearEverything();' id="clear_button">Clear</button>
     </div>
   </form>
