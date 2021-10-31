@@ -13,6 +13,11 @@ export class SearchComponent implements OnInit {
   @Output() sendAddress : EventEmitter<any> = new EventEmitter();
   @Output() sendProgress : EventEmitter<any> = new EventEmitter();
   @Output() sendClear : EventEmitter<any> = new EventEmitter();
+
+  street: string = '';
+  city: string = '';
+  state: string = '';
+  
   
   
   isChecked: boolean | undefined;
@@ -99,17 +104,38 @@ export class SearchComponent implements OnInit {
 
     this.sendMyEvent.emit((event.target as HTMLInputElement).checked);
     if((event.target as HTMLInputElement).checked) {
+      // this.street = '';
+      // this.city = '';
+      
+      // auto-detection clicked
+      // this.street = 'LA';
+      // this.city = 'CA';
+
       $("#street_input").val("");
       $("#city_input").val("");
       $("#state_input").val("").prop("selected", true);
 
+      // this.street = '';
+      // this.city = '';
+
+
       $("#street_input").attr("disabled", "true");
       $("#city_input").attr("disabled", "true");
       $("#state_input").attr("disabled", "true");
+
+      $("#submit_button").removeAttr("disabled");
     } else {
+      // auto-detection unclicked
+
       $("#street_input").removeAttr("disabled"); 
       $("#city_input").removeAttr("disabled"); 
-      $("#state_input").removeAttr("disabled"); 
+      $("#state_input").removeAttr("disabled");
+
+      $("#submit_button").attr("disabled", "true");
+
+      this.street = '';
+      this.city = '';
+
     }
   }
 
