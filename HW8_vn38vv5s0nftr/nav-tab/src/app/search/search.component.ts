@@ -17,8 +17,8 @@ export class SearchComponent implements OnInit {
   street: string = '';
   city: string = '';
   state: string = '';
-  
-  
+  showStreetErrorMessage = false;
+  showCityErrorMessage = false;
   
   isChecked: boolean | undefined;
 
@@ -27,6 +27,15 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  streetFocusOut() {
+    this.showStreetErrorMessage = true;
+  }
+
+  cityFocusOut() {
+    this.showCityErrorMessage = true;
   }
 
   handleSubmit() {
@@ -152,6 +161,9 @@ export class SearchComponent implements OnInit {
     $("#street_input").val("");
     $("#city_input").val("");
     $("#state_input").val("").prop("selected", true);
+
+    this.showStreetErrorMessage = false;
+    this.showCityErrorMessage = false;
   }
 
 }

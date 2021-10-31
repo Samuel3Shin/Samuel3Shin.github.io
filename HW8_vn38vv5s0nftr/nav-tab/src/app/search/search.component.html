@@ -5,7 +5,7 @@
       <div class="form-group row">
         <label for="validationServer02" class="col-sm-2 col-form-label">Street</label>
         <div class="col-md-6 mb-3">
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': streetInput.errors?.required}" id="street_input" name="my_street" [(ngModel)]="street" #streetInput="ngModel"  required>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': streetInput.errors?.required && showStreetErrorMessage}" (focusout)="streetFocusOut()" id="street_input" name="my_street" [(ngModel)]="street" #streetInput="ngModel"  required>
           <div class="invalid-feedback">
             Please enter a valid street.
           </div>
@@ -16,7 +16,7 @@
         <label for="validationServer03" class="col-sm-2 col-form-label">City</label>
         <div class="col-md-6 mb-3">
           
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': cityInput.errors?.required}" id="city_input" name="my_city" [(ngModel)]="city" #cityInput="ngModel" required>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': cityInput.errors?.required && showCityErrorMessage}" (focusout)="cityFocusOut()" id="city_input" name="my_city" [(ngModel)]="city" #cityInput="ngModel" required>
           <div class="invalid-feedback">
             Please enter a valid city.
           </div>
