@@ -17,8 +17,16 @@ export class SearchComponent implements OnInit {
   street: string = '';
   city: string = '';
   state: string = '';
+  lat: any;
+  lng: any;
+
+  ipInfoCity: any;
+  ipInfoState: any;
+
   showStreetErrorMessage = false;
   showCityErrorMessage = false;
+  userLocationDetermined = false;
+  checkBoxChecked = false;
   
   isChecked: boolean | undefined;
 
@@ -53,18 +61,25 @@ export class SearchComponent implements OnInit {
     // auto-address
     if($("#checkbox").is(':checked')) {
       this.sendMyEvent.emit("auto-address");
-      fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
-          (response) => response.json()
-      ).then(
-          (jsonResponse) => {
-              city = jsonResponse['city'];
-              state = jsonResponse['region'];
-              lat = jsonResponse['loc'].split(",")[0];
-              lng = jsonResponse['loc'].split(",")[1];
-              this.sendLatLng.emit(lat + " " + lng);
-              this.sendAddress.emit(city + " " + state);
-          }
-      )    
+      // fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
+      //     (response) => response.json()
+      // ).then(
+      //     (jsonResponse) => {
+      //         city = jsonResponse['city'];
+      //         state = jsonResponse['region'];
+      //         lat = jsonResponse['loc'].split(",")[0];
+      //         lng = jsonResponse['loc'].split(",")[1];
+      //         this.sendLatLng.emit(lat + " " + lng);
+      //         this.sendAddress.emit(city + " " + state);
+      //     }
+      // )
+      city = this.ipInfoCity;
+      state = this.ipInfoState;
+      lat = this.lat;
+      lng = this.lng;
+
+      this.sendLatLng.emit(lat + " " + lng);
+      this.sendAddress.emit(city + " " + state);
     } else {
       // No auto-address
       this.sendMyEvent.emit("user input address");
@@ -133,6 +148,20 @@ export class SearchComponent implements OnInit {
       $("#state_input").attr("disabled", "true");
 
       $("#submit_button").removeAttr("disabled");
+
+      fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
+          (response) => response.json()
+      ).then(
+          (jsonResponse) => {
+              this.ipInfoCity = jsonResponse['city'];
+              this.ipInfoState = jsonResponse['region'];
+              this.lat = jsonResponse['loc'].split(",")[0];
+              this.lng = jsonResponse['loc'].split(",")[1];
+              this.userLocationDetermined = true;
+          }
+      )
+
+      this.checkBoxChecked = true;
     } else {
       // auto-detection unclicked
 
@@ -145,6 +174,11 @@ export class SearchComponent implements OnInit {
       this.street = '';
       this.city = '';
 
+      this.showStreetErrorMessage = false;
+      this.showCityErrorMessage = false;
+
+      this.checkBoxChecked = false;
+      this.userLocationDetermined = false;
     }
   }
 
@@ -162,8 +196,16 @@ export class SearchComponent implements OnInit {
     $("#city_input").val("");
     $("#state_input").val("").prop("selected", true);
 
+    $("#submit_button").attr("disabled", "true");
+
+    this.street = '';
+    this.city = '';
+
     this.showStreetErrorMessage = false;
     this.showCityErrorMessage = false;
+
+    this.checkBoxChecked = false;
+    this.userLocationDetermined = false;
   }
 
 }
