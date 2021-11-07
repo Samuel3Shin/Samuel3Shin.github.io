@@ -86,6 +86,5 @@ export class AppComponent {
           console.error('There was an error!', error);
       }
     })
-
   }
 }

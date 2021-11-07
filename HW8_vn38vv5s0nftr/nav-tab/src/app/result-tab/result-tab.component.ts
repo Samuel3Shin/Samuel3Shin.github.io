@@ -82,6 +82,8 @@ export class ResultTabComponent implements OnInit {
 
   latitude: any;
   longitude: any;
+
+  favorite_icon = "star_border";
   
   constructor() { }
 
@@ -188,6 +190,17 @@ export class ResultTabComponent implements OnInit {
   }
 
   addFavorite() {
+    // alert("star button clicked!");
+    // var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+    // saved_items.push(this.latitude + "," + this.longitude + "," + this.address);
+
+
+    // star button toggle
+    if(this.favorite_icon == "star_border") {
+      this.favorite_icon = "star";
+    } else {
+      this.favorite_icon = "star_border";
+    }
 
   }
 

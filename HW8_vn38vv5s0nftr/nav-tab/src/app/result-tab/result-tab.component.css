@@ -24,4 +24,31 @@
 
 agm-map {
     height: 600px;
-  }
+}
+
+#below_buttons {
+    margin: 0 auto;
+    margin-top: 30px;
+    justify-content:right;
+    align-items: center;
+}
+
+#star_button {
+    /* background-image: url(../../../src/assets/star_black_24dp.svg); */
+    /* background-color:yellow; */
+    /* background-size: contain; */
+    background-color: white;
+    fill: blue;
+    border-radius: 10%;
+    border-width: thin;
+    /* border-color: grey; */
+    width: 35px;
+    height: 35px;
+
+    justify-content:center;
+    align-items: center;
+}
+
+#yellow_star {
+    color: yellow;
+}
