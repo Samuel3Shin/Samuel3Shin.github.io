@@ -33,9 +33,6 @@ export class SearchComponent implements OnInit {
   constructor() {
     this.isChecked = false;
 
-    // favorites local storage init
-    var saved_items: string[] = [];
-    localStorage.setItem("favorites", JSON.stringify(saved_items));
   }
 
   ngOnInit(): void {

@@ -79,6 +79,7 @@ export class AppComponent {
           this.isProgressBar = false;
           this.resultExist = true;
           this.isError = false;
+          this.isFavorite = false;
           // console.log(json_data["data"]);
       },
       error: error => {

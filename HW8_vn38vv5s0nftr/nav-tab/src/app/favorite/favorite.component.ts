@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 interface FavoriteItem {
   lat: string;
@@ -13,11 +13,20 @@ interface FavoriteItem {
   styleUrls: ['./favorite.component.css']
 })
 export class FavoriteComponent implements OnInit {
+  @Output() sendLatLng : EventEmitter<any> = new EventEmitter();
+  @Output() sendAddress : EventEmitter<any> = new EventEmitter();
+
+  itemExist = false;
+
   favoriteItems: FavoriteItem[] = [];
 
   constructor() {
     var saved_items = JSON.parse(localStorage.getItem("favorites")!);
     console.log("item length:", saved_items.length);
+
+    if(saved_items.length > 0){
+      this.itemExist = true;
+    }
 
     for(var i=0; i<saved_items.length; ++i) {
       console.log("favorite item index: ", i);
@@ -42,11 +51,17 @@ export class FavoriteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onCityClick(event: any) {
+    console.log("city clicked!");
+
+    this.sendLatLng.emit(this.favoriteItems[event]["lat"] + "," + this.favoriteItems[event]["lng"]);
+    this.sendAddress.emit(this.favoriteItems[event]["city"] + "," + this.favoriteItems[event]["state"]);
+  }
+
   onDeleteClick(event: any){
     console.log("delete button clicked!");
 
     var saved_items = JSON.parse(localStorage.getItem("favorites")!);
-    // saved_items.delete(event);
 
     saved_items.splice(event, 1);
     this.favoriteItems.splice(event, 1);
@@ -54,8 +69,9 @@ export class FavoriteComponent implements OnInit {
     localStorage.setItem("favorites", JSON.stringify(saved_items));
     console.log(JSON.stringify(saved_items));
 
-    // alert("Event type: " + event.toDateString());
-    // this.sendDetailTrigger.emit(event);
-    // return (event.target as HTMLInputElement).value;
+    if(this.favoriteItems.length == 0) {
+      this.itemExist = false;
+    }
+
   }
 }

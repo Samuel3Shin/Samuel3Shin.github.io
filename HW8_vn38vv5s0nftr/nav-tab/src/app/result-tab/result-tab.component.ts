@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { trigger, transition, animate, style, query, group } from '@angular/animations'
+import * as $ from 'jquery';
 
 import { Utils } from './../utils';
 
@@ -84,11 +85,12 @@ export class ResultTabComponent implements OnInit {
   longitude: any;
 
   favorite_icon = "star_border";
+  favoriteAdded = false;
   
   constructor() { }
 
   ngOnInit(): void {
-
+    
   }
 
   ngOnChanges() { 
@@ -169,6 +171,8 @@ export class ResultTabComponent implements OnInit {
       })
 
       // alert(event);
+
+      if(this.favoriteAdded) $("#star_icon").css("color", "#feda00");
     }
     
     // const state = event.split("/")[0];
@@ -191,13 +195,34 @@ export class ResultTabComponent implements OnInit {
 
   addFavorite() {
     // alert("star button clicked!");
-    var saved_items = JSON.parse(localStorage.getItem("favorites")!);
-    saved_items.push(this.latitude + "," + this.longitude + "," + this.address);
 
-    localStorage.setItem("favorites", JSON.stringify(saved_items));
-    console.log(JSON.stringify(saved_items));
 
-    // // star button toggle
+    // adding favorite
+    if(!this.favoriteAdded) {
+      var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+      saved_items.push(this.latitude + "," + this.longitude + "," + this.address);
+  
+      localStorage.setItem("favorites", JSON.stringify(saved_items));
+      console.log(JSON.stringify(saved_items));
+
+      this.favorite_icon = "star";
+      this.favoriteAdded = !this.favoriteAdded;
+      $("#star_icon").css("color", "#feda00");
+
+    } else {
+      var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+
+      saved_items.forEach((element: string,index: any)=>{
+        if(element==this.latitude + "," + this.longitude + "," + this.address) saved_items.splice(index,1);
+      });
+
+      localStorage.setItem("favorites", JSON.stringify(saved_items));
+      console.log(JSON.stringify(saved_items));
+      this.favorite_icon = "star_border";
+      this.favoriteAdded = !this.favoriteAdded;
+      $("#star_icon").css("color", "black");
+    }
+
     // if(this.favorite_icon == "star_border") {
     //   this.favorite_icon = "star";
     // } else {
