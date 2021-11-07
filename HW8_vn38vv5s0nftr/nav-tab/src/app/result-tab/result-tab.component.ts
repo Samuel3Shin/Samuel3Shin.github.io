@@ -191,16 +191,18 @@ export class ResultTabComponent implements OnInit {
 
   addFavorite() {
     // alert("star button clicked!");
-    // var saved_items = JSON.parse(localStorage.getItem("favorites")!);
-    // saved_items.push(this.latitude + "," + this.longitude + "," + this.address);
+    var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+    saved_items.push(this.latitude + "," + this.longitude + "," + this.address);
 
+    localStorage.setItem("favorites", JSON.stringify(saved_items));
+    console.log(JSON.stringify(saved_items));
 
-    // star button toggle
-    if(this.favorite_icon == "star_border") {
-      this.favorite_icon = "star";
-    } else {
-      this.favorite_icon = "star_border";
-    }
+    // // star button toggle
+    // if(this.favorite_icon == "star_border") {
+    //   this.favorite_icon = "star";
+    // } else {
+    //   this.favorite_icon = "star_border";
+    // }
 
   }
 

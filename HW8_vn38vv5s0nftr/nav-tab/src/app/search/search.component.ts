@@ -73,8 +73,8 @@ export class SearchComponent implements OnInit {
       //         state = jsonResponse['region'];
       //         lat = jsonResponse['loc'].split(",")[0];
       //         lng = jsonResponse['loc'].split(",")[1];
-      //         this.sendLatLng.emit(lat + " " + lng);
-      //         this.sendAddress.emit(city + " " + state);
+      //         this.sendLatLng.emit(lat + "," + lng);
+      //         this.sendAddress.emit(city + "," + state);
       //     }
       // )
       city = this.ipInfoCity;
@@ -82,8 +82,8 @@ export class SearchComponent implements OnInit {
       lat = this.lat;
       lng = this.lng;
 
-      this.sendLatLng.emit(lat + " " + lng);
-      this.sendAddress.emit(city + " " + state);
+      this.sendLatLng.emit(lat + "," + lng);
+      this.sendAddress.emit(city + "," + state);
     } else {
       // No auto-address
       this.sendMyEvent.emit("user input address");
@@ -119,8 +119,9 @@ export class SearchComponent implements OnInit {
           if(formattedAddress == "") {
             formattedAddress = (route=="" ? "" : (route + ", ")) + city + ", " + state + ", " + country;
           } 
-          this.sendLatLng.emit(lat + " " + lng);
-          this.sendAddress.emit(route + " " + city + " " + state);
+          this.sendLatLng.emit(lat + "," + lng);
+          this.sendAddress.emit(city + "," + state);
+          // this.sendAddress.emit(route + " " + city + " " + state);
         }
       );      
     }

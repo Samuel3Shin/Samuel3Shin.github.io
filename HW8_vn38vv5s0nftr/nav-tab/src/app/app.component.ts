@@ -58,8 +58,8 @@ export class AppComponent {
   }
 
   async getLatLng(event: any) {
-    const lat = event.split(" ")[0];
-    const lng = event.split(" ")[1];
+    const lat = event.split(",")[0];
+    const lng = event.split(",")[1];
 
     this.latitude = lat;
     this.longitude = lng;

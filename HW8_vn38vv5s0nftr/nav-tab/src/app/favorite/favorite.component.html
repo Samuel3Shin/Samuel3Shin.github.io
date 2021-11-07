@@ -1,3 +1,29 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
 <div class="alert alert-warning" role="alert">
     Sorry! No records found.
 </div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let info of favoriteItems; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ info.city }}</td>
+        <td>{{ info.state}}</td>
+        <td (click)=onDeleteClick(i)>
+            <span class="material-icons">
+                delete
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
