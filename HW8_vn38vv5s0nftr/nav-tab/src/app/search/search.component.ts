@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
 
 
   // autocomplete part
-  cityInputControl= new FormControl();
+  cityInputControl = new FormControl();
   cities: string[] = [];
   options: string[] = [];
   showAutocomplete = true;
@@ -46,7 +46,8 @@ export class SearchComponent implements OnInit {
 
   constructor() {
     this.isChecked = false;
-
+    this.cityInputControl= new FormControl();
+    this.showCityErrorMessage = false;
   }
 
   ngOnInit(): void {

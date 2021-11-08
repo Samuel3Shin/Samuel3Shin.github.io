@@ -200,6 +200,10 @@ export class ResultTabComponent implements OnInit {
     // adding favorite
     if(!this.favoriteAdded) {
       var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+      if(saved_items == null) {
+        saved_items = [];
+      }
+
       saved_items.push(this.latitude + "," + this.longitude + "," + this.address);
   
       localStorage.setItem("favorites", JSON.stringify(saved_items));

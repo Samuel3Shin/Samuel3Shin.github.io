@@ -20,7 +20,7 @@
         <label for="validationServer03" class="col-sm-2 col-form-label">City</label>
         <div class="col-md-6 mb-3">
           
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': cityInputControl.errors?.required && showCityErrorMessage}"
+          <input type="text" class="form-control"
           (focusout)="cityFocusOut()" id="city_input"
 
           (ngModelChange)="valuechange($event)"
