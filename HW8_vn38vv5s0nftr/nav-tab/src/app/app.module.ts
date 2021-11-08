@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
@@ -32,16 +32,19 @@ import { FavoriteComponent } from './favorite/favorite.component';
   ],
   imports: [
     BrowserModule,
-    NgbModule,
-    FormsModule,
-    HttpClientModule,
-    HighchartsChartModule,
     BrowserAnimationsModule,
-    MatTabsModule,
     DemoMaterialModule,
+    NgbModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB6wzX7VVJILzNoa2cbSUebst5BmBOLzEA'
-    })
+    }),
+    FormsModule,
+    ReactiveFormsModule,
+    DemoMaterialModule,
+    HttpClientModule,
+    HighchartsChartModule,
+    MatTabsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

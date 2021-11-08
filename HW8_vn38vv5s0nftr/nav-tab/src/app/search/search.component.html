@@ -5,7 +5,8 @@
       <div class="form-group row">
         <label for="validationServer02" class="col-sm-2 col-form-label">Street</label>
         <div class="col-md-6 mb-3">
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': streetInput.errors?.required && showStreetErrorMessage}" (focusout)="streetFocusOut()" id="street_input" name="my_street" [(ngModel)]="street" #streetInput="ngModel"  required>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': streetInput.errors?.required && showStreetErrorMessage}" 
+          (focusout)="streetFocusOut()" id="street_input" name="my_street" [(ngModel)]="street" #streetInput="ngModel"  required>
           <div class="invalid-feedback">
             Please enter a valid street.
           </div>
@@ -16,7 +17,18 @@
         <label for="validationServer03" class="col-sm-2 col-form-label">City</label>
         <div class="col-md-6 mb-3">
           
-          <input type="text" class="form-control" [ngClass]="{'is-invalid': cityInput.errors?.required && showCityErrorMessage}" (focusout)="cityFocusOut()" id="city_input" name="my_city" [(ngModel)]="city" #cityInput="ngModel" required>
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': cityInputControl.errors?.required && showCityErrorMessage}"
+          (focusout)="cityFocusOut()" id="city_input"
+
+          (ngModelChange)="valuechange($event)"
+          [matAutocomplete]="auto"
+          [formControl]="cityInputControl"
+          required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+            </mat-option>
+          </mat-autocomplete>
           <div class="invalid-feedback">
             Please enter a valid city.
           </div>
@@ -26,7 +38,8 @@
       <div class="form-group row">
         <label for="validationServer04" class="col-sm-2">State</label>
         <div class="col-md-3 mb-3">
-          <select id="state_input" required>
+          <select id="state_input" [ngClass]="{'is-invalid': stateInput.errors?.required}"
+          name="my_state" [(ngModel)]="state" #stateInput="ngModel" required>
             <option value="">Select Your State</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -98,9 +111,8 @@
       </div>
     </div>
   
-  
     <div class="form-row">
-        <button [disabled]="cityInput.errors?.required || streetInput.errors?.required || (checkBoxChecked && !userLocationDetermined)" class="btn btn-primary" type="submit" id="submit_button">Submit</button>
+        <button [disabled]="cityInputControl.errors?.required || streetInput.errors?.required || stateInput.errors?.required || (checkBoxChecked && !userLocationDetermined)" class="btn btn-primary" type="submit" id="submit_button">Submit</button>
         <button class="btn btn-primary" type="button" (click)='clearEverything();' id="clear_button">Clear</button>
     </div>
   </form>

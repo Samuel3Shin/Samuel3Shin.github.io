@@ -1,5 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as $ from 'jquery';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search',
@@ -30,13 +35,55 @@ export class SearchComponent implements OnInit {
   
   isChecked: boolean | undefined;
 
+
+  // autocomplete part
+  cityInputControl= new FormControl();
+  cities: string[] = [];
+  options: string[] = [];
+  showAutocomplete = true;
+
+  filteredOptions: Observable<string[]> | undefined;
+
   constructor() {
     this.isChecked = false;
 
   }
 
   ngOnInit(): void {
+    // autocomplete
+    this.filteredOptions = this.cityInputControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+  }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  valuechange(event: any) {
+    console.log(event);
+
+    if(event == "") {
+      console.log("no input!");
+
+    } else {
+      this.showAutocomplete = true;
+      fetch(`http://localhost:8080/autocomplete?city=${event}`).then(
+        (response) => response.json()
+      ).then(
+          (jsonResponse) => {
+              console.log(jsonResponse);
+  
+              this.cities = [];
+              for(var i=0; i<jsonResponse['predictions'].length; ++i) {
+                this.cities.push(jsonResponse['predictions'][i]['structured_formatting']['main_text']);
+              }
+              this.options = this.cities;
+          }
+      )
+    }
   }
 
   streetFocusOut() {
