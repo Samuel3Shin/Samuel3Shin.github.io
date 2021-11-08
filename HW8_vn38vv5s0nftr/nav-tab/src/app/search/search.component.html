@@ -20,11 +20,11 @@
         <label for="validationServer03" class="col-sm-2 col-form-label">City</label>
         <div class="col-md-6 mb-3">
           
-          <input type="text" class="form-control"
-          (focusout)="cityFocusOut()" id="city_input"
-
+          <input type="text" class="form-control" 
           (ngModelChange)="valuechange($event)"
           [matAutocomplete]="auto"
+          [ngClass]="{'is-invalid': showCityErrorMessage}"
+          (focusout)="cityFocusOut()" id="city_input"
           [formControl]="cityInputControl"
           required>
           <mat-autocomplete #auto="matAutocomplete">

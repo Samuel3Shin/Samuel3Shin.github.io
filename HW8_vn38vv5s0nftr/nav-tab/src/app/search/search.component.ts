@@ -46,8 +46,8 @@ export class SearchComponent implements OnInit {
 
   constructor() {
     this.isChecked = false;
-    this.cityInputControl= new FormControl();
-    this.showCityErrorMessage = false;
+    // this.cityInputControl= new FormControl();
+    // this.showCityErrorMessage = false;
   }
 
   ngOnInit(): void {
@@ -68,8 +68,11 @@ export class SearchComponent implements OnInit {
 
     if(event == "") {
       console.log("no input!");
+      this.showCityErrorMessage = true;
 
     } else {
+      this.showCityErrorMessage = false;
+
       this.showAutocomplete = true;
       fetch(`http://localhost:8080/autocomplete?city=${event}`).then(
         (response) => response.json()
@@ -92,7 +95,7 @@ export class SearchComponent implements OnInit {
   }
 
   cityFocusOut() {
-    this.showCityErrorMessage = true;
+    // this.showCityErrorMessage = true;
   }
 
   handleSubmit() {
