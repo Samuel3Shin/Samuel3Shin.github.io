@@ -1,7 +1,10 @@
-<div id="centerWannabe">
+<div id="search_container" class="justify-content-center">
   <form (ngSubmit)=handleSubmit(); class="needs-validation">
-    <h3>Weather Search</h3>
-    <div class="form-col">
+    <div id="top-grid">
+      <span style="vertical-align:middle" class="centerWannabe" id="weather_search_text">Weather Search</span>
+      <img id="sun_behind_cloud" style="vertical-align:middle" src="../../assets/sun_behind_cloud.png">
+    </div>
+    <div id="search_items" class="form-col">
       <div class="form-group row">
         <label for="validationServer02" class="col-sm-2 col-form-label">Street</label>
         <div class="col-md-6 mb-3">
@@ -112,8 +115,17 @@
     </div>
   
     <div class="form-row">
-        <button [disabled]="cityInputControl.errors?.required || streetInput.errors?.required || stateInput.errors?.required || (checkBoxChecked && !userLocationDetermined)" class="btn btn-primary" type="submit" id="submit_button">Submit</button>
-        <button class="btn btn-primary" type="button" (click)='clearEverything();' id="clear_button">Clear</button>
+        <button [disabled]="cityInputControl.errors?.required || streetInput.errors?.required || stateInput.errors?.required || (checkBoxChecked && !userLocationDetermined)" class="btn btn-primary" type="submit" id="submit_button">
+          <span style="vertical-align:middle" class="material-icons">
+            search
+          </span>            
+          Search</button>
+          
+        <button class="btn btn-outline-dark" type="button" (click)='clearEverything();' id="clear_button">
+          <span style="vertical-align:middle" class="material-icons">
+            clear_all
+          </span>            
+          Clear</button>
     </div>
   </form>
   

@@ -1,6 +1,6 @@
 <app-search (sendMyEvent)="getEventThanks($event)" (sendProgress)="getProgress($event)" (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)" (sendClear)="getClear($event)"></app-search>
 <div class="form-row" id="below_buttons">
-    <button class="btn btn-primary" (click)='clickResult()'>Result</button>
+    <button class="btn btn-primary" (click)='clickResult()'>Results</button>
     <button class="btn" type="button" (click)='clickFavorite()'>Favorite</button>
 </div>
 <div class="progress" *ngIf="isProgressBar" style="width: 65%; margin:auto">
