@@ -58,6 +58,10 @@ select {
     background-color: white;
 }
 
+select[disabled] { 
+    background-color: #e9ecef; 
+}
+
 select option {
     /* background-color: #e5e6e7; */
 }

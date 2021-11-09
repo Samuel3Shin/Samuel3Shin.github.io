@@ -38,9 +38,10 @@ agm-map {
     /* background-color:yellow; */
     /* background-size: contain; */
     background-color: white;
-    fill: blue;
+    border-color: #d9dde2;
     border-radius: 10%;
     border-width: thin;
+    margin-right: 3px;
     /* border-color: grey; */
     width: 35px;
     height: 35px;
@@ -52,3 +53,9 @@ agm-map {
 /* #star_icon {
     color: #feda00;
 } */
+
+#detail_button {
+    border: none;
+    font-weight: lighter;
+    color: grey;
+}

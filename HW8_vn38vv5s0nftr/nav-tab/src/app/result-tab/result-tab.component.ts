@@ -77,6 +77,9 @@ export class ResultTabComponent implements OnInit {
   
   weather_data: any;
   address: string | undefined;
+  city: string | undefined;
+  state: string | undefined;
+
   isDetail = false;
   idx: any;
   date: any;
@@ -87,17 +90,27 @@ export class ResultTabComponent implements OnInit {
   favorite_icon = "star_border";
   favoriteAdded = false;
   
-  constructor() { }
+  constructor() {     if(this.favorite_icon == "star") {
+    $("#star_icon").css("color", "#feda00");
+  }}
 
   ngOnInit(): void {
-    
+    if(this.favorite_icon == "star") {
+      $("#star_icon").css("color", "#feda00");
+    }
   }
 
   ngOnChanges() { 
+    if(this.favorite_icon == "star") {
+      $("#star_icon").css("color", "#feda00");
+    }
+
     // if(this.json_data != null) {
       this.isError = this.isError_data;
       this.weather_data = this.json_data;
       this.address = this.address_data;
+      this.city = this.address?.split(",")[0];
+      this.state = this.address?.split(",")[1];
 
       this.latitude = parseFloat(this.lat);
       this.longitude = parseFloat(this.lng);
@@ -108,6 +121,10 @@ export class ResultTabComponent implements OnInit {
   }
 
   getDetailTrigger(event: any) {
+    if(this.favorite_icon == "star") {
+      $("#star_icon").css("color", "#feda00");
+    }
+
     if(!this.isDetail) {
       this.isDetail = true;
       this.idx = event;
@@ -171,8 +188,6 @@ export class ResultTabComponent implements OnInit {
       })
 
       // alert(event);
-
-      if(this.favoriteAdded) $("#star_icon").css("color", "#feda00");
     }
     
     // const state = event.split("/")[0];
@@ -185,6 +200,14 @@ export class ResultTabComponent implements OnInit {
     this.isDetail = false;
     this.weatherDetails = [];
     // alert(this.isDetail);
+
+    if(this.favorite_icon == "star") {
+      $("#star_icon").css("color", "#feda00");
+    }
+  }
+
+  detailClick() {
+    this.getDetailTrigger(0);
   }
 
   twit() {
@@ -201,7 +224,7 @@ export class ResultTabComponent implements OnInit {
     if(!this.favoriteAdded) {
       var saved_items = JSON.parse(localStorage.getItem("favorites")!);
       if(saved_items == null) {
-        saved_items = [];
+        saved_items = []
       }
 
       saved_items.push(this.latitude + "," + this.longitude + "," + this.address);

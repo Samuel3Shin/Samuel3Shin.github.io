@@ -4,7 +4,7 @@
 <div *ngIf="!isError">
 
   <div *ngIf="!isDetail" [@slideWeekly]>
-    <div class="address">Forecast at {{ address }}</div>
+    <div class="address">Forecast at {{ city }}, {{ state }}</div>
   
     <!-- <div class="row">
       <div class="col-sm" align="right">
@@ -17,10 +17,10 @@
     </div> -->
 
     <div class="row" id="below_buttons">
-      <button (click)="addFavorite()" id="star_button"><span class="material-icons" id="star_icon">
+      <button (click)="addFavorite()" id="star_button"><span style="vertical-align:middle" class="material-icons" id="star_icon">
         {{favorite_icon}}
     </span></button>  
-      <button mat-stroked-button (click)="listClick()">Details</button>
+      <button mat-stroked-button id="detail_button" (click)="detailClick()">Details &gt;</button>
     </div>
   
     <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-end">
