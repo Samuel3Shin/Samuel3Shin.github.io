@@ -432,9 +432,7 @@ var populatingChart2 = function(url) {
     var client = new HttpClient();
     client.get(url, function(response) {
         var json_data = JSON.parse(response);
-
-        new Meteogram(json_data, 'chart2_container');
-        // Meteogram(json_data, 'chart2_container');
+        window.meteogram = new Meteogram(json_data, 'chart2_container');
     });
 }
 
@@ -456,67 +454,7 @@ function Meteogram(json_data, container) {
     this.hourly_weather_data = json_data
 
     // Run
-    // this.parseYrData();
-
-
-    var meteogram = this;
-    var json = this.hourly_weather_data;
-
-    for(i=0; i<json["data"]["timelines"][0]["intervals"].length; ++i) {
-        // Get the times - only Safari can't parse ISO8601 so we need to do
-        // some replacements
-        // console.log(json["data"]["timelines"][0]["intervals"][0]["startTime"].slice(0, -6));
-
-        var from = json["data"]["timelines"][0]["intervals"][i]["startTime"].slice(0, -6) + ' UTC';
-    
-        from = from.replace(/-/g, '/').replace('T', ' ');
-        from = Date.parse(from);
-
-        meteogram.temperatures.push({
-            x: from,
-            y: parseInt(
-                json["data"]["timelines"][0]["intervals"][i]['values']['temperature'],
-                10
-            ),
-        });
-
-        meteogram.humidities.push({
-            x: from,
-            y: parseInt(
-                json["data"]["timelines"][0]["intervals"][i]['values']['humidity']
-            )
-        });
-
-        if (i % 2 === 0) {
-            meteogram.winds.push({
-                x: from,
-                value: json["data"]["timelines"][0]["intervals"][i]['values']['windSpeed'],
-                direction: json["data"]["timelines"][0]["intervals"][i]['values']['windDirection']
-            });
-        }
-
-        meteogram.pressures.push({
-            x: from,
-            y: parseFloat(json["data"]["timelines"][0]["intervals"][i]['values']["pressureSeaLevel"])
-        });
-
-        if (i === 0) {
-            pointStart = from;
-        }
-    }
-
-    // Smooth the line
-    smoothLine(this.temperatures);
-
-    // Create the chart when the data is loaded
-    // this.createChart();
-    var meteogram = this;
-    this.chart = new Highcharts.Chart(getChartOptions(this.container, this.humidities,
-        this.precipitationsError, // Only for some data sets
-        this.winds,
-        this.temperatures,
-        this.pressures));
-    drawBlocksForWindArrows(this.chart)
+    this.parseYrData();
 }
 
 /**
@@ -524,7 +462,7 @@ function Meteogram(json_data, container) {
  * which makes the line graph look jagged. So we apply a running mean on it, but preserve
  * the unaltered value in the tooltip.
  */
-var smoothLine = function (data) {
+Meteogram.prototype.smoothLine = function (data) {
     var i = data.length,
         sum,
         value;
@@ -542,7 +480,7 @@ var smoothLine = function (data) {
 /**
  * Draw blocks around wind arrows, below the plot area
  */
-var drawBlocksForWindArrows = function (chart) {
+Meteogram.prototype.drawBlocksForWindArrows = function (chart) {
     var xAxis = chart.xAxis[0],
         x,
         pos,
@@ -579,16 +517,22 @@ var drawBlocksForWindArrows = function (chart) {
 
 };
 
-var getChartOptions = function (container, humidities,
-    precipitationsError, // Only for some data sets
-    winds,
-    temperatures,
-    pressures) {
+/**
+ * Get the title based on the XML data
+ */
+Meteogram.prototype.getTitle = function () {
+    return 'Hourly Weather (For Next 5 Days)'
+};
+
+/**
+ * Build and return the Highcharts options structure
+ */
+Meteogram.prototype.getChartOptions = function () {
     var meteogram = this;
 
     return {
         chart: {
-            renderTo: container,
+            renderTo: this.container,
             marginBottom: 70,
             marginRight: 40,
             marginTop: 50,
@@ -618,7 +562,7 @@ var getChartOptions = function (container, humidities,
         },
 
         title: {
-            text: 'Hourly Weather (For Next 5 Days)',
+            text: this.getTitle(),
             align: 'center',
             style: {
                 whiteSpace: 'nowrap',
@@ -746,7 +690,7 @@ var getChartOptions = function (container, humidities,
 
         series: [{
             name: 'Temperature',
-            data: temperatures,
+            data: this.temperatures,
             type: 'spline',
             marker: {
                 enabled: false,
@@ -765,7 +709,7 @@ var getChartOptions = function (container, humidities,
             negativeColor: '#48AFE8'
         }, {
             name: 'Precipitation',
-            data: precipitationsError,
+            data: this.precipitationsError,
             type: 'column',
             color: 'url(#precipitation-error)',
             yAxis: 1,
@@ -780,7 +724,7 @@ var getChartOptions = function (container, humidities,
             dataLabels: {
                 enabled: meteogram.hasPrecipitationError,
                 formatter: function () {
-                    if (point.maxvalue > 0) {
+                    if (this.point.maxvalue > 0) {
                         return this.point.maxvalue;
                     }
                 },
@@ -791,7 +735,7 @@ var getChartOptions = function (container, humidities,
             }
         }, {
             name: 'Humidity',
-            data: humidities,
+            data: this.humidities,
             type: 'column',
             color: '#7db1d3',
             yAxis: 1,
@@ -816,7 +760,7 @@ var getChartOptions = function (container, humidities,
         }, {
             name: 'Air pressure',
             color: '#f4b840',
-            data: pressures,
+            data: this.pressures,
             marker: {
                 enabled: false
             },
@@ -832,7 +776,7 @@ var getChartOptions = function (container, humidities,
             id: 'windbarbs',
             color: Highcharts.getOptions().colors[1],
             lineWidth: 0.5,
-            data: winds,
+            data: this.winds,
             vectorLength: 12,
             yOffset: -15,
             tooltip: {
@@ -842,5 +786,83 @@ var getChartOptions = function (container, humidities,
     };
 };
 
+/**
+ * Post-process the chart from the callback function, the second argument to Highcharts.Chart.
+ */
+Meteogram.prototype.onChartLoad = function (chart) {
+    this.drawBlocksForWindArrows(chart);
+};
 
+/**
+ * Create the chart. This function is called async when the data file is loaded and parsed.
+ */
+Meteogram.prototype.createChart = function () {
+    var meteogram = this;
+    this.chart = new Highcharts.Chart(this.getChartOptions(), function (chart) {
+        meteogram.onChartLoad(chart);
+    });
+};
+
+Meteogram.prototype.error = function () {
+    document.getElementById('loading').innerHTML = '<i class="fa fa-frown-o"></i> Failed loading data, please try again later';
+};
+
+/**
+ * Handle the data. This part of the code is not Highcharts specific, but deals with yr.no's
+ * specific data format
+ */
+Meteogram.prototype.parseYrData = function () {
+
+    var meteogram = this;
+    var json = this.hourly_weather_data;
+
+    for(i=0; i<json["data"]["timelines"][0]["intervals"].length; ++i) {
+        // Get the times - only Safari can't parse ISO8601 so we need to do
+        // some replacements
+        // console.log(json["data"]["timelines"][0]["intervals"][0]["startTime"].slice(0, -6));
+
+        var from = json["data"]["timelines"][0]["intervals"][i]["startTime"].slice(0, -6) + ' UTC';
+    
+        from = from.replace(/-/g, '/').replace('T', ' ');
+        from = Date.parse(from);
+
+        meteogram.temperatures.push({
+            x: from,
+            y: parseInt(
+                json["data"]["timelines"][0]["intervals"][i]['values']['temperature'],
+                10
+            ),
+        });
+
+        meteogram.humidities.push({
+            x: from,
+            y: parseInt(
+                json["data"]["timelines"][0]["intervals"][i]['values']['humidity']
+            )
+        });
+
+        if (i % 2 === 0) {
+            meteogram.winds.push({
+                x: from,
+                value: json["data"]["timelines"][0]["intervals"][i]['values']['windSpeed'],
+                direction: json["data"]["timelines"][0]["intervals"][i]['values']['windDirection']
+            });
+        }
+
+        meteogram.pressures.push({
+            x: from,
+            y: parseFloat(json["data"]["timelines"][0]["intervals"][i]['values']["pressureSeaLevel"])
+        });
+
+        if (i === 0) {
+            pointStart = from;
+        }
+    }
+
+    // Smooth the line
+    this.smoothLine(this.temperatures);
+
+    // Create the chart when the data is loaded
+    this.createChart();
+};
 // End of the Meteogram protype

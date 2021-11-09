@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="simple_meteogram.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/windbarb.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <body>
+        <h1>Hello World</h1>
+        <p>I'm hosted with GitHub Pages.</p>
+        <figure class="highcharts-figure">
+            <div id="chart2_container"></div>
+        </figure>
+
+        <script>
+            populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=34.052235&lng=-118.243683`);
+        </script>
+    </body>
+</html>

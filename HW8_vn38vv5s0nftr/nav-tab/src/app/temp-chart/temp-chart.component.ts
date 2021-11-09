@@ -106,13 +106,8 @@ export class TempChartComponent implements OnInit {
         }
       }
   
-      this.chartOptions = this.highcharts.Options;
+    //   this.chartOptions = this.highcharts.Options;
+    this.highcharts.chart('chart_container', this.highcharts.Options);
     }
-
-
-
   }
-  
-
-
 }

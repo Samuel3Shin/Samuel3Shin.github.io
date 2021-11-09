@@ -98,6 +98,30 @@ app.get('/', (req, res) => {
 });
 
 
+app.get('/autocomplete', (req, res) => {
+  // res.status(200).send('Hello, autocomplete!').end();
+  console.log(req.query.city);
+
+  fetch("https://maps.googleapis.com/maps/api/place/autocomplete/json?" + new URLSearchParams({
+    input : req.query.city,
+    country : "us",
+    types : "(cities)",
+    key : "AIzaSyB6wzX7VVJILzNoa2cbSUebst5BmBOLzEA"
+  }), {method: "GET"})
+  .then((result) => result.json())
+  .then((json) => {
+    console.log(json)
+    res.status(200).send(json).end();
+  })
+  .catch((error) => console.error("error: " + error));
+
+
+  // res.status(200).send(json_data).end();
+
+});
+
+
+
 app.get('/weather', (req, res) => {
   // fetch(getTimelineURL + "?" + getTimelineParameters, {method: "GET"})
   // .then((result) => result.json())
@@ -105,7 +129,7 @@ app.get('/weather', (req, res) => {
   //   console.log(json)
   //   res.status(200).send(json).end();
   // })
-  // .catch((error) => console.error("error: " + err));
+  // .catch((error) => console.error("error: " + error));
 
   var json_data = {'data': {'timelines': [{'timestep': 'current',
   'startTime': '2021-10-16T19:36:00-04:00',
