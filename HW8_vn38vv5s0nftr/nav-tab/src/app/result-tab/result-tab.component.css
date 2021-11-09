@@ -10,9 +10,21 @@
 
 #twiter_button {
     background-image: url(../../../src/assets/Twitter_logo_white_32.png);
-    background-size:auto;
-    width: 40px;
-    height: 40px;
+    background-size: auto;
+    background-color: #eae9eb;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+    border: solid;
+    border-width: thin;
+    border-radius: 10%;
+    border-color: #d9dde2;
+    
+    margin-right: 5px;
+}
+
+#list_button {
+    margin-left: 5px;
 }
 
 /* #star_button {

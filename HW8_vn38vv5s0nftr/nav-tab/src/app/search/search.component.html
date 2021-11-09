@@ -1,11 +1,11 @@
-<div id="search_container" class="justify-content-center">
+<div id="search_container" class="">
   <form (ngSubmit)=handleSubmit(); class="needs-validation">
     <div id="top-grid">
       <span style="vertical-align:middle" class="centerWannabe" id="weather_search_text">Weather Search</span>
       <img id="sun_behind_cloud" style="vertical-align:middle" src="../../assets/sun_behind_cloud.png">
     </div>
     <div id="search_items" class="form-col">
-      <div class="form-group row">
+      <div class="form-group row justify-content-center">
         <label for="validationServer02" class="col-sm-2 col-form-label" id="search_texts">Street</label>
         <div class="col-md-6 mb-3">
           <input type="text" class="form-control" [ngClass]="{'is-invalid': streetInput.errors?.required && showStreetErrorMessage}" 
@@ -16,7 +16,7 @@
         </div>
       </div>
   
-      <div class="form-group row">
+      <div class="form-group row justify-content-center">
         <label for="validationServer03" class="col-sm-2 col-form-label" id="search_texts">City</label>
         <div class="col-md-6 mb-3">
           
@@ -38,10 +38,10 @@
         </div>
       </div>
   
-      <div class="form-group row">
+      <div class="form-group row justify-content-center">
         <label for="validationServer04" class="col-sm-2">State</label>
-        <div class="col-md-5 mb-3">
-          <select class="col-md-5 mb-3" id="state_input" [ngClass]="{'is-invalid': stateInput.errors?.required}"
+        <div class="col-md-6 mb-3">
+          <select class="col-md-6 mb-3" id="state_input" [ngClass]="{'is-invalid': stateInput.errors?.required}"
           name="my_state" [(ngModel)]="state" #stateInput="ngModel" required>
             <option value="">Select Your State</option>
             <option value="AL">Alabama</option>
@@ -98,10 +98,10 @@
         </select>			
         </div>
       </div>
+
+      <hr class="col-sm-8 justify-content-center">
       
-      <hr class="col-sm-8" style="margin-left:0">
-  
-      <div class="form-group row">
+      <div class="form-group row justify-content-center">
         <label for="validationServer05" class="col-sm-2" id="search_texts">Auto-detect location</label>
         <div class="col-sm-6 mb-3">
           <div class="form-check">
@@ -115,7 +115,7 @@
       </div>
     </div>
   
-    <div class="form-row">
+    <div class="col-sm-7 mb-3 form-row justify-content-center" id="search_clear">
         <button [disabled]="cityInputControl.errors?.required || streetInput.errors?.required || stateInput.errors?.required || (checkBoxChecked && !userLocationDetermined)" class="btn btn-primary" type="submit" id="submit_button">
           <span style="vertical-align:middle" class="material-icons">
             search

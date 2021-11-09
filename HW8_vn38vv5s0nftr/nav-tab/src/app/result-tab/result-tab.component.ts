@@ -212,7 +212,7 @@ export class ResultTabComponent implements OnInit {
 
   twit() {
     var strWindowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
-    window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.address} on ${this.date} is ${this.weatherDetails[3]["value"]}. The weather conditions are ${this.weatherDetails[0]["value"]} %23CSCI571WeatherSearch`, "", strWindowFeatures);
+    window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.city}, ${this.state} on ${this.date} is ${this.weatherDetails[3]["value"]}. The weather conditions are ${this.weatherDetails[0]["value"]} %23CSCI571WeatherSearch`, "", strWindowFeatures);
     // alert("twit!");
   }
 

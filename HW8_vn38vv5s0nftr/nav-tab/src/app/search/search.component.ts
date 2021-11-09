@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-search',
@@ -192,8 +193,8 @@ export class SearchComponent implements OnInit {
       $("#city_input").val("");
       $("#state_input").val("").prop("selected", true);
 
-      this.street = "    ";
-      this.city = "    ";
+      // this.street = "    ";
+      // this.city = "    ";
 
 
       $("#street_input").attr("disabled", "true");
@@ -215,6 +216,9 @@ export class SearchComponent implements OnInit {
       )
 
       this.checkBoxChecked = true;
+
+      this.showStreetErrorMessage = false;
+      this.showCityErrorMessage = false;
     } else {
       // auto-detection unclicked
 
@@ -222,10 +226,13 @@ export class SearchComponent implements OnInit {
       $("#city_input").removeAttr("disabled"); 
       $("#state_input").removeAttr("disabled");
 
+      $("#state_input").val("").prop("selected", true);
+
       $("#submit_button").attr("disabled", "true");
 
       this.street = '';
       this.city = '';
+      this.state = '';
 
       this.showStreetErrorMessage = false;
       this.showCityErrorMessage = false;
@@ -253,12 +260,14 @@ export class SearchComponent implements OnInit {
 
     this.street = '';
     this.city = '';
+    this.state = '';
 
     this.showStreetErrorMessage = false;
     this.showCityErrorMessage = false;
 
     this.checkBoxChecked = false;
     this.userLocationDetermined = false;
+
   }
 
 }
