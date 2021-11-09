@@ -1,191 +1,80 @@
-// HttpClient 
-var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                aCallback(anHttpRequest.responseText);
-        }
-        anHttpRequest.open( "GET", aUrl, true );            
-        anHttpRequest.send( null );
-    }
-}
-
-// var populatingChart2 = function(url) {
-//     var client = new HttpClient();
-//     client.get(url, function(response) {
-//         var json_data = JSON.parse(response);
-
-//         new Meteogram(json_data, 'chart2_container');
-//         // Meteogram(json_data, 'chart2_container');
-//     });
-// }
-
 function populatingChart2(url) {
-    var client = new HttpClient();
-    client.get(url, function(response) {
-        var json_data = JSON.parse(response);
+    fetch(url).then(
+        (response) => response.json()
+    ).then(
+        (jsonResponse) => {
 
-        // new Meteogram(json_data, 'chart2_container');
-            // Parallel arrays for the chart data, these are populated as the XML/JSON file
-    // is loaded
-    humidities = [];
-    precipitationsError = []; // Only for some data sets
-    winds = [];
-    temperatures = [];
-    pressures = [];
-
-    // Initialize
-    container = 'chart2_container';
-
-    hourly_weather_data = json_data
-
-    // Run
-    // this.parseYrData();
+        var json_data = jsonResponse;
 
 
-    // var meteogram = this;
-    var json = hourly_weather_data;
+        humidities = [];
+        precipitationsError = []; // Only for some data sets
+        winds = [];
+        temperatures = [];
+        pressures = [];
 
-    for(i=0; i<json["data"]["timelines"][0]["intervals"].length; ++i) {
-        // Get the times - only Safari can't parse ISO8601 so we need to do
-        // some replacements
-        // console.log(json["data"]["timelines"][0]["intervals"][0]["startTime"].slice(0, -6));
+        // Initialize
+        container = 'chart2_container';
 
-        var from = json["data"]["timelines"][0]["intervals"][i]["startTime"].slice(0, -6) + ' UTC';
-    
-        from = from.replace(/-/g, '/').replace('T', ' ');
-        from = Date.parse(from);
+        hourly_weather_data = json_data
 
-        temperatures.push({
-            x: from,
-            y: parseInt(
-                json["data"]["timelines"][0]["intervals"][i]['values']['temperature'],
-                10
-            ),
-        });
+        var json = hourly_weather_data;
 
-        humidities.push({
-            x: from,
-            y: parseInt(
-                json["data"]["timelines"][0]["intervals"][i]['values']['humidity']
-            )
-        });
+        for(i=0; i<json["data"]["timelines"][0]["intervals"].length; ++i) {
+            // Get the times - only Safari can't parse ISO8601 so we need to do
+            // some replacements
+            // console.log(json["data"]["timelines"][0]["intervals"][0]["startTime"].slice(0, -6));
 
-        if (i % 2 === 0) {
-            winds.push({
+            var from = json["data"]["timelines"][0]["intervals"][i]["startTime"].slice(0, -6) + ' UTC';
+        
+            from = from.replace(/-/g, '/').replace('T', ' ');
+            from = Date.parse(from);
+
+            temperatures.push({
                 x: from,
-                value: json["data"]["timelines"][0]["intervals"][i]['values']['windSpeed'],
-                direction: json["data"]["timelines"][0]["intervals"][i]['values']['windDirection']
+                y: parseInt(
+                    json["data"]["timelines"][0]["intervals"][i]['values']['temperature'],
+                    10
+                ),
             });
+
+            humidities.push({
+                x: from,
+                y: parseInt(
+                    json["data"]["timelines"][0]["intervals"][i]['values']['humidity']
+                )
+            });
+
+            if (i % 2 === 0) {
+                winds.push({
+                    x: from,
+                    value: json["data"]["timelines"][0]["intervals"][i]['values']['windSpeed'],
+                    direction: json["data"]["timelines"][0]["intervals"][i]['values']['windDirection']
+                });
+            }
+
+            pressures.push({
+                x: from,
+                y: parseFloat(json["data"]["timelines"][0]["intervals"][i]['values']["pressureSeaLevel"])
+            });
+
+            if (i === 0) {
+                pointStart = from;
+            }
         }
 
-        pressures.push({
-            x: from,
-            y: parseFloat(json["data"]["timelines"][0]["intervals"][i]['values']["pressureSeaLevel"])
-        });
+        // Smooth the line
+        smoothLine(temperatures);
 
-        if (i === 0) {
-            pointStart = from;
+        var chart = new Highcharts.Chart(getChartOptions(container, humidities,
+            precipitationsError, // Only for some data sets
+            winds,
+            temperatures,
+            pressures));
+            drawBlocksForWindArrows(chart)
         }
-    }
-
-    // Smooth the line
-    smoothLine(temperatures);
-
-    // Create the chart when the data is loaded
-    // this.createChart();
-    // var meteogram = this;
-    var chart = new Highcharts.Chart(getChartOptions(container, humidities,
-        precipitationsError, // Only for some data sets
-        winds,
-        temperatures,
-        pressures));
-    drawBlocksForWindArrows(chart)
-    });
+    )   
 }
-
-
-
-// Start of the Meteogram protype
-
-// function Meteogram(json_data, container) {
-//     // Parallel arrays for the chart data, these are populated as the XML/JSON file
-//     // is loaded
-//     this.humidities = [];
-//     this.precipitationsError = []; // Only for some data sets
-//     this.winds = [];
-//     this.temperatures = [];
-//     this.pressures = [];
-
-//     // Initialize
-//     this.container = container;
-
-//     this.hourly_weather_data = json_data
-
-//     // Run
-//     // this.parseYrData();
-
-
-//     var meteogram = this;
-//     var json = this.hourly_weather_data;
-
-//     for(i=0; i<json["data"]["timelines"][0]["intervals"].length; ++i) {
-//         // Get the times - only Safari can't parse ISO8601 so we need to do
-//         // some replacements
-//         // console.log(json["data"]["timelines"][0]["intervals"][0]["startTime"].slice(0, -6));
-
-//         var from = json["data"]["timelines"][0]["intervals"][i]["startTime"].slice(0, -6) + ' UTC';
-    
-//         from = from.replace(/-/g, '/').replace('T', ' ');
-//         from = Date.parse(from);
-
-//         meteogram.temperatures.push({
-//             x: from,
-//             y: parseInt(
-//                 json["data"]["timelines"][0]["intervals"][i]['values']['temperature'],
-//                 10
-//             ),
-//         });
-
-//         meteogram.humidities.push({
-//             x: from,
-//             y: parseInt(
-//                 json["data"]["timelines"][0]["intervals"][i]['values']['humidity']
-//             )
-//         });
-
-//         if (i % 2 === 0) {
-//             meteogram.winds.push({
-//                 x: from,
-//                 value: json["data"]["timelines"][0]["intervals"][i]['values']['windSpeed'],
-//                 direction: json["data"]["timelines"][0]["intervals"][i]['values']['windDirection']
-//             });
-//         }
-
-//         meteogram.pressures.push({
-//             x: from,
-//             y: parseFloat(json["data"]["timelines"][0]["intervals"][i]['values']["pressureSeaLevel"])
-//         });
-
-//         if (i === 0) {
-//             pointStart = from;
-//         }
-//     }
-
-//     // Smooth the line
-//     smoothLine(this.temperatures);
-
-//     // Create the chart when the data is loaded
-//     // this.createChart();
-//     var meteogram = this;
-//     this.chart = new Highcharts.Chart(getChartOptions(this.container, this.humidities,
-//         this.precipitationsError, // Only for some data sets
-//         this.winds,
-//         this.temperatures,
-//         this.pressures));
-//     drawBlocksForWindArrows(this.chart)
-// }
 
 /**
  * Function to smooth the temperature line. The original data provides only whole degrees,
