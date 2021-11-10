@@ -98,33 +98,33 @@ export class ResultTabComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("result tab initiated!");
-    var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+    // var saved_items = JSON.parse(localStorage.getItem("favorites")!);
     
-    if(saved_items == null) {
-      saved_items = [];
-    }
+    // if(saved_items == null) {
+    //   saved_items = [];
+    // }
 
-    console.log("saved_item length: ", saved_items.length);
+    // console.log("saved_item length: ", saved_items.length);
 
-    if(saved_items.length > 0){
-      for(var i=0; i<saved_items.length; ++i) {
+    // if(saved_items.length > 0){
+    //   for(var i=0; i<saved_items.length; ++i) {
 
-        var stringArr = saved_items[i].split(",");
+    //     var stringArr = saved_items[i].split(",");
 
-        var lat_get = stringArr[0];
-        var lng_get = stringArr[1];
+    //     var lat_get = stringArr[0];
+    //     var lng_get = stringArr[1];
   
-        var city_get = stringArr[2]
-        var state_get = stringArr[3]
+    //     var city_get = stringArr[2]
+    //     var state_get = stringArr[3]
 
-        console.log(city_get + ", " + state_get);
-        if(city_get == this.city && state_get == this.state) {
-          console.log("Exists!!!!!!");
-          this.favorite_icon = "star";
-          $("#star_icon").css("color", "#feda00");
-        }
-      }
-    }
+    //     console.log(city_get + ", " + state_get);
+    //     if(city_get == this.city && state_get == this.state) {
+    //       console.log("Exists!!!!!!");
+    //       this.favorite_icon = "star";
+    //       $("#star_icon").css("color", "#feda00");
+    //     }
+    //   }
+    // }
 
     if(this.favorite_icon == "star") {
       $("#star_icon").css("color", "#feda00");

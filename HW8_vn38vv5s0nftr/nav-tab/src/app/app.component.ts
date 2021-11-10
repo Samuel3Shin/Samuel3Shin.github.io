@@ -33,6 +33,8 @@ export class AppComponent {
   getClear(event: any){
     if(event == true) {
       this.resultExist = false;
+      this.isProgressBar = false;
+      this.isFavorite = false;
     }
   }
 

@@ -74,4 +74,16 @@ agm-map {
     border: none;
     font-weight: lighter;
     color: grey;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#detail_button:hover {
+    text-decoration: underline;
+    background-color: white;
+    cursor: pointer;
+    /* box-shadow: none !important; */
+    /* background-color: white */
+    /* background-color: transparent; */
+    opacity: 1 !important;
 }

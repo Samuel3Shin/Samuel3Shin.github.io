@@ -20,7 +20,7 @@
       <button (click)="addFavorite()" id="star_button"><span style="vertical-align:middle" class="material-icons" id="star_icon">
         {{favorite_icon}}
     </span></button>  
-      <button mat-stroked-button id="detail_button" (click)="detailClick()">Details &gt;</button>
+      <div id="detail_button" (click)="detailClick()">Details &gt;</div>
     </div>
   
     <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-end" id="tabs">
