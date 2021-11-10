@@ -39,7 +39,7 @@
       <li [ngbNavItem]="3">
         <a ngbNavLink>Meteogram</a>
         <ng-template ngbNavContent>
-          Meteogram!
+          <app-meteogram [json_data]='weather_data' ></app-meteogram>
         </ng-template>
       </li>
     </ul>

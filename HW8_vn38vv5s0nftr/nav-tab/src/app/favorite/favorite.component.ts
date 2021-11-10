@@ -22,7 +22,10 @@ export class FavoriteComponent implements OnInit {
 
   constructor() {
     var saved_items = JSON.parse(localStorage.getItem("favorites")!);
-    console.log("item length:", saved_items.length);
+    
+    if(saved_items == null) {
+      saved_items = [];
+    }
 
     if(saved_items.length > 0){
       this.itemExist = true;

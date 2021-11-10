@@ -20,6 +20,7 @@ import {DemoMaterialModule} from './material-module';
 
 import { AgmCoreModule } from '@agm/core';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { MeteogramComponent } from './meteogram/meteogram.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
     SearchComponent,
     WeeklyWeatherComponent,
     TempChartComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    MeteogramComponent
   ],
   imports: [
     BrowserModule,
