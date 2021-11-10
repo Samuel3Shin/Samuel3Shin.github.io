@@ -115,25 +115,35 @@ export class SearchComponent implements OnInit {
     // auto-address
     if($("#checkbox").is(':checked')) {
       this.sendMyEvent.emit("auto-address");
-      // fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
-      //     (response) => response.json()
-      // ).then(
-      //     (jsonResponse) => {
-      //         city = jsonResponse['city'];
-      //         state = jsonResponse['region'];
-      //         lat = jsonResponse['loc'].split(",")[0];
-      //         lng = jsonResponse['loc'].split(",")[1];
-      //         this.sendLatLng.emit(lat + "," + lng);
-      //         this.sendAddress.emit(city + "," + state);
-      //     }
-      // )
-      city = this.ipInfoCity;
-      state = this.ipInfoState;
-      lat = this.lat;
-      lng = this.lng;
+      fetch("https://ipinfo.io/json?token=ecddd4a7e21254").then(
+          (response) => response.json()
+      ).then(
+          (jsonResponse) => {
 
-      this.sendLatLng.emit(lat + "," + lng);
-      this.sendAddress.emit(city + "," + state);
+              if(jsonResponse == null || jsonResponse['status'] == 403) {
+                this.sendErrorOccurred.emit("error_occurred");
+                return;
+              }
+
+              city = jsonResponse['city'];
+              state = jsonResponse['region'];
+              lat = jsonResponse['loc'].split(",")[0];
+              lng = jsonResponse['loc'].split(",")[1];
+              this.sendLatLng.emit(lat + "," + lng);
+              this.sendAddress.emit(city + "," + state);
+          }
+      ).catch((error) => {
+        console.log(error);
+        this.sendErrorOccurred.emit("error_occurred");
+        return;
+      })
+      // city = this.ipInfoCity;
+      // state = this.ipInfoState;
+      // lat = this.lat;
+      // lng = this.lng;
+
+      // this.sendLatLng.emit(lat + "," + lng);
+      // this.sendAddress.emit(city + "," + state);
     } else {
       // No auto-address
       this.sendMyEvent.emit("user input address");
@@ -143,7 +153,7 @@ export class SearchComponent implements OnInit {
       ).then(
         (jsonResponse) => {
 
-          if(jsonResponse['results'].length == 0) {
+          if(jsonResponse == null || jsonResponse['results'].length == 0) {
             this.sendErrorOccurred.emit("error_occurred");
               return;
           }
@@ -169,12 +179,16 @@ export class SearchComponent implements OnInit {
 
           if(formattedAddress == "") {
             formattedAddress = (route=="" ? "" : (route + ", ")) + city + ", " + state + ", " + country;
-          } 
+          }
           this.sendLatLng.emit(lat + "," + lng);
           this.sendAddress.emit(city + "," + state);
           // this.sendAddress.emit(route + " " + city + " " + state);
         }
-      );      
+      ).catch((error) => {
+        console.log(error);
+        this.sendErrorOccurred.emit("error_occurred");
+        return;
+      });      
     }
   }
 
@@ -215,7 +229,11 @@ export class SearchComponent implements OnInit {
               this.lng = jsonResponse['loc'].split(",")[1];
               this.userLocationDetermined = true;
           }
-      )
+      ).catch((error) => {
+        console.log(error);
+        this.sendErrorOccurred.emit("error_occurred");
+        return;
+      })
 
       this.checkBoxChecked = true;
 
