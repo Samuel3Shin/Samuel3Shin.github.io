@@ -4,7 +4,7 @@
 <div id="result_tab_container" class="col-md-8 justify-content-center">
   <div *ngIf="!isError">
 
-    <div *ngIf="!isDetail" [@slideWeekly]>
+    <div *ngIf="!isDetail" [@slideWeekly] [@.disabled]="!isItFromDetail">
       <div class="address">Forecast at {{ city }}, {{ state }}</div>
     
       <!-- <div class="row">

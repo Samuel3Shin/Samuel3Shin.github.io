@@ -81,6 +81,7 @@ export class ResultTabComponent implements OnInit {
   state: string | undefined;
 
   isDetail = false;
+  isItFromDetail = false;
   idx: any;
   date: any;
 
@@ -198,7 +199,7 @@ export class ResultTabComponent implements OnInit {
         name: "Cloud Cover",
         value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["cloudCover"] + " %"
       })
-
+      this.isItFromDetail = true;
     }
   
   }
