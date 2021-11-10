@@ -50,6 +50,15 @@ export class AppComponent {
     // this.sendMyEvent.emit("Favorite clicked!");
   }
 
+  async getErrorOccurred(event: any) {
+    if(event == "error_occurred") {
+      this.isProgressBar = false;
+      this.resultExist = true;
+      this.isError = true;
+      this.isFavorite = false;
+    }
+  }
+
   async getAddress(event: any) {
     // const state = event.split("/")[0];
     // const city = event.split("/")[1];
@@ -83,8 +92,13 @@ export class AppComponent {
           // console.log(json_data["data"]);
       },
       error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
+        this.isProgressBar = false;
+        this.resultExist = true;
+        this.isError = true;
+        this.isFavorite = false;
+        
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
       }
     })
   }

@@ -19,7 +19,8 @@ export class SearchComponent implements OnInit {
   @Output() sendAddress : EventEmitter<any> = new EventEmitter();
   @Output() sendProgress : EventEmitter<any> = new EventEmitter();
   @Output() sendClear : EventEmitter<any> = new EventEmitter();
-
+  @Output() sendErrorOccurred : EventEmitter<any> = new EventEmitter();
+  
   street: string = '';
   city: string = '';
   state: string = '';
@@ -143,7 +144,8 @@ export class SearchComponent implements OnInit {
         (jsonResponse) => {
 
           if(jsonResponse['results'].length == 0) {
-              alert('There is no Geocoding API result. Please fill out addresses correctly.')
+            this.sendErrorOccurred.emit("error_occurred");
+              return;
           }
 
           var formattedAddress = "";
