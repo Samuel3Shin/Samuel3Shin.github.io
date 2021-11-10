@@ -71,7 +71,7 @@ export class TempChartComponent implements OnInit {
         tooltip: {
             crosshairs: true,
             shared: true,
-            valueSuffix: '°F',
+            valueSuffix: ' °F',
             xDateFormat: '%A, %b %e'
         },
 

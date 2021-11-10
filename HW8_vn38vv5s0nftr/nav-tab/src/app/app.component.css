@@ -13,3 +13,11 @@
 #result_button {
     margin-right: 20px;
 }
+
+.btn {
+    color: #1976D2;
+}
+
+.btn-primary {
+    color: white;
+}

@@ -62,11 +62,11 @@
       </div>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="detail_table">
       <tbody>
       <tr *ngFor="let info of weatherDetails; index as i">
-        <td>{{ info.name}}</td>
-        <td>{{ info.value}}</td>
+        <td class="col-sm-4">{{ info.name}}</td>
+        <td class="col-md-6">{{ info.value}}</td>
       </tr>
       </tbody>
     </table>
