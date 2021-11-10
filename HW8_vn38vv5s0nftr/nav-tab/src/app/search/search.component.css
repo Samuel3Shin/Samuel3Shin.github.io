@@ -100,7 +100,6 @@ label > input[type="checkbox"] + *::before {
 }
 
 
-
 label > input[type="checkbox"]:checked + *::before {
     content: "";
     color: white;

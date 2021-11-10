@@ -1,14 +1,12 @@
-<div id="overall_container" class="col-md-8 justify-content-center">
-    <app-search (sendMyEvent)="getEventThanks($event)" (sendProgress)="getProgress($event)" (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)" (sendClear)="getClear($event)" (sendErrorOccurred)="getErrorOccurred($event)"></app-search>
-    <div class="form-row" id="below_buttons">
-        <button class="btn" (click)='clickResult()' [ngClass]="{'btn-primary': !isFavorite}" id="result_button">Results</button>
-        <button class="btn" type="button" (click)='clickFavorite()' [ngClass]="{'btn-primary': isFavorite}">Favorite</button>
-    </div>
-    <div class="progress" *ngIf="isProgressBar" style="width: 65%; margin:auto">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%"></div>
-    </div>
-    <app-result-tab *ngIf="resultExist" (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' [address_data]='address' [lng]='longitude' [lat]='latitude' [isError_data]="isError"></app-result-tab>
-    <app-favorite *ngIf="isFavorite"  (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)"></app-favorite>
-    <!-- <app-weekly-weather (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-weekly-weather> -->
-    <!-- <app-temp-chart (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-temp-chart> -->    
+<app-search (sendMyEvent)="getEventThanks($event)" (sendProgress)="getProgress($event)" (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)" (sendClear)="getClear($event)" (sendErrorOccurred)="getErrorOccurred($event)"></app-search>
+<div class="form-row" id="below_buttons">
+    <button class="btn" (click)='clickResult()' [ngClass]="{'btn-primary': !isFavorite}" id="result_button">Results</button>
+    <button class="btn" type="button" (click)='clickFavorite()' [ngClass]="{'btn-primary': isFavorite}">Favorite</button>
 </div>
+<div class="progress" *ngIf="isProgressBar" style="width: 65%; margin:auto">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%"></div>
+</div>
+<app-result-tab *ngIf="resultExist" (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' [address_data]='address' [lng]='longitude' [lat]='latitude' [isError_data]="isError"></app-result-tab>
+<app-favorite *ngIf="isFavorite"  (sendLatLng)="getLatLng($event)" (sendAddress)="getAddress($event)"></app-favorite>
+<!-- <app-weekly-weather (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-weekly-weather> -->
+<!-- <app-temp-chart (sendMyEvent)="getEventThanks($event)" [json_data]='weather_data' ></app-temp-chart> -->    

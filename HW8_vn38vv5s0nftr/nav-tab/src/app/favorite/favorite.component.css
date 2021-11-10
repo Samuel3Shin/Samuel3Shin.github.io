@@ -1,3 +1,7 @@
+#favorite_container {
+    margin: 0 auto;
+}
+
 .clickable_text {
     color: #1976D2;
     text-decoration: underline;
