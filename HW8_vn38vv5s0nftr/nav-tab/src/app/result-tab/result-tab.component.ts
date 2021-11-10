@@ -88,73 +88,54 @@ export class ResultTabComponent implements OnInit {
   longitude: any;
 
   favorite_icon = "star_border";
-  favoriteAdded = false;
   
   constructor() {     
-    
-    if(this.favorite_icon == "star") {
-    $("#star_icon").css("color", "#feda00");
-  }}
+
+  }
 
   ngOnInit(): void {
-    console.log("result tab initiated!");
-    // var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+    var saved_items = JSON.parse(localStorage.getItem("favorites")!);
     
-    // if(saved_items == null) {
-    //   saved_items = [];
-    // }
+    if(saved_items == null) {
+      saved_items = [];
+    }
 
     // console.log("saved_item length: ", saved_items.length);
 
-    // if(saved_items.length > 0){
-    //   for(var i=0; i<saved_items.length; ++i) {
+    if(saved_items.length > 0){
+      for(var i=0; i<saved_items.length; ++i) {
 
-    //     var stringArr = saved_items[i].split(",");
+        var stringArr = saved_items[i].split(",");
 
-    //     var lat_get = stringArr[0];
-    //     var lng_get = stringArr[1];
+        var lat_get = stringArr[0];
+        var lng_get = stringArr[1];
   
-    //     var city_get = stringArr[2]
-    //     var state_get = stringArr[3]
+        var city_get = stringArr[2]
+        var state_get = stringArr[3]
 
-    //     console.log(city_get + ", " + state_get);
-    //     if(city_get == this.city && state_get == this.state) {
-    //       console.log("Exists!!!!!!");
-    //       this.favorite_icon = "star";
-    //       $("#star_icon").css("color", "#feda00");
-    //     }
-    //   }
-    // }
-
-    if(this.favorite_icon == "star") {
-      $("#star_icon").css("color", "#feda00");
+        if(city_get == this.city && state_get == this.state) {
+          this.favorite_icon = "star";
+        }
+      }
     }
+
   }
 
   ngOnChanges() { 
-    if(this.favorite_icon == "star") {
-      $("#star_icon").css("color", "#feda00");
-    }
+    this.isError = this.isError_data;
+    this.weather_data = this.json_data;
+    this.address = this.address_data;
+    this.city = this.address?.split(",")[0];
+    this.state = this.address?.split(",")[1];
 
-    // if(this.json_data != null) {
-      this.isError = this.isError_data;
-      this.weather_data = this.json_data;
-      this.address = this.address_data;
-      this.city = this.address?.split(",")[0];
-      this.state = this.address?.split(",")[1];
+    this.latitude = parseFloat(this.lat);
+    this.longitude = parseFloat(this.lng);
 
-      this.latitude = parseFloat(this.lat);
-      this.longitude = parseFloat(this.lng);
+    this.sendMyEvent.emit("lat: " + this.latitude + " lng: " + this.longitude);
 
-      this.sendMyEvent.emit("lat: " + this.latitude + " lng: " + this.longitude);
-      // this.sendMyEvent.emit(this.weather_data);
-    // }
   }
 
   getDetailTrigger(event: any) {
-    if(this.favorite_icon == "star") {
-      $("#star_icon").css("color", "#feda00");
-    }
 
     if(!this.isDetail) {
       this.isDetail = true;
@@ -218,23 +199,13 @@ export class ResultTabComponent implements OnInit {
         value: data["data"]["timelines"][2]["intervals"][this.idx]["values"]["cloudCover"] + " %"
       })
 
-      // alert(event);
     }
-    
-    // const state = event.split("/")[0];
-    // const city = event.split("/")[1];
-
-    // this.address = state + " " + city;
+  
   }
 
   listClick() {
     this.isDetail = false;
     this.weatherDetails = [];
-    // alert(this.isDetail);
-
-    if(this.favorite_icon == "star") {
-      $("#star_icon").css("color", "#feda00");
-    }
   }
 
   detailClick() {
@@ -244,14 +215,12 @@ export class ResultTabComponent implements OnInit {
   twit() {
     var strWindowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
     window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.city}, ${this.state} on ${this.date} is ${this.weatherDetails[3]["value"]}. The weather conditions are ${this.weatherDetails[0]["value"]} %23CSCI571WeatherForecast`, "", strWindowFeatures);
-    // alert("twit!");
   }
 
   addFavorite() {
-    // alert("star button clicked!");
 
     // adding favorite
-    if(!this.favoriteAdded) {
+    if(this.favorite_icon != "star") {
       var saved_items = JSON.parse(localStorage.getItem("favorites")!);
       if(saved_items == null) {
         saved_items = []
@@ -263,28 +232,24 @@ export class ResultTabComponent implements OnInit {
       console.log(JSON.stringify(saved_items));
 
       this.favorite_icon = "star";
-      this.favoriteAdded = !this.favoriteAdded;
-      $("#star_icon").css("color", "#feda00");
 
     } else {
       var saved_items = JSON.parse(localStorage.getItem("favorites")!);
 
       saved_items.forEach((element: string,index: any)=>{
-        if(element==this.latitude + "," + this.longitude + "," + this.address) saved_items.splice(index,1);
+
+        var stringArr = element.split(",");
+  
+        var city_get = stringArr[2]
+        var state_get = stringArr[3]
+
+        if(city_get==this.city && state_get == this.state) saved_items.splice(index,1);
       });
 
       localStorage.setItem("favorites", JSON.stringify(saved_items));
       console.log(JSON.stringify(saved_items));
       this.favorite_icon = "star_border";
-      this.favoriteAdded = !this.favoriteAdded;
-      $("#star_icon").css("color", "black");
     }
-
-    // if(this.favorite_icon == "star_border") {
-    //   this.favorite_icon = "star";
-    // } else {
-    //   this.favorite_icon = "star_border";
-    // }
 
   }
 

@@ -16,9 +16,10 @@
 }
 
 #twiter_button {
-    background-image: url(../../../src/assets/Twitter_logo_white_32.png);
-    background-size: auto;
-    background-color: #eae9eb;
+    /* background-image: url(../../../src/assets/Twitter_logo_white_32.png); */
+    /* background-size: auto; */
+    color: white;
+    background-color: #007bff;
     width: 35px;
     height: 35px;
     vertical-align: middle;
@@ -26,12 +27,17 @@
     border-width: thin;
     border-radius: 10%;
     border-color: #d9dde2;
+
     
     margin-right: 5px;
+
+    border-radius: 50px;
 }
 
 #list_button {
     margin-left: 5px;
+    width: 35px;
+    height: 35px;
 }
 
 /* #star_button {
@@ -63,11 +69,14 @@ agm-map {
     border-width: thin;
     margin-right: 3px;
     /* border-color: grey; */
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
 
     justify-content:center;
     align-items: center;
+
+    /* display: flex; */
+    /* align-items: center; */
 }
 
 /* #star_icon {
