@@ -148,7 +148,7 @@ export class SearchComponent implements OnInit {
       // No auto-address
       this.sendMyEvent.emit("user input address");
 
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street} ${city} ${state}&key=AIzaSyBdntW0ccDzEwtizOG019WmtcYnj34D410`).then(
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street} ${city} ${state}&key=AIzaSyB6wzX7VVJILzNoa2cbSUebst5BmBOLzEA`).then(
         (response) => response.json()
       ).then(
         (jsonResponse) => {

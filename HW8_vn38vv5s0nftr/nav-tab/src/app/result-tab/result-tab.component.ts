@@ -90,11 +90,42 @@ export class ResultTabComponent implements OnInit {
   favorite_icon = "star_border";
   favoriteAdded = false;
   
-  constructor() {     if(this.favorite_icon == "star") {
+  constructor() {     
+    
+    if(this.favorite_icon == "star") {
     $("#star_icon").css("color", "#feda00");
   }}
 
   ngOnInit(): void {
+    console.log("result tab initiated!");
+    var saved_items = JSON.parse(localStorage.getItem("favorites")!);
+    
+    if(saved_items == null) {
+      saved_items = [];
+    }
+
+    console.log("saved_item length: ", saved_items.length);
+
+    if(saved_items.length > 0){
+      for(var i=0; i<saved_items.length; ++i) {
+
+        var stringArr = saved_items[i].split(",");
+
+        var lat_get = stringArr[0];
+        var lng_get = stringArr[1];
+  
+        var city_get = stringArr[2]
+        var state_get = stringArr[3]
+
+        console.log(city_get + ", " + state_get);
+        if(city_get == this.city && state_get == this.state) {
+          console.log("Exists!!!!!!");
+          this.favorite_icon = "star";
+          $("#star_icon").css("color", "#feda00");
+        }
+      }
+    }
+
     if(this.favorite_icon == "star") {
       $("#star_icon").css("color", "#feda00");
     }
@@ -212,13 +243,12 @@ export class ResultTabComponent implements OnInit {
 
   twit() {
     var strWindowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
-    window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.city}, ${this.state} on ${this.date} is ${this.weatherDetails[3]["value"]}. The weather conditions are ${this.weatherDetails[0]["value"]} %23CSCI571WeatherSearch`, "", strWindowFeatures);
+    window.open(`https://twitter.com/intent/tweet?text=The temperature in ${this.city}, ${this.state} on ${this.date} is ${this.weatherDetails[3]["value"]}. The weather conditions are ${this.weatherDetails[0]["value"]} %23CSCI571WeatherForecast`, "", strWindowFeatures);
     // alert("twit!");
   }
 
   addFavorite() {
     // alert("star button clicked!");
-
 
     // adding favorite
     if(!this.favoriteAdded) {

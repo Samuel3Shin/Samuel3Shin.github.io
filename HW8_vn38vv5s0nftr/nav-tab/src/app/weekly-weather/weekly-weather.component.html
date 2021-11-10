@@ -12,7 +12,7 @@
   <tbody>
   <tr *ngFor="let info of weatherInfo; index as i">
     <th scope="row">{{ i + 1 }}</th>
-    <td (click)=onItemClick(i) class="clickable_date">{{ info.date }}</td>
+    <td (click)=onItemClick(i)><span class="clickable_date">{{ info.date }}</span></td>
     <td>
       <img [src]=info.status_img class="mr-2" style="width: 20px">
       {{ info.status_txt }}
