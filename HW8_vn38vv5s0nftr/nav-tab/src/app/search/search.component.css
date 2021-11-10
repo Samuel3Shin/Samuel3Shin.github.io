@@ -78,3 +78,35 @@ select option {
 #clear_button {
     background-color: white;
 }
+
+
+label > input[type="checkbox"] {
+    display: none;
+}
+
+label > input[type="checkbox"] + *::before {
+    content: "";
+    display: inline-block;
+    vertical-align: bottom;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 10%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: gray;
+    background-color: white;
+}
+
+
+
+label > input[type="checkbox"]:checked + *::before {
+    content: "";
+    color: white;
+    text-align: center;
+    background: #1976D2;
+    border-color: #1976D2;
+}
+
+/* #current_location_text {
+    margin-left: 5px;
+} */
