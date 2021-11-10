@@ -1,3 +1,7 @@
+#overall_container {
+    margin: 0 auto;
+}
+
 .nav-tabs {
     justify-content: flex-end;
 }

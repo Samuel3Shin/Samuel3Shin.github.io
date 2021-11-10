@@ -1,86 +1,88 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
-<div *ngIf="!isError">
+<div id="result_tab_container">
+  <div *ngIf="!isError">
 
-  <div *ngIf="!isDetail" [@slideWeekly]>
-    <div class="address">Forecast at {{ city }}, {{ state }}</div>
-  
-    <!-- <div class="row">
-      <div class="col-sm" align="right">
-        <button mat-stroked-button (click)="addFavorite()" id="star_button">star</button>
-      </div>
-  
-      <div class="col-sm"  align="right">
-        <button mat-stroked-button (click)="listClick()">Details</button>
-      </div>
-    </div> -->
-
-    <div class="row" id="below_buttons">
-      <button (click)="addFavorite()" id="star_button"><span style="vertical-align:middle" class="material-icons" id="star_icon">
-        {{favorite_icon}}
-    </span></button>  
-      <div id="detail_button" (click)="detailClick()">Details &gt;</div>
-    </div>
-  
-    <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-end" id="tabs">
-      <li [ngbNavItem]="1">
-        <a ngbNavLink>Day View</a>
-        <ng-template ngbNavContent>
-          <app-weekly-weather [json_data]='weather_data' (sendDetailTrigger)="getDetailTrigger($event)"></app-weekly-weather>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]="2">
-        <a ngbNavLink>Daily Temp. Chart</a>
-        <ng-template ngbNavContent>
-          <app-temp-chart [json_data]='weather_data' ></app-temp-chart>
-        </ng-template>
-      </li>
-      <li [ngbNavItem]="3">
-        <a ngbNavLink>Meteogram</a>
-        <ng-template ngbNavContent>
-          <app-meteogram [json_data]='weather_data' ></app-meteogram>
-        </ng-template>
-      </li>
-    </ul>
+    <div *ngIf="!isDetail" [@slideWeekly]>
+      <div class="address">Forecast at {{ city }}, {{ state }}</div>
     
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
-  </div>
+      <!-- <div class="row">
+        <div class="col-sm" align="right">
+          <button mat-stroked-button (click)="addFavorite()" id="star_button">star</button>
+        </div>
+    
+        <div class="col-sm"  align="right">
+          <button mat-stroked-button (click)="listClick()">Details</button>
+        </div>
+      </div> -->
   
-  
-  
-  <div *ngIf="isDetail" [@slideDetail]>
-    <div class="row">
-      <div class="col-sm">
-        <button mat-stroked-button (click)="listClick()" id="list_button"> &lt; List</button>
+      <div class="row" id="below_buttons">
+        <button (click)="addFavorite()" id="star_button"><span style="vertical-align:middle" class="material-icons" id="star_icon">
+          {{favorite_icon}}
+      </span></button>  
+        <div id="detail_button" (click)="detailClick()">Details &gt;</div>
       </div>
-      <div class="col-sm d-flex justify-content-center">
-        <h3>{{date}}</h3>
-      </div>
-      <div class="col-sm d-flex justify-content-end">
-        <button type="button" id="twiter_button" (click)="twit()"></button>
-      </div>
+    
+      <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-end" id="tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Day View</a>
+          <ng-template ngbNavContent>
+            <app-weekly-weather [json_data]='weather_data' (sendDetailTrigger)="getDetailTrigger($event)"></app-weekly-weather>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Daily Temp. Chart</a>
+          <ng-template ngbNavContent>
+            <app-temp-chart [json_data]='weather_data' ></app-temp-chart>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink>Meteogram</a>
+          <ng-template ngbNavContent>
+            <app-meteogram [json_data]='weather_data' ></app-meteogram>
+          </ng-template>
+        </li>
+      </ul>
+      
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </div>
-
-    <table class="table table-striped" id="detail_table">
-      <tbody>
-      <tr *ngFor="let info of weatherDetails; index as i">
-        <td class="col-sm-4">{{ info.name}}</td>
-        <td class="col-md-6">{{ info.value}}</td>
-      </tr>
-      </tbody>
-    </table>
+    
+    
+    
+    <div *ngIf="isDetail" [@slideDetail]>
+      <div class="row">
+        <div class="col-sm">
+          <button mat-stroked-button (click)="listClick()" id="list_button"> &lt; List</button>
+        </div>
+        <div class="col-sm d-flex justify-content-center">
+          <h3>{{date}}</h3>
+        </div>
+        <div class="col-sm d-flex justify-content-end">
+          <button type="button" id="twiter_button" (click)="twit()"></button>
+        </div>
+      </div>
   
-    <agm-map [latitude]="latitude" [longitude]="longitude">
-      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-    </agm-map>
+      <table class="table table-striped" id="detail_table">
+        <tbody>
+        <tr *ngFor="let info of weatherDetails; index as i">
+          <td class="col-sm-4">{{ info.name}}</td>
+          <td class="col-md-6">{{ info.value}}</td>
+        </tr>
+        </tbody>
+      </table>
+    
+      <agm-map [latitude]="latitude" [longitude]="longitude">
+        <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+      </agm-map>
+    
+    </div>
+  </div>
+  
+  <div *ngIf="isError">
+    <div class="alert alert-danger" role="alert">
+      An error occured please try again later
+  </div>
   
   </div>
-</div>
-
-<div *ngIf="isError">
-  <div class="alert alert-danger" role="alert">
-    An error occured please try again later
-</div>
-
 </div>

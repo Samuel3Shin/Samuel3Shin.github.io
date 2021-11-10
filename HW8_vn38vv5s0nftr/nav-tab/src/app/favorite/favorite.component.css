@@ -1,5 +1,9 @@
 .clickable_text {
     color: #1976D2;
     text-decoration: underline;
+    cursor: pointer;
 }
 
+#delete_icon {
+    cursor: pointer;
+}

@@ -1,3 +1,7 @@
+#result_tab_container {
+    margin: 0 auto;
+}
+
 #tabs {
     margin-right: 3px;
 }
@@ -69,6 +73,8 @@ agm-map {
 /* #star_icon {
     color: #feda00;
 } */
+
+
 
 #detail_button {
     border: none;
