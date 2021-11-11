@@ -77,12 +77,8 @@ export class AppComponent {
     
     console.log(lat);
     console.log(lng);
-    // const response = await fetch(`http://localhost:8080/weather?lat=${lat}&lng=${lng}`);
-    // const json_data = await response.json();
 
-    // console.log(json_data);
-
-    this.http.get<any>(`http://localhost:8080/weather?lat=${lat}&lng=${lng}`).subscribe({
+    this.http.get<any>(`https://web-hw8-328723.wl.r.appspot.com/weather?lat=${lat}&lng=${lng}`).subscribe({
       next: json_data => {
           console.log(json_data["data"]["timelines"][2]["intervals"][0]["values"]["precipitationType"]);
           // console.log(typeof(JSON.stringify(json_data)));

@@ -102,3 +102,8 @@ agm-map {
     /* background-color: transparent; */
     opacity: 1 !important;
 }
+
+.svg_img {
+    margin: 0 auto;
+    display: block;
+}

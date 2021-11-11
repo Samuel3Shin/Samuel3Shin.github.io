@@ -4,9 +4,6 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
-import { HttpClient } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -76,7 +73,7 @@ export class SearchComponent implements OnInit {
       this.showCityErrorMessage = false;
 
       this.showAutocomplete = true;
-      fetch(`http://localhost:8080/autocomplete?city=${event}`).then(
+      fetch(`https://web-hw8-328723.wl.r.appspot.com/autocomplete?city=${event}`).then(
         (response) => response.json()
       ).then(
           (jsonResponse) => {
@@ -104,9 +101,14 @@ export class SearchComponent implements OnInit {
     this.sendProgress.emit(true);
     this.sendMyEvent.emit("submit button clicked!");
 
-    var street = $("street_input").val();
-    var city = $("city_input").val();
-    var state = $("state_input").val();
+    // var street = $("street_input").val();
+    // var city = $("city_input").val();
+    // var state = $("state_input").val();
+
+    // console.log("street: ", street);
+    // console.log("City: ", city);
+    // console.log("State: ", state);
+
     var country = "USA";
     var route = "";
     var lat;
@@ -125,12 +127,12 @@ export class SearchComponent implements OnInit {
                 return;
               }
 
-              city = jsonResponse['city'];
-              state = jsonResponse['region'];
+              var city_get = jsonResponse['city'];
+              var state_get = jsonResponse['region'];
               lat = jsonResponse['loc'].split(",")[0];
               lng = jsonResponse['loc'].split(",")[1];
               this.sendLatLng.emit(lat + "," + lng);
-              this.sendAddress.emit(city + "," + state);
+              this.sendAddress.emit(city_get + "," + state_get);
           }
       ).catch((error) => {
         console.log(error);
@@ -148,10 +150,13 @@ export class SearchComponent implements OnInit {
       // No auto-address
       this.sendMyEvent.emit("user input address");
 
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${street} ${city} ${state}&key=AIzaSyB6wzX7VVJILzNoa2cbSUebst5BmBOLzEA`).then(
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.street} ${this.cityInputControl.value} ${this.state}&key=AIzaSyB6wzX7VVJILzNoa2cbSUebst5BmBOLzEA`).then(
         (response) => response.json()
       ).then(
         (jsonResponse) => {
+
+          var city_get = "";
+          var state_get = "";
 
           if(jsonResponse == null || jsonResponse['results'].length == 0) {
             this.sendErrorOccurred.emit("error_occurred");
@@ -166,11 +171,11 @@ export class SearchComponent implements OnInit {
           var addressComponents = jsonResponse['results'][0]['address_components'];
           for(var i=0; i<addressComponents.length; ++i) {
               if(addressComponents[i]['types'][0] == 'locality') {
-                  city = addressComponents[i]['long_name'];
+                  city_get = addressComponents[i]['long_name'];
               } else if(addressComponents[i]['types'][0] == 'administrative_area_level_1') {
-                  state = addressComponents[i]['long_name'];
+                  state_get = addressComponents[i]['long_name'];
               } else if(addressComponents[i]['types'][0] == 'route') {
-                  route = state = addressComponents[i]['short_name'];
+                  route = addressComponents[i]['short_name'];
               }
           }
 
@@ -178,10 +183,10 @@ export class SearchComponent implements OnInit {
           lng = jsonResponse['results'][0]['geometry']['location']['lng'];
 
           if(formattedAddress == "") {
-            formattedAddress = (route=="" ? "" : (route + ", ")) + city + ", " + state + ", " + country;
+            formattedAddress = (route=="" ? "" : (route + ", ")) + city_get + ", " + state_get + ", " + country;
           }
           this.sendLatLng.emit(lat + "," + lng);
-          this.sendAddress.emit(city + "," + state);
+          this.sendAddress.emit(city_get + "," + state_get);
           // this.sendAddress.emit(route + " " + city + " " + state);
         }
       ).catch((error) => {
