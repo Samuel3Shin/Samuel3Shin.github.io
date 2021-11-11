@@ -1,3 +1,6 @@
+
+
+
 function populatingChart2(url) {
     fetch(url).then(
         (response) => response.json()
@@ -5,7 +8,6 @@ function populatingChart2(url) {
         (jsonResponse) => {
 
         var json_data = jsonResponse;
-
 
         humidities = [];
         precipitationsError = []; // Only for some data sets
@@ -58,20 +60,20 @@ function populatingChart2(url) {
                 y: parseFloat(json["data"]["timelines"][0]["intervals"][i]['values']["pressureSeaLevel"])
             });
 
-            if (i === 0) {
-                pointStart = from;
-            }
+            // if (i === 0) {
+            //     pointStart = from;
+            // }
         }
 
         // Smooth the line
-        smoothLine(temperatures);
+        // smoothLine(temperatures);
 
-        var chart = new Highcharts.Chart(getChartOptions(container, humidities,
+        var chart = new Highcharts.Chart(container, getChartOptions(humidities,
             precipitationsError, // Only for some data sets
             winds,
             temperatures,
             pressures));
-            drawBlocksForWindArrows(chart)
+            // drawBlocksForWindArrows(chart)
         }
     )   
 }
@@ -81,62 +83,62 @@ function populatingChart2(url) {
  * which makes the line graph look jagged. So we apply a running mean on it, but preserve
  * the unaltered value in the tooltip.
  */
-var smoothLine = function (data) {
-    var i = data.length,
-        sum,
-        value;
+// var smoothLine = function (data) {
+//     var i = data.length,
+//         sum,
+//         value;
 
-    while (i--) {
-        data[i].value = value = data[i].y; // preserve value for tooltip
+//     while (i--) {
+//         data[i].value = value = data[i].y; // preserve value for tooltip
 
-        // Set the smoothed value to the average of the closest points, but don't allow
-        // it to differ more than 0.5 degrees from the given value
-        sum = (data[i - 1] || data[i]).y + value + (data[i + 1] || data[i]).y;
-        data[i].y = Math.max(value - 0.5, Math.min(sum / 3, value + 0.5));
-    }
-};
+//         // Set the smoothed value to the average of the closest points, but don't allow
+//         // it to differ more than 0.5 degrees from the given value
+//         sum = (data[i - 1] || data[i]).y + value + (data[i + 1] || data[i]).y;
+//         data[i].y = Math.max(value - 0.5, Math.min(sum / 3, value + 0.5));
+//     }
+// };
 
 /**
  * Draw blocks around wind arrows, below the plot area
  */
-var drawBlocksForWindArrows = function (chart) {
-    var xAxis = chart.xAxis[0],
-        x,
-        pos,
-        max,
-        isLong,
-        isLast,
-        i;
+// var drawBlocksForWindArrows = function (chart) {
+//     var xAxis = chart.xAxis[0],
+//         x,
+//         pos,
+//         max,
+//         isLong,
+//         isLast,
+//         i;
 
-    for (pos = xAxis.min, max = xAxis.max, i = 0; pos <= max + 36e5; pos += 36e5, i += 1) {
+//     for (pos = xAxis.min, max = xAxis.max, i = 0; pos <= max + 36e5; pos += 36e5, i += 1) {
 
-        // Get the X position
-        isLast = pos === max + 36e5;
-        x = Math.round(xAxis.toPixels(pos)) + (isLast ? 0.5 : -0.5);
+//         // Get the X position
+//         isLast = pos === max + 36e5;
+//         x = Math.round(xAxis.toPixels(pos)) + (isLast ? 0.5 : -0.5);
 
-        // Draw the vertical dividers and ticks
-        if (this.resolution > 36e5) {
-            isLong = pos % this.resolution === 0;
-        } else {
-            isLong = i % 2 === 0;
-        }
-        chart.renderer.path(['M', x, chart.plotTop + chart.plotHeight + (isLong ? 0 : 28),
-            'L', x, chart.plotTop + chart.plotHeight + 32, 'Z'])
-            .attr({
-                stroke: chart.options.chart.plotBorderColor,
-                'stroke-width': 1
-            })
-            .add();
-    }
+//         // Draw the vertical dividers and ticks
+//         if (this.resolution > 36e5) {
+//             isLong = pos % this.resolution === 0;
+//         } else {
+//             isLong = i % 2 === 0;
+//         }
+//         chart.renderer.path(['M', x, chart.plotTop + chart.plotHeight + (isLong ? 0 : 28),
+//             'L', x, chart.plotTop + chart.plotHeight + 32, 'Z'])
+//             .attr({
+//                 stroke: chart.options.chart.plotBorderColor,
+//                 'stroke-width': 1
+//             })
+//             .add();
+//     }
 
-    // Center items in block
-    chart.get('windbarbs').markerGroup.attr({
-        translateX: chart.get('windbarbs').markerGroup.translateX + 8
-    });
+//     // Center items in block
+//     chart.get('windbarbs').markerGroup.attr({
+//         translateX: chart.get('windbarbs').markerGroup.translateX + 8
+//     });
 
-};
+// };
 
-var getChartOptions = function (container, humidities,
+var getChartOptions = function (humidities,
     precipitationsError, // Only for some data sets
     winds,
     temperatures,
@@ -145,7 +147,7 @@ var getChartOptions = function (container, humidities,
 
     return {
         chart: {
-            renderTo: container,
+            // renderTo: container,
             marginBottom: 70,
             marginRight: 40,
             marginTop: 50,

@@ -11,14 +11,13 @@
     <script src="https://code.highcharts.com/modules/windbarb.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <body>
-        <h1>Hello World</h1>
-        <p>I'm hosted with GitHub Pages.</p>
         <figure class="highcharts-figure">
             <div id="chart2_container"></div>
         </figure>
 
         <script>
             populatingChart2(`http://127.0.0.1:5000/hourly_weather?lat=34.052235&lng=-118.243683`);
+            // populatingChart2("https://api.tomorrow.io/v4/timelines?location=34.052235,-118.243683&fields=temperature,temperatureApparent,temperatureMin,temperatureMax,windSpeed,windDirection,humidity,pressureSeaLevel,uvIndex,weatherCode,precipitationProbability,precipitationType,visibility,cloudCover&timesteps=1h&units=imperial&timezone=America/Los_Angeles&apikey=PGTQROOkeMlj2nBLgk0fBjUjRVn08Rae");
         </script>
     </body>
 </html>
