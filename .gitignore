@@ -2,3 +2,5 @@ node_modules/
 Images/
 images/
 assets/
+
+.DS_Store
