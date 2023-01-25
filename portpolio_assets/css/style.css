@@ -38,6 +38,11 @@
     hsl(45, 100%, 71%) 0%, 
     hsla(36, 100%, 69%, 0) 50%
   );
+  /* --bg-gradient-yellow-1: linear-gradient(
+    to bottom right, 
+    hsl(194, 100%, 64%) 0%,
+    hsla(36, 100%, 69%, 0) 50%
+  ); */
   --bg-gradient-yellow-2: linear-gradient(
     135deg, 
     hsla(45, 100%, 71%, 0.251) 0%, 
@@ -54,6 +59,11 @@
     hsl(35, 100%, 68%)
   );
 
+  /* --text-gradient-yellow: linear-gradient(
+    to right,
+    hsl(189, 100%, 72%),
+    hsl(196, 85%, 54%)
+  ); */
   --text-gradient-blue: linear-gradient(
     to right, 
     hsl(180, 89%, 68%), 
@@ -70,7 +80,9 @@
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
   --orange-yellow-crayola: hsl(45, 100%, 72%);
+  /* --orange-yellow-crayola: hsl(194, 100%, 60%); */
   --vegas-gold: hsl(45, 54%, 58%);
+  /* --vegas-gold: hsl(189, 100%, 61%); */
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
@@ -844,8 +856,26 @@ main {
 
 .skills-list { padding: 20px; }
 
-
 .skills-item:not(:last-child) { margin-bottom: 15px; }
+
+/* .skill-item { 
+  margin-bottom: 15px; 
+  color: var(--light-gray);
+}
+.skill-text { 
+  margin-bottom: 15px; 
+  color: var(--light-gray);
+} */
+
+.skill-item {
+  color: var(--vegas-gold);
+}
+
+.skill-text {
+  color: hsl(0, 0%, 100%);
+  font-weight: var(--fw-300);
+  font-size: 0.9rem;
+}
 
 .skill .title-wrapper {
   display: flex;
