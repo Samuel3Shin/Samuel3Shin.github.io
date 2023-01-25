@@ -1,0 +1,105 @@
+#search_container {
+    margin: 0 auto;
+    margin-top: 10px;
+    /* margin-left: 10px;
+    margin-right: 10px; */
+    /* padding: 20px; */
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    /* width: 75%; */
+    border-style: solid;
+    border-color: #e9e9e9;
+    border-width: thin;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+}
+
+.centerWannabe {
+    /* display: flex; */
+    justify-content:center;
+    align-items: center;
+    align-self: center;
+    
+}
+/* 
+#state_container {
+    margin-left: -30px;
+} */
+
+#top-grid {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#weather_search_text {
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+#sun_behind_cloud {
+    margin-left: 5px;
+    height: 24px;
+    width: 24px;
+}
+
+#submit_button {
+    /* margin-left: 300px; */
+    margin-right: 15px;
+}
+
+#search_texts:after {
+    content:" *";
+    color: #c64b59;
+}
+
+select {
+    appearance: none;
+    border: solid;
+    border-width: thin;
+    border-color: #d9dde2;
+    border-radius: 5px;
+    height: 100%;
+    background-color: white;
+}
+
+select[disabled] { 
+    background-color: #e9ecef; 
+}
+
+select option {
+    /* background-color: #e5e6e7; */
+}
+
+/* #checkbox {
+    outline: 1px solid #1e5180
+} */
+
+
+
+label > input[type="checkbox"] {
+    display: none;
+}
+
+label > input[type="checkbox"] + *::before {
+    content: "";
+    display: inline-block;
+    vertical-align: bottom;
+    width: 1rem;
+    height: 1rem;
+    /* border-radius: 10%; */
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: #e9e9e9;
+    background-color: white;
+}
+
+
+label > input[type="checkbox"]:checked + *::before {
+    content: "";
+    color: white;
+    text-align: center;
+    background: #1976D2;
+    border-color: #1976D2;
+}
