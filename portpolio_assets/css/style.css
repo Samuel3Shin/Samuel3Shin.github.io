@@ -293,8 +293,8 @@ article.active {
 .content-card {
   position: relative;
   background: var(--border-gradient-onyx);
-  padding: 15px;
-  padding-top: 45px;
+  padding: 30px;
+  padding-top: 25px;
   border-radius: 14px;
   box-shadow: var(--shadow-2);
   cursor: pointer;
@@ -851,6 +851,25 @@ main {
 /**
  * skills 
  */
+
+ .skills-content-card {
+  position: relative;
+  background: var(--border-gradient-onyx);
+  padding: 30px;
+  padding-top: 25px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-2);
+  z-index: 1;
+}
+
+.skills-content-card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
 
 .skills-title { margin-bottom: 20px; }
 
@@ -1453,10 +1472,10 @@ textarea.form-input::-webkit-resizer { display: none; }
     padding-bottom: 35px;
   }
 
-  .content-card {
+  /* .content-card {
     padding: 30px;
     padding-top: 25px;
-  }
+  } */
 
   .testimonials-avatar-box {
     transform: translate(30px, -30px);
