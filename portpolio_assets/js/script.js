@@ -43,6 +43,7 @@ for (let i = 0; i < testimonialsItem.length; i++) {
     modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
     modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
     modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
+    modalText.innerText = this.querySelector("[data-testimonials-text]").innerText;
     modalUrl1.href = this.querySelector("[data-testimonials-url]").href;
     modalUrl2.href = this.querySelector("[data-testimonials-url]").href;
 
