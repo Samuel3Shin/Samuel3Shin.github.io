@@ -1,94 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8ZSWSS3CMZ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZSWSS3CMZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      gtag("config", "G-8ZSWSS3CMZ");
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samuel Shin</title>
 
-    gtag('config', 'G-8ZSWSS3CMZ');
-  </script>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samuel Shin</title>
-
-  <!--
+    <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="./portpolio_assets/portpolio_images/logo.ico" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="./portpolio_assets/portpolio_images/logo.ico"
+      type="image/x-icon"
+    />
 
-  <!--
+    <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="./portpolio_assets/css/style.css">
-4
-  <!--
+    <link rel="stylesheet" href="./portpolio_assets/css/style.css" />
+    4
+    <!--
     - google font link
   -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-
-  <!--
+  <body>
+    <!--
     - #MAIN
   -->
 
-  <main>
-
-    <!--
+    <main>
+      <!--
       - #SIDEBAR
     -->
 
-    <aside class="sidebar" data-sidebar>
+      <aside class="sidebar" data-sidebar>
+        <div class="sidebar-info">
+          <figure class="avatar-box">
+            <img
+              src="./portpolio_assets/portpolio_images/Sam_avartar_wobg.png"
+              alt="Samuel Shin"
+              width="80"
+            />
+          </figure>
 
-      <div class="sidebar-info">
+          <div class="info-content">
+            <h1 class="name" title="Samuel Shin">Samuel Shin</h1>
 
-        <figure class="avatar-box">
-          <img src="./portpolio_assets/portpolio_images/Sam_avartar_wobg.png" alt="Samuel Shin" width="80">
-        </figure>
+            <p class="title">SW Engineer</p>
+          </div>
 
-        <div class="info-content">
-          <h1 class="name" title="Samuel Shin">Samuel Shin</h1>
+          <button class="info_more-btn" data-sidebar-btn>
+            <span>Show Contacts</span>
 
-          <p class="title">SW Engineer</p>
+            <ion-icon name="chevron-down"></ion-icon>
+          </button>
         </div>
 
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
+        <div class="sidebar-info_more">
+          <div class="separator"></div>
 
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
+          <ul class="contacts-list">
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
 
-      </div>
+              <div class="contact-info">
+                <p class="contact-title">Email</p>
 
-      <div class="sidebar-info_more">
+                <a href="mailto:shinsamu@usc.edu" class="contact-link"
+                  >shinsamu@usc.edu</a
+                >
+              </div>
+            </li>
 
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:shinsamu@usc.edu" class="contact-link">shinsamu@usc.edu</a>
-            </div>
-
-          </li>
-
-          <!-- <li class="contact-item">
+            <!-- <li class="contact-item">
 
             <div class="icon-box">
               <ion-icon name="phone-portrait-outline"></ion-icon>
@@ -102,50 +110,52 @@
 
           </li> -->
 
-          <li class="contact-item">
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
 
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
+              <div class="contact-info">
+                <p class="contact-title">Location</p>
 
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
+                <address>Los Angeles, California, USA</address>
+              </div>
+            </li>
 
-              <address>Los Angeles, California, USA</address>
-            </div>
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="document-attach-outline"></ion-icon>
+              </div>
 
-          </li>
+              <div class="contact-info">
+                <p class="contact-title">Resume</p>
+                <a
+                  href="https://drive.google.com/file/d/1HHyncdyxVg4yQEAxmd4Nl_31B1PSYphl/view?usp=drive_link"
+                  class="contact-link"
+                  >SamuelShin_CV.pdf</a
+                >
+              </div>
+            </li>
+          </ul>
 
-          <li class="contact-item">
+          <div class="separator"></div>
 
-            <div class="icon-box">
-              <ion-icon name="document-attach-outline"></ion-icon>
-            </div>
+          <ul class="social-list">
+            <li class="social-item">
+              <a
+                href="https://www.linkedin.com/in/samuel3-shin/"
+                class="social-link"
+              >
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+            <li class="social-item">
+              <a href="https://github.com/Samuel3Shin" class="social-link">
+                <ion-icon name="logo-github"></ion-icon>
+              </a>
+            </li>
 
-            <div class="contact-info">
-              <p class="contact-title">Resume</p>
-              <a href="https://drive.google.com/file/d/1HHyncdyxVg4yQEAxmd4Nl_31B1PSYphl/view?usp=drive_link" class="contact-link">SamuelShin_CV.pdf</a>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/samuel3-shin/" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-          <li class="social-item">
-            <a href="https://github.com/Samuel3Shin" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-
-          <!-- 
+            <!-- 
           <li class="social-item">
             <a href="https://www.instagram.com/sam.industry/" class="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
@@ -157,262 +167,293 @@
               <ion-icon name="logo-facebook"></ion-icon>
             </a>
           </li> -->
+          </ul>
+        </div>
+      </aside>
 
-
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-    <!--
+      <!--
       - #main-content
     -->
 
-    <div class="main-content">
-
-      <!--
+      <div class="main-content">
+        <!--
         - #NAVBAR
       -->
 
-      <nav class="navbar">
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <button class="navbar-link active" data-nav-link>About</button>
+            </li>
 
-        <ul class="navbar-list">
+            <li class="navbar-item">
+              <button class="navbar-link" data-nav-link>Resume</button>
+            </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
-          </li>
+            <!-- TODO: add my portpolio -->
+            <li class="navbar-item">
+              <button class="navbar-link" data-nav-link>Portfolio</button>
+            </li>
 
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-          
-          <!-- TODO: add my portpolio -->
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
-          </li>
-
-          <!-- <li class="navbar-item">
+            <!-- <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Blog</button>
           </li> -->
 
-          <!-- <li class="navbar-item">
+            <!-- <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
           </li> -->
+          </ul>
+        </nav>
 
-        </ul>
-
-      </nav>
-
-
-      <!--
+        <!--
         - #ABOUT
       -->
 
-      <article class="about  active" data-page="about">
+        <article class="about active" data-page="about">
+          <header>
+            <h2 class="h2 article-title">About me</h2>
+          </header>
 
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
+          <section class="about-text">
+            <p>Hi, I'm Samuel!</p>
+            <p>
+              I'm a software engineer studying at the University of Southern
+              California. I enjoy building things with codes.
+            </p>
+            <p>Thank you so much for visiting my website!</p>
+          </section>
 
-        <section class="about-text">
-          <p>
-            Hi, I'm Samuel!
-          </p>
-          <p>
-            I'm a software engineer studying at the University of Southern California.
-            I enjoy building things with codes.
-          </p>
-          <p>
-            Thank you so much for visiting my website!
-          </p>
-
-        </section>
-
-        <!--
+          <!--
           - service
         -->
-        <!-- TODO: Add what I love -->
-        <!-- TODO: when I click the item, it should redirect to the portfolio -->
-        <!-- TODO: And I need to make the card clickable not the contents inside. -->
-        <section class="service">
+          <!-- TODO: Add what I love -->
+          <!-- TODO: when I click the item, it should redirect to the portfolio -->
+          <!-- TODO: And I need to make the card clickable not the contents inside. -->
+          <section class="service">
+            <h3 class="h3 service-title">What I Love</h3>
 
-          <h3 class="h3 service-title">What I Love</h3>
-          
-          <ul class="service-list">
+            <ul class="service-list">
+              <li class="service-item">
+                <div class="service-icon-box">
+                  <img
+                    src="./portpolio_assets/portpolio_images/icon-dev.svg"
+                    alt="Web development icon"
+                    width="40"
+                  />
+                </div>
 
-            <li class="service-item">
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Full-Stack development</h4>
 
-              <div class="service-icon-box">
-                <img src="./portpolio_assets/portpolio_images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Full-Stack development</h4>
-
-                <p class="service-item-text">
-                  Love to handle both client and server side.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./portpolio_assets/portpolio_images/icon-photo.svg" alt="camera icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">ML Engineering</h4>
-
-                <p class="service-item-text">
-                  Building tools with deep learning models.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./portpolio_assets/portpolio_images/icon-app.svg" alt="mobile app icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile apps</h4>
-
-                <p class="service-item-text">
-                  Creating applications with Flutter, React Native, or Android.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-              
-              <div class="service-icon-box">
-                <a href="https://leetcode.com/Samuel3Shin/">
-                  <img src="./portpolio_assets/portpolio_images/icon-design.svg
-                  " alt="design icon" width="40">
-                </a>
-              </div>
-
-              <div class="service-content-box">
-                <a href="https://leetcode.com/Samuel3Shin/">
-                  <h4 class="h4 service-item-title">Problem Solving</h4>
                   <p class="service-item-text">
-                    Solved 1300+ algorithm problems in LeetCode.
+                    Love to handle both client and server side.
                   </p>
-                </a>
-              </div>
-            </li>
-          </ul>
+                </div>
+              </li>
 
-        </section>
+              <li class="service-item">
+                <div class="service-icon-box">
+                  <img
+                    src="./portpolio_assets/portpolio_images/icon-photo.svg"
+                    alt="camera icon"
+                    width="40"
+                  />
+                </div>
 
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">ML Engineering</h4>
 
-        <!--
+                  <p class="service-item-text">
+                    Building tools with deep learning models.
+                  </p>
+                </div>
+              </li>
+
+              <li class="service-item">
+                <div class="service-icon-box">
+                  <img
+                    src="./portpolio_assets/portpolio_images/icon-app.svg"
+                    alt="mobile app icon"
+                    width="40"
+                  />
+                </div>
+
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Mobile apps</h4>
+
+                  <p class="service-item-text">
+                    Creating applications with Flutter, React Native, or
+                    Android.
+                  </p>
+                </div>
+              </li>
+
+              <li class="service-item">
+                <div class="service-icon-box">
+                  <a href="https://leetcode.com/Samuel3Shin/">
+                    <img
+                      src="./portpolio_assets/portpolio_images/icon-design.svg
+                  "
+                      alt="design icon"
+                      width="40"
+                    />
+                  </a>
+                </div>
+
+                <div class="service-content-box">
+                  <a href="https://leetcode.com/Samuel3Shin/">
+                    <h4 class="h4 service-item-title">Problem Solving</h4>
+                    <p class="service-item-text">
+                      Solved 1300+ algorithm problems in LeetCode.
+                    </p>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!--
           - testimonials
         -->
 
-        <section class="testimonials">
+          <section class="testimonials">
+            <h3 class="h3 testimonials-title">Testimonials</h3>
 
-          <h3 class="h3 testimonials-title">Testimonials</h3>
+            <ul class="testimonials-list has-scrollbar">
+              <li class="testimonials-item">
+                <div class="content-card" data-testimonials-item>
+                  <figure class="testimonials-avatar-box">
+                    <img
+                      src="./portpolio_assets/portpolio_images/avatar-1.png"
+                      alt="Tom McGuire"
+                      width="60"
+                      data-testimonials-avatar
+                    />
+                  </figure>
 
-          <ul class="testimonials-list has-scrollbar">
+                  <a
+                    href="https://www.linkedin.com/in/1337/"
+                    data-testimonials-url
+                  ></a>
+                  <h4
+                    class="h4 testimonials-item-title"
+                    data-testimonials-title
+                  >
+                    Tom McGuire
+                  </h4>
 
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./portpolio_assets/portpolio_images/avatar-1.png" alt="Tom McGuire" width="60" data-testimonials-avatar>
-                </figure>
-
-                <a href="https://www.linkedin.com/in/1337/" data-testimonials-url></a>
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Tom McGuire</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <time>10 Sep, 2022</time>
-                  <p>
-                    Few are fortunate enough to have an intern as skilled and driven as Samuel. I had the pleasure of helping mentor Samuel throughout the summer of 2022 working closely on the Valora Wallet. Samuel’s ability to jump into a new code base and ship features touching both the front and backend services were superb; he was able to quickly learn our practices and process which was apparent in the quality and quantity of work he produced. Samuel’s work ethic and desire to learn were of a quality that I wouldn’t hesitate to recommend to any future engineering team; any team would be lucky to have him as a member and I know he will be missed here at Valora.
-                  </p>
+                  <div class="testimonials-text" data-testimonials-text>
+                    <time>10 Sep, 2022</time>
+                    <p>
+                      Few are fortunate enough to have an intern as skilled and
+                      driven as Samuel. I had the pleasure of helping mentor
+                      Samuel throughout the summer of 2022 working closely on
+                      the Valora Wallet. Samuel’s ability to jump into a new
+                      code base and ship features touching both the front and
+                      backend services were superb; he was able to quickly learn
+                      our practices and process which was apparent in the
+                      quality and quantity of work he produced. Samuel’s work
+                      ethic and desire to learn were of a quality that I
+                      wouldn’t hesitate to recommend to any future engineering
+                      team; any team would be lucky to have him as a member and
+                      I know he will be missed here at Valora.
+                    </p>
+                  </div>
                 </div>
+              </li>
 
-              </div>
-            </li>
+              <li class="testimonials-item">
+                <div class="content-card" data-testimonials-item>
+                  <figure class="testimonials-avatar-box">
+                    <img
+                      src="./portpolio_assets/portpolio_images/avatar-2.png"
+                      alt="Kathy Luo"
+                      width="60"
+                      data-testimonials-avatar
+                    />
+                  </figure>
+                  <a
+                    href="https://www.linkedin.com/in/kluo/"
+                    data-testimonials-url
+                  ></a>
+                  <h4
+                    class="h4 testimonials-item-title"
+                    data-testimonials-title
+                  >
+                    Kathy Luo
+                  </h4>
 
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./portpolio_assets/portpolio_images/avatar-2.png" alt="Kathy Luo" width="60" data-testimonials-avatar>
-                </figure>
-                <a href="https://www.linkedin.com/in/kluo/" data-testimonials-url></a>
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Kathy Luo</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <time>01 Sep, 2022</time>
-                  <p>
-                    Samuel is a great asset for any team. I really enjoyed working with him and appreciated his ambition and dedication. He didn’t hesitate to pick up complex tasks from the very start and made many valuable contributions to our team and product in a short time. He was proactive about seeking help and feedback, and I have no doubt that this growth mindset will make him valuable to any future team. It would be a pleasure to work with Samuel again in the future. 
-                  </p>
+                  <div class="testimonials-text" data-testimonials-text>
+                    <time>01 Sep, 2022</time>
+                    <p>
+                      Samuel is a great asset for any team. I really enjoyed
+                      working with him and appreciated his ambition and
+                      dedication. He didn’t hesitate to pick up complex tasks
+                      from the very start and made many valuable contributions
+                      to our team and product in a short time. He was proactive
+                      about seeking help and feedback, and I have no doubt that
+                      this growth mindset will make him valuable to any future
+                      team. It would be a pleasure to work with Samuel again in
+                      the future.
+                    </p>
+                  </div>
                 </div>
+              </li>
+            </ul>
+          </section>
 
-              </div>
-            </li>
-
-
-          </ul>
-
-        </section>
-
-
-        <!--
+          <!--
           - testimonials modal
         -->
 
-        <div class="modal-container" data-modal-container>
+          <div class="modal-container" data-modal-container>
+            <div class="overlay" data-overlay></div>
 
-          <div class="overlay" data-overlay></div>
+            <section class="testimonials-modal">
+              <button class="modal-close-btn" data-modal-close-btn>
+                <ion-icon name="close-outline"></ion-icon>
+              </button>
 
-          <section class="testimonials-modal">
+              <div class="modal-img-wrapper">
+                <figure class="modal-avatar-box">
+                  <a
+                    href="https://www.linkedin.com/in/samuel3-shin/"
+                    data-modal-url1
+                  >
+                    <img
+                      src="./portpolio_assets/portpolio_images/Sam_avartar_wobg.png"
+                      alt="Samuel Shin"
+                      width="80"
+                      data-modal-img
+                    />
+                  </a>
+                </figure>
 
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <a href="https://www.linkedin.com/in/samuel3-shin/" data-modal-url1>
-                  <img src="./portpolio_assets/portpolio_images/Sam_avartar_wobg.png" alt="Samuel Shin" width="80" data-modal-img>
-                </a>
-              </figure>
-
-              <img src="./portpolio_assets/portpolio_images/icon-quote.svg" alt="quote icon">
-            </div>
-
-            <div class="modal-content">
-              <a href="https://www.linkedin.com/in/samuel3-shin/" data-modal-url2>
-                <h4 class="h3 modal-title" data-modal-title>Samuel Shin</h4>
-              </a>
-              <div>
-                <p data-modal-text>
-                </p>
+                <img
+                  src="./portpolio_assets/portpolio_images/icon-quote.svg"
+                  alt="quote icon"
+                />
               </div>
 
-            </div>
+              <div class="modal-content">
+                <a
+                  href="https://www.linkedin.com/in/samuel3-shin/"
+                  data-modal-url2
+                >
+                  <h4 class="h3 modal-title" data-modal-title>Samuel Shin</h4>
+                </a>
+                <div>
+                  <p data-modal-text></p>
+                </div>
+              </div>
+            </section>
+          </div>
 
-          </section>
-
-        </div>
-
-
-        <!--
+          <!--
           - clients
         -->
 
-        <!-- <section class="clients">
+          <!-- <section class="clients">
 
           <h3 class="h3 clients-title">Clients</h3>
 
@@ -457,516 +498,602 @@
           </ul>
 
         </section> -->
+        </article>
 
-      </article>
-
-
-
-
-
-      <!--
+        <!--
         - #RESUME
       -->
 
-      <article class="resume" data-page="resume">
+        <article class="resume" data-page="resume">
+          <header>
+            <h2 class="h2 article-title">Resume</h2>
+          </header>
 
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
+          <section class="timeline">
+            <div class="title-wrapper">
+              <div class="icon-box">
+                <ion-icon name="book-outline"></ion-icon>
+              </div>
 
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
+              <h3 class="h3">Education</h3>
             </div>
 
-            <h3 class="h3">Education</h3>
-          </div>
+            <ol class="timeline-list">
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  University of Southern California, Viterbi School of
+                  Engineering
+                </h4>
 
-          <ol class="timeline-list">
+                <span>2021 — 2023</span>
 
-            <li class="timeline-item">
+                <p class="timeline-text">
+                  Master of Science in Computer Science
+                </p>
+                <p class="timeline-text">Dean's Master's Scholarship</p>
+              </li>
 
-              <h4 class="h4 timeline-item-title">University of Southern California, Viterbi School of Engineering</h4>
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">Yonsei University</h4>
 
-              <span>2021 — 2023</span>
+                <span>2012 — 2018</span>
 
-              <p class="timeline-text">
-                Master of Science in Computer Science
-              </p>
-              <p class="timeline-text">
-                Dean's Master's Scholarship
-              </p>
-              
+                <p class="timeline-text">
+                  Bachelor of Science in Computer Science, Bachelor of Business
+                  Administration
+                </p>
+                <p class="timeline-text">Undergraduate Full Scholarship</p>
+              </li>
+            </ol>
+          </section>
 
-            </li>
+          <section class="timeline">
+            <div class="title-wrapper">
+              <div class="icon-box">
+                <ion-icon name="book-outline"></ion-icon>
+              </div>
 
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Yonsei University</h4>
-
-              <span>2012 — 2018</span>
-
-              <p class="timeline-text">
-                Bachelor of Science in Computer Science, Bachelor of Business Administration
-              </p>
-              <p class="timeline-text">
-                Undergraduate Full Scholarship
-              </p>
-            </li>
-
-  
-
-          </ol>
-
-        </section>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
+              <h3 class="h3">Experience</h3>
             </div>
 
-            <h3 class="h3">Experience</h3>
-          </div>
+            <ol class="timeline-list">
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  Full-Stack Development Intern @ BirchAI
+                </h4>
 
-          <ol class="timeline-list">
+                <span>Mar 2023 — May 2023</span>
 
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Full-Stack Development Intern @ BirchAI</h4>
-
-              <span>Mar 2023 — May 2023</span>
-
-              <p class="timeline-text">
-                • Developed React-based WebApp demo for NLP models, including audio-to-text and summarization models
-              </p>
-              <p class="timeline-text">
-                • Engineered FastAPI proxy server for the NLP model API server using WebSocket, RabbitMQ, and PostgreSQL
-              </p>
-              <p class="timeline-text">
-                • Orchestrated deployments with Docker Compose, Alembic, and AWS EC2
-              </p>            
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Full-Stack Development Summer Intern @ Valora</h4>
-
-              <span>Jun 2022 — Aug 2022</span>
-
-              <p class="timeline-text">
-                • Developed blockchain wallet app using React Native, Redux, and TypeScript; conducted A/B testing through Firebase
-              </p>
-              <p class="timeline-text">
-                • Created a Node.js API server with Express and GraphQL for blockchain transaction information, impacting over 500,000 users
-              </p>
-              <p class="timeline-text">
-                • Designed algorithms to classify blockchain transactions into NFT or swap categories based on token transfer data
-              </p>            
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Machine Learning Engineer @ USC Institute of Creative Technology</h4>
-
-              <span>Oct 2021 — May 2022</span>
-
-              <p class="timeline-text">
-                • Developed pipeline to generate 3D skeleton data from TED videos using PyTorch, Variational Autoencoders, and One-Euro filter
-              </p>
-              <p class="timeline-text">
-                • Co-authored paper titled “A Tool for Extracting 3D Avatar-Ready Gesture Animations from Monocular Videos,” accepted at MIG
-                2022 (ACM SIGGRAPH Conference on Motion, Interaction and Games)
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Software Engineer @ Samsung Research</h4>
-
-              <span>Jan 2018 — Jul 2021</span>
-
-              <p class="timeline-text">
-                • Co-founded AI-based dance game startup and secured $600K in funding from Samsung Venture Investment Corporation
-              </p>
-              <p class="timeline-text">
-                • Developed real-time 2d skeleton inference API server with Node.js backend using Tensorflow and FastAPI
-              </p>
-              <p class="timeline-text">
-                • Innovated foot pressure inference model using RGB cameras and smart shoes, achieving 90% accuracy
-              </p>
-              <p class="timeline-text">
-                • Built hand detection model with 95% accuracy using YOLOv3, deployed to AR glasses at Samsung Research AR Lab
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Software Engineering Winter Intern @ LG CNS</h4>
-
-              <span>Feb 2017</span>
-
-              <p class="timeline-text">
-                • Developed WebSocket-based webpage managing distributed servers processing smart factory sensor data
-              </p>
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Auxiliary Police @ Korean National Police Agency</h4>
-
-              <span>Oct 2013 - Jul 2015</span>
-
-              <p class="timeline-text">
-                • Served as police as a substitute for military service in Korea
-              </p>
-              <p class="timeline-text">
-                • Collaborated with 30 auxiliary police officers to keep citizens safe in a demonstration
-              </p>
-            </li>
-          </ol>
-
-        </section>
-
-        <section class="skill">
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list skills-content-card">
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h4 class="skill-item">Programming Languages</h4>
-                <p class="skill-text">
-                  Python, Java, Kotlin, JavaScript, TypeScript, C, C++, C#, Solidity, Dart, Go
+                <p class="timeline-text">
+                  • Developed React-based WebApp demo for NLP models, including
+                  audio-to-text and summarization models
                 </p>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h4 class="skill-item">Web & Mobile</h4>
-                <p class="skill-text">
-                  React, Angular, Android, Flutter, React Native, Node.js, Nginx, Flask, FastAPI, Bootstrap, jQuery, Ajax, Redux
+                <p class="timeline-text">
+                  • Engineered FastAPI proxy server for the NLP model API server
+                  using WebSocket, RabbitMQ, and PostgreSQL
                 </p>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h4 class="skill-item">Frameworks & Tools</h4>
-                <p class="skill-text">Pytorch, Tensorflow, scikit-learn, Geth, Infura, Ganache, Truffle, GitHub, Docker, AWS, GCP, Unity</p>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h4 class="skill-item">Operating System & Database</h4>
-                <p class="skill-text">
-                  Linux, MacOS, Windows, MySQL, MongoDB, PostgreSQL, DynamoDB, Alembic, SQLAlchemy
+                <p class="timeline-text">
+                  • Orchestrated deployments with Docker Compose, Alembic, and
+                  AWS EC2
                 </p>
-              </div>
-            </li>
-          </ul>
-        </section>
+              </li>
 
-      </article>
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  Full-Stack Development Summer Intern @ Valora
+                </h4>
 
+                <span>Jun 2022 — Aug 2022</span>
 
-      <!--
+                <p class="timeline-text">
+                  • Developed blockchain wallet app using React Native, Redux,
+                  and TypeScript; conducted A/B testing through Firebase
+                </p>
+                <p class="timeline-text">
+                  • Created a Node.js API server with Express and GraphQL for
+                  blockchain transaction information, impacting over 500,000
+                  users
+                </p>
+                <p class="timeline-text">
+                  • Designed algorithms to classify blockchain transactions into
+                  NFT or swap categories based on token transfer data
+                </p>
+              </li>
+
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  Machine Learning Engineer @ USC Institute of Creative
+                  Technology
+                </h4>
+
+                <span>Oct 2021 — May 2022</span>
+
+                <p class="timeline-text">
+                  • Developed pipeline to generate 3D skeleton data from TED
+                  videos using PyTorch, Variational Autoencoders, and One-Euro
+                  filter
+                </p>
+                <p class="timeline-text">
+                  • Co-authored paper titled “A Tool for Extracting 3D
+                  Avatar-Ready Gesture Animations from Monocular Videos,”
+                  accepted at MIG 2022 (ACM SIGGRAPH Conference on Motion,
+                  Interaction and Games)
+                </p>
+              </li>
+
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  Software Engineer @ Samsung Research
+                </h4>
+
+                <span>Jan 2018 — Jul 2021</span>
+
+                <p class="timeline-text">
+                  • Co-founded AI-based dance game startup and secured $600K in
+                  funding from Samsung Venture Investment Corporation
+                </p>
+                <p class="timeline-text">
+                  • Developed real-time 2d skeleton inference API server with
+                  Node.js backend using Tensorflow and FastAPI
+                </p>
+                <p class="timeline-text">
+                  • Innovated foot pressure inference model using RGB cameras
+                  and smart shoes, achieving 90% accuracy
+                </p>
+                <p class="timeline-text">
+                  • Built hand detection model with 95% accuracy using YOLOv3,
+                  deployed to AR glasses at Samsung Research AR Lab
+                </p>
+              </li>
+
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  Software Engineering Winter Intern @ LG CNS
+                </h4>
+
+                <span>Feb 2017</span>
+
+                <p class="timeline-text">
+                  • Developed WebSocket-based webpage managing distributed
+                  servers processing smart factory sensor data
+                </p>
+              </li>
+
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
+                  Auxiliary Police @ Korean National Police Agency
+                </h4>
+
+                <span>Oct 2013 - Jul 2015</span>
+
+                <p class="timeline-text">
+                  • Served as police as a substitute for military service in
+                  Korea
+                </p>
+                <p class="timeline-text">
+                  • Collaborated with 30 auxiliary police officers to keep
+                  citizens safe in a demonstration
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="skill">
+            <h3 class="h3 skills-title">My skills</h3>
+
+            <ul class="skills-list skills-content-card">
+              <li class="skills-item">
+                <div class="title-wrapper">
+                  <h4 class="skill-item">Programming Languages</h4>
+                  <p class="skill-text">
+                    Python, Java, Kotlin, JavaScript, TypeScript, C, C++, C#,
+                    Solidity, Dart, Go
+                  </p>
+                </div>
+              </li>
+
+              <li class="skills-item">
+                <div class="title-wrapper">
+                  <h4 class="skill-item">Web & Mobile</h4>
+                  <p class="skill-text">
+                    React, Angular, Android, Flutter, React Native, Node.js,
+                    Nginx, Flask, FastAPI, Bootstrap, jQuery, Ajax, Redux
+                  </p>
+                </div>
+              </li>
+
+              <li class="skills-item">
+                <div class="title-wrapper">
+                  <h4 class="skill-item">Frameworks & Tools</h4>
+                  <p class="skill-text">
+                    Pytorch, Tensorflow, scikit-learn, Geth, Infura, Ganache,
+                    Truffle, GitHub, Docker, AWS, GCP, Unity
+                  </p>
+                </div>
+              </li>
+
+              <li class="skills-item">
+                <div class="title-wrapper">
+                  <h4 class="skill-item">Operating System & Database</h4>
+                  <p class="skill-text">
+                    Linux, MacOS, Windows, MySQL, MongoDB, PostgreSQL, DynamoDB,
+                    Alembic, SQLAlchemy
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </article>
+
+        <!--
         - #PORTFOLIO
       -->
 
-      <article class="portfolio" data-page="portfolio">
+        <article class="portfolio" data-page="portfolio">
+          <header>
+            <h2 class="h2 article-title">Portfolio</h2>
+          </header>
 
-        <header>
-          <h2 class="h2 article-title">Portfolio</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Full stack</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Machine learning</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Mobile apps</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Academic project</button>
-            </li>
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
+          <section class="projects">
+            <ul class="filter-list">
+              <li class="filter-item">
+                <button class="active" data-filter-btn>All</button>
               </li>
 
-              <li class="select-item">
-                <button data-select-item>Full stack</button>
+              <li class="filter-item">
+                <button data-filter-btn>Full stack</button>
               </li>
 
-              <li class="select-item">
-                <button data-select-item>Machine learning</button>
+              <li class="filter-item">
+                <button data-filter-btn>Machine learning</button>
               </li>
 
-              <li class="select-item">
-                <button data-select-item>Mobile apps</button>
+              <li class="filter-item">
+                <button data-filter-btn>Mobile apps</button>
               </li>
 
-              <li class="select-item">
-                <button data-select-item>Academic project</button>
+              <li class="filter-item">
+                <button data-filter-btn>Academic project</button>
               </li>
-
             </ul>
 
-          </div>
+            <div class="filter-select-box">
+              <button class="filter-select" data-select>
+                <div class="select-value" data-selecct-value>
+                  Select category
+                </div>
 
-          <ul class="project-list">
+                <div class="select-icon">
+                  <ion-icon name="chevron-down"></ion-icon>
+                </div>
+              </button>
 
-            <li class="project-item  active" data-filter-item data-category="machine learning">
-              <a href="https://dl.acm.org/doi/10.1145/3561975.3562953">
+              <ul class="select-list">
+                <li class="select-item">
+                  <button data-select-item>All</button>
+                </li>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                <li class="select-item">
+                  <button data-select-item>Full stack</button>
+                </li>
 
-                  <img src="./portpolio_assets/portpolio_images/paper.jpg" alt="finance" loading="lazy">
-                </figure>
+                <li class="select-item">
+                  <button data-select-item>Machine learning</button>
+                </li>
 
-                <h3 class="project-title">A Tool for Extracting 3D Avatar-Ready Gesture Animations from Monocular Videos</h3>
-                <p class="project-category">Pytorch, Computer Vision</p>
-              </a>
-            </li>
+                <li class="select-item">
+                  <button data-select-item>Mobile apps</button>
+                </li>
 
-            <li class="project-item  active" data-filter-item data-category="machine learning">
-              <a href="https://www.youtube.com/watch?v=MWionxh6uv8">
+                <li class="select-item">
+                  <button data-select-item>Academic project</button>
+                </li>
+              </ul>
+            </div>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+            <ul class="project-list">
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="machine learning"
+              >
+                <a href="https://dl.acm.org/doi/10.1145/3561975.3562953">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                  <img src="./portpolio_assets/portpolio_images/dantorial_first.jpg" alt="finance" loading="lazy">
-                </figure>
+                    <img
+                      src="./portpolio_assets/portpolio_images/paper.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                <h3 class="project-title">AI based Dance Tutorial</h3>
-                <p class="project-category">Pytorch, FastAPI, Express</p>
-              </a>
-            </li>
+                  <h3 class="project-title">
+                    A Tool for Extracting 3D Avatar-Ready Gesture Animations
+                    from Monocular Videos
+                  </h3>
+                  <p class="project-category">Pytorch, Computer Vision</p>
+                </a>
+              </li>
 
-            <li class="project-item  active" data-filter-item data-category="mobile apps">
-              <a href="https://github.com/Samuel3Shin/GupsikTime">
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="machine learning"
+              >
+                <a href="https://www.youtube.com/watch?v=MWionxh6uv8">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                    <img
+                      src="./portpolio_assets/portpolio_images/dantorial_first.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                  <img src="./portpolio_assets/portpolio_images/gupsiktime_menu.jpg" alt="finance" loading="lazy">
-                </figure>
+                  <h3 class="project-title">AI based Dance Tutorial</h3>
+                  <p class="project-category">Pytorch, FastAPI, Express</p>
+                </a>
+              </li>
 
-                <h3 class="project-title">GupsikTime</h3>
-                <p class="project-category">Native Android, Kotlin</p>
-              </a>
-            </li>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="mobile apps"
+              >
+                <a href="https://github.com/Samuel3Shin/GupsikTime">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-            <li class="project-item  active" data-filter-item data-category="mobile apps">
-              <a href="https://github.com/Samuel3Shin/weather_app">
+                    <img
+                      src="./portpolio_assets/portpolio_images/gupsiktime_menu.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                  <h3 class="project-title">GupsikTime</h3>
+                  <p class="project-category">Native Android, Kotlin</p>
+                </a>
+              </li>
 
-                  <img src="./portpolio_assets/portpolio_images/weatherApp.jpg" alt="finance" loading="lazy">
-                </figure>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="mobile apps"
+              >
+                <a href="https://github.com/Samuel3Shin/weather_app">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                <h3 class="project-title">Weather Mobile App</h3>
-                <p class="project-category">Android Native, Kotlin</p>
-              </a>
-            </li>
+                    <img
+                      src="./portpolio_assets/portpolio_images/weatherApp.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-            <li class="project-item  active" data-filter-item data-category="academic project">
-              <a href="https://play.unity.com/mg/other/ballooned-it-22">
+                  <h3 class="project-title">Weather Mobile App</h3>
+                  <p class="project-category">Android Native, Kotlin</p>
+                </a>
+              </li>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="academic project"
+              >
+                <a href="https://play.unity.com/mg/other/ballooned-it-22">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                  <img src="./portpolio_assets/portpolio_images/ballooned.jpg" alt="finance" loading="lazy">
-                </figure>
+                    <img
+                      src="./portpolio_assets/portpolio_images/ballooned.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                <h3 class="project-title">Ballooned It!</h3>
-                <p class="project-category">Unity, C#</p>
-              </a>
-            </li>
+                  <h3 class="project-title">Ballooned It!</h3>
+                  <p class="project-category">Unity, C#</p>
+                </a>
+              </li>
 
-            <li class="project-item  active" data-filter-item data-category="academic project">
-              <a href="https://orange-wholesaler-991.notion.site/Engineering-Details-5ee9bb98da594386b0a549ae303e03b5">
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="academic project"
+              >
+                <a
+                  href="https://orange-wholesaler-991.notion.site/Engineering-Details-5ee9bb98da594386b0a549ae303e03b5"
+                >
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                    <img
+                      src="./portpolio_assets/portpolio_images/CS576.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                  <img src="./portpolio_assets/portpolio_images/CS576.jpg" alt="finance" loading="lazy">
-                </figure>
+                  <h3 class="project-title">Multimedia Final Project</h3>
+                  <p class="project-category">
+                    Pytorch, Several deeplearning models
+                  </p>
+                </a>
+              </li>
 
-                <h3 class="project-title">Multimedia Final Project</h3>
-                <p class="project-category">Pytorch, Several deeplearning models</p>
-              </a>
-            </li>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="full stack"
+              >
+                <a
+                  href="https://github.com/Samuel3Shin/Samuel3Shin.github.io/tree/master/weather_app"
+                >
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-            <li class="project-item active" data-filter-item data-category="full stack">
-              <a href="https://github.com/Samuel3Shin/Samuel3Shin.github.io/tree/master/weather_app">
+                    <img
+                      src="./portpolio_assets/portpolio_images/weather_web_app.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                  <h3 class="project-title">Weather Web Application</h3>
 
-                  <img src="./portpolio_assets/portpolio_images/weather_web_app.jpg" alt="finance" loading="lazy">
-                </figure>
+                  <p class="project-category">Angular, Bootstrap</p>
+                </a>
+              </li>
 
-                <h3 class="project-title">Weather Web Application</h3>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="full stack"
+              >
+                <a
+                  href="https://github.com/valora-inc/wallet/pulls?q=samuel3shin"
+                >
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                <p class="project-category">Angular, Bootstrap</p>
+                    <img
+                      src="./portpolio_assets/portpolio_images/valora.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-              </a>
-            </li>
+                  <h3 class="project-title">Valora Blockchain Wallet App</h3>
 
-            <li class="project-item active" data-filter-item data-category="full stack">
-              <a href="https://github.com/valora-inc/wallet/pulls?q=samuel3shin">
+                  <p class="project-category">React Native, Redux</p>
+                </a>
+              </li>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="full stack"
+              >
+                <a
+                  href="https://github.com/valora-inc/blockchain-api/pulls?q=is%3Apr+author%3ASamuel3Shin"
+                >
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                  <img src="./portpolio_assets/portpolio_images/valora.jpg" alt="finance" loading="lazy">
-                </figure>
+                    <img
+                      src="./portpolio_assets/portpolio_images/blockchainAPI.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                <h3 class="project-title">Valora Blockchain Wallet App</h3>
+                  <h3 class="project-title">Blockchain Info API</h3>
+                  <p class="project-category">Express, GraphQL</p>
+                </a>
+              </li>
 
-                <p class="project-category">React Native, Redux</p>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="full stack"
+              >
+                <a href="https://github.com/Samuel3Shin/12-Server-Applications">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-              </a>
-            </li>
+                    <img
+                      src="./portpolio_assets/portpolio_images/12-server.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-            <li class="project-item active" data-filter-item data-category="full stack">
-              <a href="https://github.com/valora-inc/blockchain-api/pulls?q=is%3Apr+author%3ASamuel3Shin">
+                  <h3 class="project-title">12 Server Applications</h3>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                  <p class="project-category">
+                    React, Express, SocketIO, MongoDB, MySQL, Ajax
+                  </p>
+                </a>
+              </li>
 
-                  <img src="./portpolio_assets/portpolio_images/blockchainAPI.jpg" alt="finance" loading="lazy">
-                </figure>
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="mobile apps"
+              >
+                <a href="https://github.com/Samuel3Shin/drawing_memo">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                <h3 class="project-title">Blockchain Info API</h3>
-                <p class="project-category">Express, GraphQL</p>
+                    <img
+                      src="./portpolio_assets/portpolio_images/drawingApp.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-              </a>
-            </li>
+                  <h3 class="project-title">Simple Drawing App</h3>
+                  <p class="project-category">Flutter, Dart, iOS, Android</p>
+                </a>
+              </li>
 
-            <li class="project-item active" data-filter-item data-category="full stack">
-              <a href="https://github.com/Samuel3Shin/12-Server-Applications">
+              <li
+                class="project-item active"
+                data-filter-item
+                data-category="mobile apps"
+              >
+                <a href="https://github.com/Samuel3Shin/simple_clipboard">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box">
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </div>
 
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
+                    <img
+                      src="./portpolio_assets/portpolio_images/clipboard.jpg"
+                      alt="finance"
+                      loading="lazy"
+                    />
+                  </figure>
 
-                  <img src="./portpolio_assets/portpolio_images/12-server.jpg" alt="finance" loading="lazy">
-                </figure>
+                  <h3 class="project-title">Simple Clipboard App</h3>
+                  <p class="project-category">Flutter, Dart, iOS, Android</p>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </article>
 
-                <h3 class="project-title">12 Server Applications</h3>
-
-                <p class="project-category">React, Express, SocketIO, MongoDB, MySQL, Ajax</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="mobile apps">
-              <a href="https://github.com/Samuel3Shin/drawing_memo">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./portpolio_assets/portpolio_images/drawingApp.jpg" alt="finance" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Simple Drawing App</h3>
-                <p class="project-category">Flutter, Dart, iOS, Android</p>
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="mobile apps">
-              <a href="https://github.com/Samuel3Shin/simple_clipboard">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./portpolio_assets/portpolio_images/clipboard.jpg" alt="finance" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Simple Clipboard App</h3>
-                <p class="project-category">Flutter, Dart, iOS, Android</p>
-              </a>
-            </li>
-
-            
-
-
-          </ul>
-        </section>
-      </article>
-
-
-
-      <!--
+        <!--
         - #BLOG
       -->
 
-      <!-- <article class="blog" data-page="blog">
+        <!-- <article class="blog" data-page="blog">
 
         <header>
           <h2 class="h2 article-title">Blog</h2>
@@ -1151,70 +1278,83 @@
       </article>
  -->
 
-
-
-
-      <!--
+        <!--
         - #CONTACT
       -->
 
-      <article class="contact" data-page="contact">
+        <article class="contact" data-page="contact">
+          <header>
+            <h2 class="h2 article-title">Contact</h2>
+          </header>
 
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
+          <section class="mapbox" data-mapbox>
+            <figure>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+                width="400"
+                height="300"
+                loading="lazy"
+              ></iframe>
+            </figure>
+          </section>
 
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
+          <section class="contact-form">
+            <h3 class="h3 form-title">Contact Form</h3>
 
-        <section class="contact-form">
+            <form action="#" class="form" data-form>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  name="fullname"
+                  class="form-input"
+                  placeholder="Full name"
+                  required
+                  data-form-input
+                />
 
-          <h3 class="h3 form-title">Contact Form</h3>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="Email address"
+                  required
+                  data-form-input
+                />
+              </div>
 
-          <form action="#" class="form" data-form>
+              <textarea
+                name="message"
+                class="form-input"
+                placeholder="Your Message"
+                required
+                data-form-input
+              ></textarea>
 
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <button class="form-btn" type="submit" disabled data-form-btn>
+                <ion-icon name="paper-plane"></ion-icon>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </section>
+        </article>
+      </div>
+    </main>
 
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-
-      </article>
-
-    </div>
-
-  </main>
-
-
-
-
-  <!--
+    <!--
     - custom js link
   -->
-  <script src="./portpolio_assets/js/script.js"></script>
+    <script src="./portpolio_assets/js/script.js"></script>
 
-  <!--
+    <!--
     - ionicon link
   -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-</body>
-
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>
