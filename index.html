@@ -33,24 +33,79 @@
     - custom css link
   -->
     <link rel="stylesheet" href="./portpolio_assets/css/style.css" />
-    4
+
     <!--
     - google font link
   -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
   </head>
 
   <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+      <div class="loader-terminal">
+        <div class="loader-header">
+          <span class="loader-dot red"></span>
+          <span class="loader-dot yellow"></span>
+          <span class="loader-dot green"></span>
+        </div>
+        <div class="loader-content">
+          <p class="loader-text"><span class="loader-prompt">$</span> initializing portfolio...</p>
+          <div class="loader-bar-container">
+            <div class="loader-bar" id="loader-bar"></div>
+          </div>
+          <p class="loader-percent" id="loader-percent">0%</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div id="particles-js" class="hero-particles"></div>
+      <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">
+          <span id="typed-name"></span>
+        </h1>
+        <div class="hero-tagline">
+          <span id="typed-tagline"></span>
+        </div>
+
+        <a href="#main-content" class="hero-cta">
+          <span>Explore My Work</span>
+          <ion-icon name="arrow-down-outline"></ion-icon>
+        </a>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <p>Scroll Down</p>
+      </div>
+    </section>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
     <!--
     - #MAIN
   -->
 
-    <main>
+    <main id="main-content">
       <!--
       - #SIDEBAR
     -->
@@ -68,7 +123,7 @@
           <div class="info-content">
             <h1 class="name" title="Samuel Shin">Samuel Shin</h1>
 
-            <p class="title">SW Engineer</p>
+            <p class="title">Senior SW Engineer</p>
           </div>
 
           <button class="info_more-btn" data-sidebar-btn>
@@ -118,7 +173,7 @@
               <div class="contact-info">
                 <p class="contact-title">Location</p>
 
-                <address>San Francisco, California, USA</address>
+                <address>San Francisco Bay Area, CA</address>
               </div>
             </li>
 
@@ -130,7 +185,7 @@
               <div class="contact-info">
                 <p class="contact-title">Resume</p>
                 <a
-                  href="https://drive.google.com/file/d/1hvAPP1R_CT9PCC_-MO_kw7G4WLvGcrHn/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1DtS-PLkMmGySiuJeOJGiWciUtvFUrWg2/view?usp=sharing"
                   class="contact-link"
                   >SamuelShin_CV.pdf</a
                 >
@@ -211,28 +266,101 @@
 
         <article class="about active" data-page="about">
           <header>
-            <h2 class="h2 article-title">About me</h2>
+            <h2 class="h2 article-title gradient-text">About me</h2>
           </header>
 
+          <!-- Terminal-style Bio -->
+          <div class="terminal-bio">
+            <div class="terminal-header">
+              <span class="terminal-btn red"></span>
+              <span class="terminal-btn yellow"></span>
+              <span class="terminal-btn green"></span>
+              <span class="terminal-title">samuel@portfolio ~ %</span>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command"> whoami</span>
+              </div>
+              <p class="terminal-output">Samuel Shin - Senior Software Engineer @ Campfire (YC S23)</p>
+
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command"> cat achievements.json</span>
+              </div>
+              <div class="terminal-json">
+                {<br>
+                &nbsp;&nbsp;<span class="json-key">"current_role"</span>: <span class="json-string">"Senior SWE @ Campfire (YC S23)"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"previous"</span>: <span class="json-string">"Founding Engineer @ Suger (YC W23)"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"arr_growth"</span>: <span class="json-value">"33x ($30K → $1M in 10 months)"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"integrations_built"</span>: <span class="json-value">"6 (Rippling, Bill.com, Brex, Salesforce, HubSpot)"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"publication"</span>: <span class="json-string">"ACM SIGGRAPH MIG 2022"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"users_impacted"</span>: <span class="json-value">"500,000+"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"startup_funding"</span>: <span class="json-value">"$600K (Samsung Ventures)"</span><br>
+                }
+              </div>
+
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command"> echo $MISSION</span>
+              </div>
+              <p class="terminal-output">Building scalable, user-centric software that accelerates innovation.</p>
+            </div>
+          </div>
+
           <section class="about-text">
-            <p>Hello, I'm Samuel Shin! </p>
             <p>
-              With a robust background in full-stack development and machine learning, my expertise lies in crafting innovative solutions that drive technological advancement. Currently, as a Founding Engineer at Suger, I am committed to simplifying cloud marketplace sales, aligning with our mission to streamline e-commerce for businesses. My approach is deeply rooted in collaboration, aiming to contribute diverse perspectives and foster a culture of innovation within our organization.
+              With a robust background in full-stack development and machine learning, I specialize in building scalable, user-centric software that accelerates innovation. At Campfire (YC S23), I'm currently focused on developing modern accounting tools that empower startups and mid-sized tech companies to operate with clarity and precision.
             </p>
             <p>
-              Since joining Suger, I've been pivotal in developing a comprehensive platform to enhance co-selling experiences. Leveraging my recent internship experience at Birch.ai, I've incorporated React development and FastAPI server engineering into our product suite, ensuring our clients receive reliable, scalable, and user-friendly applications. My hands-on experience with NLP models and data pipeline construction has been instrumental in delivering solutions that meet the dynamic needs of our clients in the cloud marketplace ecosystem.
+              Previously, I joined Suger (YC W23) as Employee #2 Founding Engineer, where I built the Go backend from the ground up, architected a Vue3-based interface, and led the end-to-end integration with Salesforce. The role required deep knowledge of cloud platforms including AWS, Azure, and GCP — and demanded both technical precision and product intuition to drive adoption.
             </p>
-            <p>Thank you so much for visiting my website!</p>
+            <p>
+              I bring a collaborative mindset, long-term thinking, and a bias for execution to every team I join — with the goal of delivering impact that lasts beyond the next sprint.
+            </p>
+          </section>
+
+          <!--
+          - Exceptional Highlights
+        -->
+          <section class="highlights">
+            <h3 class="h3 service-title">Key Achievements</h3>
+            <ul class="highlights-list">
+              <li class="highlight-item">
+                <div class="highlight-icon">
+                  <ion-icon name="trending-up-outline"></ion-icon>
+                </div>
+                <div class="highlight-content">
+                  <h4 class="highlight-title">Top Contributor at Campfire</h4>
+                  <p class="highlight-text">Became the top contributor across both frontend and backend repositories as the company scaled from seed to Series B, shipping core product features, reliability work, and major refactors.</p>
+                </div>
+              </li>
+              <li class="highlight-item">
+                <div class="highlight-icon">
+                  <ion-icon name="git-merge-outline"></ion-icon>
+                </div>
+                <div class="highlight-content">
+                  <h4 class="highlight-title">6 Production Integrations</h4>
+                  <p class="highlight-text">Solely built six core production integrations—Rippling, Bill.com, Brex, Salesforce, and HubSpot—owning design, implementation, and on-call. Delivered the full lifecycle from auth to product-facing UI workflows.</p>
+                </div>
+              </li>
+              <li class="highlight-item">
+                <div class="highlight-icon">
+                  <ion-icon name="rocket-outline"></ion-icon>
+                </div>
+                <div class="highlight-content">
+                  <h4 class="highlight-title">First-in-Market GCP Capability</h4>
+                  <p class="highlight-text">At Suger, delivered GCP Marketplace support despite missing official APIs by reconstructing required flows from observed network requests and encoding them into a 24/7 automated service—a first-in-market capability that materially strengthened our competitive position.</p>
+                </div>
+              </li>
+            </ul>
           </section>
 
           <!--
           - service
         -->
-          <!-- TODO: Add what I love -->
-          <!-- TODO: when I click the item, it should redirect to the portfolio -->
-          <!-- TODO: And I need to make the card clickable not the contents inside. -->
           <section class="service">
-            <h3 class="h3 service-title">What I Love</h3>
+            <h3 class="h3 service-title gradient-text">What I Love</h3>
 
             <ul class="service-list">
               <li class="service-item">
@@ -314,6 +442,46 @@
           </section>
 
           <!--
+          - Publications & Patents
+        -->
+          <section class="publications">
+            <h3 class="h3 service-title">Publications & Patents</h3>
+            <ul class="publications-list">
+              <li class="publication-item">
+                <div class="publication-icon">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                </div>
+                <div class="publication-content">
+                  <h4 class="publication-title">
+                    <a href="https://dl.acm.org/doi/10.1145/3561975.3562953" target="_blank">
+                      A Tool for Extracting 3D Avatar-Ready Gesture Animations from Monocular Videos
+                    </a>
+                  </h4>
+                  <p class="publication-venue">ACM SIGGRAPH MIG 2022 (Conference on Motion, Interaction, and Games)</p>
+                </div>
+              </li>
+              <li class="publication-item">
+                <div class="publication-icon">
+                  <ion-icon name="bulb-outline"></ion-icon>
+                </div>
+                <div class="publication-content">
+                  <h4 class="publication-title">Electronic Device for Providing Choreography Learning Information</h4>
+                  <p class="publication-venue">Patent - Samsung Electronics</p>
+                </div>
+              </li>
+              <li class="publication-item">
+                <div class="publication-icon">
+                  <ion-icon name="bulb-outline"></ion-icon>
+                </div>
+                <div class="publication-content">
+                  <h4 class="publication-title">Electronic Device for Providing Feedback of Choreography Motions</h4>
+                  <p class="publication-venue">Patent - Samsung Electronics</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!--
           - testimonials
         -->
 
@@ -321,6 +489,70 @@
             <h3 class="h3 testimonials-title">Testimonials</h3>
 
             <ul class="testimonials-list has-scrollbar">
+              <li class="testimonials-item">
+                <div class="content-card" data-testimonials-item>
+                  <figure class="testimonials-avatar-box">
+                    <img
+                      src="./portpolio_assets/portpolio_images/avatar-1.png"
+                      alt="Shiman Guo"
+                      width="60"
+                      data-testimonials-avatar
+                    />
+                  </figure>
+
+                  <a
+                    href="https://www.linkedin.com/in/shiman-guo-0858707a/"
+                    data-testimonials-url
+                  ></a>
+                  <h4
+                    class="h4 testimonials-item-title"
+                    data-testimonials-title
+                  >
+                    Shiman Guo
+                  </h4>
+                  <p class="testimonials-subtitle">Full-stack Engineer, managed Samuel directly</p>
+
+                  <div class="testimonials-text" data-testimonials-text>
+                    <time>13 Sep, 2024</time>
+                    <p>
+                      Samuel is one of the most efficient software engineers I've come across. He's super focused, never wastes time, and knows exactly how to prioritize tasks to get things done. He's also great at jumping into different code bases and tech stacks without skipping a beat. Plus, he's awesome at working with different teams and people. Fast learner, hard worker—an all-around solid teammate. Highly recommend!
+                    </p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="testimonials-item">
+                <div class="content-card" data-testimonials-item>
+                  <figure class="testimonials-avatar-box">
+                    <img
+                      src="./portpolio_assets/portpolio_images/avatar-3.png"
+                      alt="Chengjun Yuan"
+                      width="60"
+                      data-testimonials-avatar
+                    />
+                  </figure>
+
+                  <a
+                    href="https://www.linkedin.com/in/chengjunyuan/"
+                    data-testimonials-url
+                  ></a>
+                  <h4
+                    class="h4 testimonials-item-title"
+                    data-testimonials-title
+                  >
+                    Chengjun Yuan
+                  </h4>
+                  <p class="testimonials-subtitle">Co-founder at Suger, managed Samuel directly</p>
+
+                  <div class="testimonials-text" data-testimonials-text>
+                    <time>12 Sep, 2024</time>
+                    <p>
+                      Throughout our time working together, Samuel consistently demonstrated an exceptional ability to quickly learn new technologies and immediately apply them in current projects. One of the most impressive aspects of Samuel's performance is their capacity to handle large, complex projects from start to finish. Even when faced with ambiguity and unclear requirements, Samuel has shown the ability to dive into the details, formulate a structured plan, and deliver high-quality results independently.
+                    </p>
+                  </div>
+                </div>
+              </li>
+
               <li class="testimonials-item">
                 <div class="content-card" data-testimonials-item>
                   <figure class="testimonials-avatar-box">
@@ -342,22 +574,12 @@
                   >
                     Tom McGuire
                   </h4>
+                  <p class="testimonials-subtitle">Software Engineer at Valora, Samuel's mentor</p>
 
                   <div class="testimonials-text" data-testimonials-text>
                     <time>10 Sep, 2022</time>
                     <p>
-                      Few are fortunate enough to have an intern as skilled and
-                      driven as Samuel. I had the pleasure of helping mentor
-                      Samuel throughout the summer of 2022 working closely on
-                      the Valora Wallet. Samuel’s ability to jump into a new
-                      code base and ship features touching both the front and
-                      backend services were superb; he was able to quickly learn
-                      our practices and process which was apparent in the
-                      quality and quantity of work he produced. Samuel’s work
-                      ethic and desire to learn were of a quality that I
-                      wouldn’t hesitate to recommend to any future engineering
-                      team; any team would be lucky to have him as a member and
-                      I know he will be missed here at Valora.
+                      Few are fortunate enough to have an intern as skilled and driven as Samuel. I had the pleasure of helping mentor Samuel throughout the summer of 2022 working closely on the Valora Wallet. Samuel's ability to jump into a new code base and ship features touching both the front and backend services were superb; he was able to quickly learn our practices and process which was apparent in the quality and quantity of work he produced. Samuel's work ethic and desire to learn were of a quality that I wouldn't hesitate to recommend to any future engineering team; any team would be lucky to have him as a member.
                     </p>
                   </div>
                 </div>
@@ -383,19 +605,12 @@
                   >
                     Kathy Luo
                   </h4>
+                  <p class="testimonials-subtitle">Software Engineering at Valora, managed Samuel directly</p>
 
                   <div class="testimonials-text" data-testimonials-text>
                     <time>01 Sep, 2022</time>
                     <p>
-                      Samuel is a great asset for any team. I really enjoyed
-                      working with him and appreciated his ambition and
-                      dedication. He didn’t hesitate to pick up complex tasks
-                      from the very start and made many valuable contributions
-                      to our team and product in a short time. He was proactive
-                      about seeking help and feedback, and I have no doubt that
-                      this growth mindset will make him valuable to any future
-                      team. It would be a pleasure to work with Samuel again in
-                      the future.
+                      Samuel is a great asset for any team. I really enjoyed working with him and appreciated his ambition and dedication. He didn't hesitate to pick up complex tasks from the very start and made many valuable contributions to our team and product in a short time. He was proactive about seeking help and feedback, and I have no doubt that this growth mindset will make him valuable to any future team. It would be a pleasure to work with Samuel again in the future.
                     </p>
                   </div>
                 </div>
@@ -507,7 +722,7 @@
 
         <article class="resume" data-page="resume">
           <header>
-            <h2 class="h2 article-title">Resume</h2>
+            <h2 class="h2 article-title gradient-text">Resume</h2>
           </header>
 
           <section class="timeline">
@@ -522,11 +737,10 @@
             <ol class="timeline-list">
               <li class="timeline-item">
                 <h4 class="h4 timeline-item-title">
-                  University of Southern California, Viterbi School of
-                  Engineering
+                  University of Southern California, Viterbi School of Engineering
                 </h4>
 
-                <span>2021 — 2023</span>
+                <span>Aug 2021 — May 2023</span>
 
                 <p class="timeline-text">
                   Master of Science in Computer Science
@@ -535,15 +749,14 @@
               </li>
 
               <li class="timeline-item">
-                <h4 class="h4 timeline-item-title">Yonsei University</h4>
+                <h4 class="h4 timeline-item-title">Yonsei University, Seoul, South Korea</h4>
 
-                <span>2012 — 2018</span>
+                <span>Mar 2012 — Feb 2018</span>
 
                 <p class="timeline-text">
-                  Bachelor of Science in Computer Science, Bachelor of Business
-                  Administration
+                  Bachelor of Science in Computer Science, Bachelor of Business Administration
                 </p>
-                <p class="timeline-text">Undergraduate Full Scholarship</p>
+                <p class="timeline-text">Undergraduate Full Scholarship, Dean's List (Top 3%)</p>
               </li>
             </ol>
           </section>
@@ -560,19 +773,37 @@
             <ol class="timeline-list">
               <li class="timeline-item">
                 <h4 class="h4 timeline-item-title">
+                  Senior Software Engineer @ Campfire (YC S23)
+                </h4>
+
+                <span>Sep 2024 — Present</span>
+
+                <p class="timeline-text">
+                  • Employee #5 at a YC-backed startup building a modern accounting platform for startups and mid-size tech companies
+                </p>
+                <p class="timeline-text">
+                  • Top contributor across both frontend and backend repositories as the company scaled from seed to Series B
+                </p>
+                <p class="timeline-text">
+                  • Built six core production integrations—Rippling, Bill.com, Brex, Salesforce, and HubSpot—owning design, implementation, and on-call
+                </p>
+              </li>
+
+              <li class="timeline-item">
+                <h4 class="h4 timeline-item-title">
                   Founding Engineer @ Suger (YC W23)
                 </h4>
 
-                <span>Jul 2023 — Present</span>
+                <span>Jul 2023 — Sep 2024</span>
 
                 <p class="timeline-text">
-                  • Pioneered the Go backend server development, crafting a unified platform that integrates AWS, Azure, and GCP marketplaces, catapulting ARR from $30K to $1M in 10 months
+                  • Employee #2. Pioneered the Go backend server development, crafting a unified platform that integrates AWS, Azure, and GCP marketplaces, catapulting ARR from $30K to $1M in 10 months
                 </p>
                 <p class="timeline-text">
                   • Engineered a Vue3-based user interface for the Suger platform, significantly boosting user engagement with intuitive and responsive design enhancements
                 </p>
                 <p class="timeline-text">
-                  • Directed the seamless integration of Suger's core functionalities into Salesforce through the design and development of a comprehensive Salesforce Apex application
+                  • Delivered GCP Marketplace support despite missing official APIs by reconstructing required flows from observed network requests and encoding them into a 24/7 automated service—a first-in-market capability
                 </p>
               </li>
 
@@ -617,13 +848,13 @@
                   Machine Learning Engineer @ USC Institute for Creative Technologies
                 </h4>
 
-                <span>Oct 2021 — May 2022</span>
+                <span>Oct 2021 — Mar 2023</span>
 
                 <p class="timeline-text">
                   • Developed an innovative pipeline for generating 3D skeleton data from TED videos utilizing PyTorch, Variational Autoencoders, and One Euro Filter
                 </p>
                 <p class="timeline-text">
-                  • Co-authored the paper “A Tool for Extracting 3D Avatar-Ready Gesture Animations from Monocular Videos,” which was accepted at MIG 2022 (ACM SIGGRAPH Conference on Motion, Interaction, and Games)
+                  • Co-authored the paper "A Tool for Extracting 3D Avatar-Ready Gesture Animations from Monocular Videos," which was accepted at MIG 2022 (ACM SIGGRAPH Conference on Motion, Interaction, and Games)
                 </p>
               </li>
 
@@ -705,18 +936,18 @@
 
               <li class="skills-item">
                 <div class="title-wrapper">
-                  <h4 class="skill-item">Frameworks & Tools</h4>
+                  <h4 class="skill-item">Tools & Frameworks</h4>
                   <p class="skill-text">
-                    AWS, GCP, Terraform, Git, Docker, Pytorch, Tensorflow, scikit-learn, Geth, Infura, Ganache, Truffle, Unity
+                    Terraform, AWS EKS, Git, Docker, Pytorch, Tensorflow, scikit-learn, Geth, Infura, Ganache, Unity
                   </p>
                 </div>
               </li>
 
               <li class="skills-item">
                 <div class="title-wrapper">
-                  <h4 class="skill-item">Database & Operating System</h4>
+                  <h4 class="skill-item">Database & Cloud</h4>
                   <p class="skill-text">
-                    Amazon RDS, MySQL, MongoDB, PostgreSQL, DynamoDB, Alembic, SQLAlchemy, Linux, MacOS, Windows
+                    Amazon RDS, MySQL, MongoDB, PostgreSQL, DynamoDB, Alembic, SQLAlchemy, AWS, GCP, Azure
                   </p>
                 </div>
               </li>
@@ -730,7 +961,7 @@
 
         <article class="portfolio" data-page="portfolio">
           <header>
-            <h2 class="h2 article-title">Portfolio</h2>
+            <h2 class="h2 article-title gradient-text">Portfolio</h2>
           </header>
 
           <section class="projects">
@@ -1335,13 +1566,13 @@
 
         <article class="contact" data-page="contact">
           <header>
-            <h2 class="h2 article-title">Contact</h2>
+            <h2 class="h2 article-title gradient-text">Contact</h2>
           </header>
 
           <section class="mapbox" data-mapbox>
             <figure>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d403098.91685939043!2d-122.52084051647045!3d37.75767028856368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808586e6302615a1%3A0x86bd130251757c00!2sSan%20Francisco%20Bay%20Area%2C%20CA!5e0!3m2!1sen!2sus!4v1706300000000!5m2!1sen!2sus"
                 width="400"
                 height="300"
                 loading="lazy"
@@ -1392,11 +1623,6 @@
     </main>
 
     <!--
-    - custom js link
-  -->
-    <script src="./portpolio_assets/js/script.js"></script>
-
-    <!--
     - ionicon link
   -->
     <script
@@ -1407,5 +1633,15 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+
+    <!--
+    - particles config
+  -->
+    <script src="./portpolio_assets/js/particles-config.js"></script>
+
+    <!--
+    - custom js link
+  -->
+    <script src="./portpolio_assets/js/script.js"></script>
   </body>
 </html>
